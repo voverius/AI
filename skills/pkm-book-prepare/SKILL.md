@@ -1,50 +1,128 @@
 ---
 name: pkm-book-prepare
-description: Prepare a Harmony book memo from a Goodreads URL or a title and author. Use to create a spoiler-free, metadata-complete book record in Envoy/Memos before later promotion to Sources/Books.
+description: >-
+  Prepare a Harmony book memo from a Goodreads URL or a title and author. Use to create a
+  spoiler-free, metadata-complete book record in Envoy/Memos before later promotion to Sources/Books.
 ---
 
 # Harmony Book Preparation
+## Operating Rules
+- Create memos only in `Envoy/Memos/`.
+- Do not promote a memo.
+- Work silently.
+- Use the result format below once each book is complete.
+- For multiple books or links, finish one complete workflow before starting the next.
 
-Create the memo in `Envoy/Memos/`. Do not promote it. Work silently and use the result format below.
 
-## Resolve the Book
+## Resolve
+- Accept a Goodreads URL or a title and author.
+- Use only Goodreads data.
+- Try the exact Goodreads URL first.
+- If it is blocked, use indexed Goodreads results and Goodreads edition pages.
+- Do not use another source.
 
-Resolve the title from the provided Goodreads URL or title and author. Before doing further work, search filenames only in `Sources/Books/`, `Lounge/Books/`, and `Envoy/Memos/` for that title. A matching filename is a duplicate: stop and report it.
 
-Use the exact Goodreads URL first. If Goodreads blocks direct access, use indexed Goodreads results and Goodreads edition pages. Prefer Goodreads-derived data; use another source only to confirm an otherwise unavailable ISBN, page count, or language.
+### Duplicate Check
+Before resolving any other data, search filenames only for the title in:
 
-Use any English edition with a valid ISBN. Prefer ISBN-13; otherwise use ISBN-10. If several English editions exist, select the most complete record. Ask only when the book identity is ambiguous, not to choose an edition.
+- `Sources/Books/`
+- `Lounge/Books/`
+- `Envoy/Memos/`
 
-Use the primary credited author. Treat clear Goodreads name variants as one person; ask only if multiple distinct authors make filename ownership unclear. Split `Title: Subtitle` at the first colon. Use `Title, Author.md` as the filename and use the title without subtitle for the H1, alias, title display, and cover filename. When no subtitle exists, leave the template's subtitle line unchanged.
+A matching filename is a duplicate. Stop and report it.
+
+
+### Edition and Identity
+- Use any English edition with a valid ISBN.
+- Prefer ISBN-13; otherwise use ISBN-10.
+- If several English editions qualify, use the most complete Goodreads record.
+- Ask only when the book identity is ambiguous.
+- Do not ask the user to choose an edition.
+- Use the primary credited author.
+- Treat clear Goodreads name variants as one person.
+- Ask only when multiple distinct authors make filename ownership unclear.
+
+
+### File Identity
+- Split `Title: Subtitle` at the first colon.
+- Derive the target filename as `Title, Author.md`.
+- Avoid any extra `.` or other punctuation in the Title or the Author
+
 
 ## Apply the Template
+- Copy `Bins/Templates/Template - Book.md` exactly to `Envoy/Memos/Title, Author.md`.
+- Do not read the template into model context.
+- Do not reconstruct the template from memory.
+- Do not duplicate its schema in this skill.
+- Treat the template as the only structural source of truth.
 
-Apply `Bins/Templates/Template - Book.md` by copying the file exactly into the target path. Do not read the template into model context, reconstruct it from memory, or duplicate its schema in this skill.
+`## Personal` and everything after it are prohibited:
 
-The template is the only structural source of truth. `## Personal` and everything after it are under a strict ban: do not read, modify, clear, replace, validate, or reason about any of that content. Edit only the content before the `## Personal` heading.
+- Do not read it.
+- Do not modify, clear, replace, validate, or reason about it.
+- Edit only content before the `## Personal` heading.
 
-## Populate the Editable Sections
 
-Populate every existing public book-information field above `## Personal` from Goodreads-derived data. Replace the template's Goodreads ID with the canonical numeric ID. Use `-` for unavailable data; price is normally `-`. Keep rating votes as an integer without separators.
+## Populate
+Populate existing public book-information fields before `## Personal` from Goodreads data.
 
-Use only existing Harmony tags. Set `#progress/released`, exactly one established book-genre tag, and up to two established book-topic tags. Match Goodreads shelves to existing lower-camel-case tags. Never create a tag, and remove generic book tag placeholders. If no existing genre tag fits, stop and ask.
+- Set the H1, alias, title display, and cover filename from the title without subtitle.
+- Put only the subtitle in the Subtitle field.
+- When no subtitle exists, leave the template's Subtitle line unchanged.
+- Set the Author field as `[[Author Name]]`.
+- Use note names only in wikilinks; never include a directory path.
+- Set Goodreads exactly as `[Goodreads](https://www.goodreads.com/book/show/<numeric-id>)`.
+- Keep only the numeric Goodreads ID; remove title slugs, query strings, and fragments.
+- Use `-` for unavailable Goodreads values.
+- Price is normally `-` unless Goodreads provides it.
+- Keep Votes as an integer without separators.
+- Record every unavailable Goodreads field for the result.
 
-Write an original overview of at most two paragraphs. It gives an engaging distant view of the book: its shape, atmosphere, scope, and central terrain without revealing underlying information. Never mention the book title or author, copy Goodreads marketing text, add personal evaluation, or include spoilers.
 
-For nonfiction, cover subject, scope, approach, and central questions. When a nonfiction book centres on one topic already present in `Notes/`, link that one topic in the overview. Do not add such a link for multi-topic books or fiction by default.
+### Tags
+- Reuse existing Harmony tags only.
+- Set `#progress/released`.
+- Set exactly one existing `#book/genre/...` tag.
+- Set zero to two existing `#book/topic/...` tags.
+- Normalize Goodreads shelves to existing lower-camel-case tags.
+- Remove generic book tag placeholders.
+- Never invent a tag.
+- Stop and ask if no existing genre tag fits.
 
-For fiction, cover premise, initial situation, central conflict, setting, and themes.
+
+### Overview
+- Write an original overview of at most two paragraphs.
+- Give an engaging distant view: shape, atmosphere, scope, and central terrain.
+- Do not reveal underlying information, add spoilers, marketing copy, personal evaluation, title, or author.
+
+For nonfiction:
+
+- Cover the subject, scope, approach, and central questions.
+- Link one existing `Notes/` topic only when the book centres on that one topic.
+
+For fiction:
+
+- Cover the premise, initial situation, central conflict, setting, and themes.
+
+Do not add a topic link for fiction or multi-topic books by default.
+
 
 ## Validate
+- Confirm the memo exists only in `Envoy/Memos/`.
+- Confirm the filename is `Title, Author.md`.
+- Confirm the duplicate check happened first.
+- Confirm the canonical numeric Goodreads link.
+- Confirm an English ISBN when Goodreads provides one.
+- Confirm one existing genre tag and no generic tag placeholders.
+- Confirm an original, spoiler-free overview without title or author.
+- Scan only content before `## Personal` for `{{`, `Quick summary`, `2026-xx-xx`, `★★★★★`, and
+  generic book tags.
 
-Before reporting completion, verify the memo is only in `Envoy/Memos/`, its filename is `Title, Author.md`, and duplicate filenames were checked first. Verify the canonical Goodreads link, English ISBN when available, existing genre tag, and original spoiler-free overview without title or author.
-
-Scan only the content before `## Personal` for unresolved template material: `{{`, `Quick summary`, `2026-xx-xx`, `★★★★★`, and standalone generic book tags. Do not inspect `## Personal` or anything after it.
 
 ## Result
-
-Respond with exactly one line:
+Respond with exactly one line per book:
 
 - `Created: Envoy/Memos/Title, Author.md`
+- `Created: Envoy/Memos/Title, Author.md (Goodreads missing: ISBN, Length)`
 - `Exists: <existing path>`
-- `Blocked: <concise reason>`
+- `Blocked: <title> (Goodreads unavailable)`

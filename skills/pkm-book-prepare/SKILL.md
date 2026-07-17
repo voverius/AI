@@ -2,12 +2,12 @@
 name: pkm-book-prepare
 description: >-
   Prepare a Harmony book memo from a Goodreads URL or a title and author. Use to create a
-  spoiler-free, metadata-complete book record in Envoy/Memos before later promotion to Sources/Books.
+  spoiler-free, metadata-complete book record in Envoy/Books before later promotion to Sources/Books.
 ---
 
 # Harmony Book Preparation
 ## Operating Rules
-- Create memos only in `Envoy/Memos/`.
+- Create notes only in `Envoy/Books/`.
 - Do not promote a memo.
 - Work silently.
 - Use the result format below once each book is complete.
@@ -26,8 +26,7 @@ description: >-
 Before resolving any other data, search filenames only for the title in:
 
 - `Sources/Books/`
-- `Lounge/Books/`
-- `Envoy/Memos/`
+- `Envoy/Books/`
 
 A matching filename is a duplicate. Stop and report it.
 
@@ -50,7 +49,7 @@ A matching filename is a duplicate. Stop and report it.
 
 
 ## Apply the Template
-- Copy `Bins/Templates/Template - Book.md` exactly to `Envoy/Memos/Title, Author.md`.
+- Copy `Bins/Templates/Template - Book.md` exactly to `Envoy/Books/Title, Author.md`.
 - Do not read the template into model context.
 - Do not reconstruct the template from memory.
 - Do not duplicate its schema in this skill.
@@ -108,7 +107,7 @@ Do not add a topic link for fiction or multi-topic books by default.
 
 
 ## Validate
-- Confirm the memo exists only in `Envoy/Memos/`.
+- Confirm the memo exists only in `Envoy/Books/`.
 - Confirm the filename is `Title, Author.md`.
 - Confirm the duplicate check happened first.
 - Confirm the canonical numeric Goodreads link.
@@ -122,7 +121,7 @@ Do not add a topic link for fiction or multi-topic books by default.
 ## Result
 Respond with exactly one line per book:
 
-- `Created: Envoy/Memos/Title, Author.md`
-- `Created: Envoy/Memos/Title, Author.md (Goodreads missing: ISBN, Length)`
+- `Created: Envoy/Books/Title, Author.md`
+- `Created: Envoy/Books/Title, Author.md (Goodreads missing: ISBN, Length)`
 - `Exists: <existing path>`
 - `Blocked: <title> (Goodreads unavailable)`

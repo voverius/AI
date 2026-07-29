@@ -64,8 +64,10 @@ A matching filename is a duplicate. Stop and report it.
 
 ## Populate
 Populate existing public book-information fields before `## Personal` from Goodreads data.
+Rule of thumb - FOLLOW THE TEMPLATE, DO NOT INVENT WHAT DOES NOT EXIST.
 
 - Set the H1, alias, title display, and cover filename from the title without subtitle.
+- The title field MUST be a wikilink with a pseudo `[[filename | Title]]`
 - Put only the subtitle in the Subtitle field.
 - When no subtitle exists, leave the template's Subtitle line unchanged.
 - Set the Author field as `[[Author Name]]`.

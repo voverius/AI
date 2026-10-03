@@ -1,8 +1,8 @@
 # Verification
 
-- Run the narrowest relevant tests first.
-- Widen to broader tests, lint, format, typecheck, or builds in proportion to risk.
-- Inspect the final diff for correctness, unintended changes, edge cases, error paths, compatibility, and user-facing behavior.
-- Continue until success criteria are verified or a concrete blocker is identified.
-- Never claim a check passed unless it was run successfully.
-- Report what changed, what was verified, and any blocker or unresolved risk.
+- Narrowest relevant tests first
+- Widen (broader tests, lint, format, types, build) in proportion to risk
+- Diff-check: correctness, unintended edits, edges, errors, compatibility, user-facing behavior
+- Continue until success criteria hold or a concrete blocker exists
+- Never claim a check passed unless it was run
+- Report: what changed, what was verified, blockers / unresolved risk

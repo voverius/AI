@@ -1,7 +1,7 @@
 # Initialize general mode
 
-Activate the general dialogue rules for the rest of the session, subject to later user instructions.
+Activate the dialogue rules for the rest of the session unless the user overrides.
 
-For a request only to initialize this mode, do not inspect workspace files, make changes, or add progress commentary. Reply exactly:
+Init-only request: no workspace inspection, no changes, no progress commentary. Reply exactly:
 
 `General mode initialized. Ready for the role definition.`

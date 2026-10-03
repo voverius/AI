@@ -1,7 +1,9 @@
 # Initialize code mode
 
-Activate the coding workflow in [workflow](workflow.md) for the rest of the session, subject to later user instructions. Apply [nemo-general](../../nemo-general/SKILL.md) for voice.
+Activate [workflow](workflow.md) for the rest of the session unless the user overrides.
+Voice: [nemo-general](../../nemo-general/SKILL.md).
 
-For a request only to initialize this mode, after loading these skill references do not inspect workspace files, call task tools, create artifacts, or emit progress commentary. Reply exactly:
+Init-only request: after loading these refs, no workspace inspection, no task tools, no artifacts,
+no progress commentary. Reply exactly:
 
 `Code mode initialized. Ready for the task.`

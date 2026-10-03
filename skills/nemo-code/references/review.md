@@ -1,38 +1,43 @@
 # Review code changes
 
-A review request alone does not authorize editing the code.
+Review alone does not authorize edits.
 
 ## Scope
 
-Identify what to review: supplied PR, branch, commit, or working-tree diff. Pin a fixed point (`git diff <point>...HEAD`). If the reference is missing, inspect the available change and ask only when choosing a base would materially alter the review. Confirm the ref resolves and the diff is non-empty before deep review.
+Pin what to review: PR, branch, commit, or working tree. Fixed point: `git diff <point>...HEAD`.
+If the base is missing, inspect what exists; ask only when the base choice would change the review.
+Confirm the ref resolves and the diff is non-empty before deep review.
 
 ## Two axes (two passes)
 
-Review **Standards** and **Spec** as separate passes so one cannot mask the other.
+Keep **Standards** and **Spec** separate so one cannot mask the other.
 
-| Axis | Question |
-| --- | --- |
-| **Standards** | Does the diff follow this repo's documented coding standards and avoid clear design smells? |
-| **Spec** | Does the diff implement what was asked (issue/spec/user request) without missing requirements or scope creep? |
+- **Standards**: repo coding standards and clear design smells
+- **Spec**: implements what was asked (issue/spec/request); no missing pieces or scope creep
 
-Prefer two parallel sub-agents when the harness supports it (one prompt per axis). Otherwise run two sequential passes in one agent. Always report under separate `## Standards` and `## Spec` headings; do not merge or cross-rank findings into one winner.
+Prefer two parallel sub-agents (one prompt per axis). Else two sequential passes in one agent.
+Report under `## Standards` and `## Spec`. Do not merge or cross-rank into one winner.
 
-### Standards pass
+### Standards
 
-- Read repo standards (`CODING_STANDARDS.md`, `CONTRIBUTING.md`, `AGENTS.md`, etc.). Repo docs override heuristics.
-- Flag hard violations of documented rules with file/line cites.
-- Optionally note judgement-call smells (e.g. duplication, speculative generality, shotgun surgery, feature envy) — never as hard blockers when tooling already enforces the concern.
-- Skip anything automated checks already cover unless the diff clearly bypasses them.
+- Read repo standards (`CODING_STANDARDS.md`, `CONTRIBUTING.md`, `AGENTS.md`, …). Repo wins
+- Hard violations: cite file/line and the rule
+- Optional judgement-call smells (duplication, speculative generality, shotgun surgery, feature
+  envy): never hard blockers when tooling already covers them
+- Skip what automation already enforces unless the diff clearly bypasses it
 
-### Spec pass
+### Spec
 
-Resolve the spec in order: commit/PR issue refs → path the user gave → `docs/` / `specs/` match → ask. If none exists and the user confirms none, report "no spec available" for this axis.
+Resolve spec: commit/PR issue refs → user path → `docs/` / `specs/` match → ask.
+None and user confirms none: "no spec available" for this axis.
 
-Report: missing/partial requirements; behavior not asked for; implementations that look wrong vs the spec. Quote the requirement for each finding.
+Report: missing/partial requirements; unasked behavior; wrong-looking implementation. Quote the
+requirement per finding.
 
 ## Output
 
-- Prioritize actionable defects: wrong behavior, missing requirements, regressions, security/data-loss risks, tests that fail to cover those risks.
-- Cite precise files and lines; separate observed defects from judgment.
-- End with counts per axis and the worst issue within each axis.
-- If no actionable findings remain, say so plainly.
+- Prioritize actionable defects: wrong behavior, missing requirements, regressions,
+  security/data-loss, weak tests for those risks
+- Cite file/line; separate observation from judgment
+- Counts per axis + worst issue within each axis
+- No findings: say so plainly

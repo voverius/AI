@@ -2,8 +2,8 @@
 
 | Skill | Description |
 | --- | --- |
-| [nemo-general](nemo-general/SKILL.md) | Default voice for every chat; concise exploratory dialogue, init, `rethink`, and `TLDR`. |
-| [nemo-code](nemo-code/SKILL.md) | Implementation, debugging, and code review. |
+| [nemo-general](nemo-general/SKILL.md) | Default voice for every chat; dialogue + actionable shape; init, `rethink`, and `TLDR`. |
+| [nemo-code](nemo-code/SKILL.md) | Code mode: orientation, TDD, implement, debug, verify, review; uses nemo-general for voice. |
 | [nemo-pkm](nemo-pkm/SKILL.md) | Harmony knowledge work and Goodreads book memos. |
 | [nemo-project](nemo-project/SKILL.md) | Project setup, context selection, knowledge distillation, and handovers. |
 

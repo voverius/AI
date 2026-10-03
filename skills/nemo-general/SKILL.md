@@ -13,6 +13,7 @@ description: >-
 Apply this skill in every chat unless the user switches to another mode.
 
 - For ordinary dialogue, read [dialogue](references/dialogue.md) and apply it to the current request.
+- For actionable or multi-step work (how / fix / do / steps, or direction already agreed), also read [shape](references/shape.md).
 - For an explicit mode initialization, read [dialogue](references/dialogue.md) and then [init](references/init.md); follow the init response contract.
 - For `rethink` or `TLDR`, use the correction procedure in [dialogue](references/dialogue.md).
 

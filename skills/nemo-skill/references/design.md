@@ -28,6 +28,17 @@ In long sessions, continue applying relevant guidance without ritual reinvocatio
 loss, recover the active task and necessary instructions through the host's persistent entry
 mechanism; do not promise that loaded context survives compaction.
 
+## Task coverage and dependencies
+Trace each supported user outcome from request to route, required context, permitted actions and
+completion evidence. Include outcomes implied by declared outputs and responsibilities. A folder
+or artifact definition does not provide a procedure for producing it. When removing or merging a
+branch, account for every job it owned: preserve, replace or explicitly retire it.
+
+Check each route as a fresh entry, without context from another branch. Load the rules it relies on
+before use, including shared locations, ownership and evidence rules. Resolve the intended target
+before reads as well as writes when several projects or workspaces are available. Give read-only
+routes their own completion criteria, without requiring artifacts or changes.
+
 ## Instructions that change behaviour
 Use concrete actions, decision conditions and observable completion criteria. Replace “be thorough”
 with the particular check that prevents a demonstrated mistake. Prefer a default with a reason over

@@ -11,13 +11,13 @@ intended users, trigger, inputs, result and authorization boundary from availabl
 only about consequential gaps. Reviewing a skill does not activate its target workflow or
 authorize edits.
 
-- [design](references/design.md) - Scope, rule ownership, navigation and concise instructions
+- [design](references/design.md) - Task coverage, dependencies, ownership and concise instructions
   Read when writing, refactoring or reviewing. Extract reusable decisions from real work, including
   corrections and failures. Preserve unrelated work. Reviews report concrete defects, consequences
   and smallest useful corrections, distinguishing observed failures from untested concerns
 - [format](references/format.md) - Package structure, metadata, links and installation boundaries
   Read before delivery or installation
-- [testing](references/testing.md) - Behaviour checks, independent trials and evidence limits
+- [testing](references/testing.md) - Branch tests, version checks and completion evidence
   Read for new workflows, changed triggers or branches, and claimed reliability improvements
   Minor wording changes need proportionate checks
 

@@ -7,6 +7,11 @@ observable result, forbidden side effects and decisive checks outside the actor'
 normal task, a relevant boundary or missing-input case, and a nearby request that should not
 activate the skill. Add lifecycle or repeat-run cases only when the skill claims those behaviours.
 
+Derive cases from the supported outcomes and dependencies, not just the implementation's menus.
+Exercise independently callable routes without earlier setup in the same chat. Include ambiguous
+targets when multiple workspaces are supported. Track untested routes explicitly. A successful
+combined lifecycle does not prove each branch works alone.
+
 Freeze the candidate during a run. The skill under test and its real dependencies remain accessible
 to the actor. Keep evaluator notes, expected answers, prior outputs and alternative candidates
 outside actor access. Fixtures must resemble ordinary user material, not contain hints about the
@@ -50,6 +55,19 @@ Separate findings by cause: discovery, instructions, unavailable environment/too
 setup. If claiming improvement, compare the same inputs and host/model conditions against the prior
 skill or no-skill baseline. Report the metric actually measured; fewer loaded words do not prove
 lower latency or better answers.
+
+## Match completion claims to evidence
+Identify the tested source and dependencies by content hash or equivalent snapshot. Compare the
+final files with that version before claiming completion. Later behavioural changes require affected
+checks again. Formatting-only changes need an inspected diff and static checks, with earlier runtime
+evidence identified as such. A commit is neither required nor proof of correctness.
+
+Keep source, installation and migration claims separate. For installation or migration work, inspect
+the relevant live discovery entries, links and consumers within the agreed scope. A source edit or
+installer exit status does not prove host consistency. Retire unrelated entries only when
+authorized.
+Update completion records to match verified scope and evidence availability. Temporary evidence is
+not a durable audit trail. Missing evidence limits the claim rather than proving success.
 
 ## Iterate without teaching the test
 Fix the smallest general cause in the source. Reinstall if needed, then rerun the affected case with

@@ -1,22 +1,9 @@
-# Capture
+# Save continuation
 
-Read [lifecycle](lifecycle.md) if not already loaded.
-One `handovers/<task>.md` per workstream; update it rather than one file per conversation.
+Use one handover per workstream in the mapped handover location; update the matching record rather than creating one per chat. Read the actual saved state before relying on remembered progress.
 
-1. **Diff against the checkpoint.** Compare conversation and artifacts to the existing
-   handover. Keep unique useful findings not yet distilled. For material already
-   maintained elsewhere: link + continuation implication, not another summary. Memory is
-   not proof of current file or system state
-2. **Write populated fields only.** Objective and status; authorization boundaries;
-   unfinished steps and blockers; exact next action; links to filed decisions, evidence,
-   results; unique undistilled findings or hypotheses. Mark completed/cancelled explicitly;
-   drop obsolete next actions. Exclude secrets, transcripts, raw tool output, repeated
-   topic contents
-3. **Cold read.** As a new agent: can you see the objective, facts vs uncertainty, needed
-   artifacts, and continue without redoing finished work? Repair local links. Unchanged →
-   leave the file untouched
+Record only what the next agent needs: objective and status, authorization boundaries, unfinished steps or blockers, the next action, and links to knowledge, evidence and results. Preserve useful findings not yet filed, clearly marked; link already maintained knowledge instead of duplicating it. Resolve delegated work before claiming a finished state.
 
-Keep the checkpoint one-pass readable. Distill durable material when it dominates the
-checkpoint; keep unresolved useful content. At completion: result pointer + any real
-unresolved dependency, or remove the checkpoint if everything is already discoverable and
-nothing continues.
+Cold-read the result: can a new agent locate the relevant material, distinguish evidence from uncertainty, and continue without repeating completed work? Repair its links. Unchanged state needs no rewrite.
+
+Mark completion or cancellation explicitly when a handover exists; remove obsolete next actions. Keep only a useful result pointer or genuinely unresolved dependency. Completion does not invent another task, and a completed task with no continuation needs no new handover.

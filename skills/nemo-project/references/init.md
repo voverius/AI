@@ -1,32 +1,25 @@
-# Bootstrap
+# Setup, repair and audit
 
-New project: use bootstrap-create in [access](access.md) (skill entry already checked
-access for an existing root).
-Read [lifecycle](lifecycle.md), [places](places.md), [ownership](ownership.md), and
-[startup](startup.md).
+Read knowledge.md in this reference directory before structural changes. Root resolution belongs to the entry skill; this procedure does not choose another location.
 
-1. Inspect purpose, boundaries, existing instructions, content, and external references
-   Confirm required skills are discoverable globally. Ask only when missing info changes
-   structure or ownership
-2. Create or update the local contract via [startup](startup.md), plus a short README with
-   purpose and links to populated roles. Empty project: those two files + `inbox/` only.
-   README: purpose, AGENTS link, inbox link; add other role links when content exists.
-   Setup creates no topic or handover. Preserve existing layout, code, unrelated instructions.
-   Do not process inputs just to finish setup
-3. For existing knowledge: treat `docs/` as the wiki ([wiki](wiki.md)); identify subject
-   owners and build `docs/index.md`. On requested restructuring, move shared facts from
-   incidental tool/task docs into domain owners, preserving evidence. Group the index by
-   retrieval purpose; branch indexes only when they cut irrelevant reading. Keep README
-   free of topic and task state. Create `docs/log.md` only when wiki writes begin
+For **setup**, inspect purpose, boundaries, existing entries and layout. Preserve unrelated instructions and existing equivalents. An empty project receives only AGENTS.md, README.md and inbox/. README contains purpose, an AGENTS link and an inbox link; add other roles when populated. Setup alone creates no subject, index, log or handover and does not process arrivals.
 
-## Done check
+Use this project contract, adapting local roles where necessary. The README reference is relative to the generated project entry, not this template:
 
-- Contract covers every startup responsibility, including missing-skill handling
-- README links only existing roles; does not repeat their definitions
-- Every maintained topic reachable; dependencies point to owners; no conflicting owners
-- Shared procedures not copied locally
-- Links resolve from actual files
-- Fresh ordinary session reaches the right subject without a supplied skill path
-- Unchanged setup leaves files unchanged
+```markdown
+# Project operating contract
 
-Continue substantive work with [operate](operate.md).
+Use the globally installed nemo-project skill for setup, retrieval, knowledge maintenance and continuation. This directory is the project root; an explicitly requested different location takes precedence. Start with README.md and load only relevant knowledge or task state.
+
+Keep reusable facts and decisions in their subject owner, deliverables separate from knowledge, and unfinished work in the matching handover. Preserve evidence and uncertainty. The changing agent maintains affected indexes and incoming links; one integrator reconciles parallel changes.
+
+Questions and audits are read-only unless changes are authorized. At a substantive work boundary, save new useful findings and capture unfinished work when needed; unchanged state needs no files. If the global skill is unavailable, report it instead of substituting a local development copy.
+```
+
+For **audit**, inspect the requested scope for broken routes, unreachable subjects, duplicated or contradictory claims, stale summaries and inappropriate ownership. Broaden only when the evidence requires it. Missing unused roles are not findings. Report concrete locations and consequences; do not repair under a read-only request.
+
+For authorized **repair**, address the demonstrated defects using knowledge.md. Move shared facts out of incidental tool/task documents into their subjects, retaining evidence and references. Preserve useful material and existing layout unless reorganization was requested.
+
+For **migration**, replace superseded workflow names in applicable project contracts while preserving local rules. Inspect other consumers before retiring an installed skill family. Use existing installation/removal mechanisms and verify global discovery without a local fallback.
+
+Done: generated contract responsibilities are present, README links existing roles, maintained subjects are reachable, links resolve, and useful evidence survives. An unchanged rerun makes no changes. For new or migrated host integration, verify a fresh ordinary request without supplying a skill path; syntax checks alone do not prove discovery.

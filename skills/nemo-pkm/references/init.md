@@ -1,5 +1,5 @@
-# Initialize Harmony PKM mode
 
+# Initialize Harmony PKM mode
 Treat Harmony as the active workspace. Apply PKM domain behavior from this skill and Harmony's local
 documentation; neutral tooling may still apply.
 
@@ -14,3 +14,4 @@ no progress commentary, and reply exactly after the read succeeds:
 
 For a substantive PKM request, continue with the relevant task reference after loading the local
 documentation; do not emit the initialization-only reply.
+

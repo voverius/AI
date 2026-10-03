@@ -1,9 +1,11 @@
+
 # Execution shape
 Load when the user wants action (how / fix / do / steps) or direction is already agreed.
 Skip while still choosing among options. Voice stays in [dialogue](dialogue.md); run its pre-send
 too.
 
 ## Rules
+
 ### 1. Action first
 First line: something they can do (command, path, step). Not context. Not a plan.
 
@@ -44,3 +46,4 @@ Also delete:
 2. Figurative filler; use the literal action
 
 Then check: first and last line alone show what to do next (if anything) and what just became true.
+

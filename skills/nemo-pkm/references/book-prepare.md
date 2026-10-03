@@ -1,5 +1,5 @@
-# Harmony Book Preparation
 
+# Harmony Book Preparation
 Voice from `nemo-general`. This task is actionable: follow
 [shape](../../nemo-general/references/shape.md) while working, but the only user-facing reply is the
 Result line below (no progress chatter, no soft closers).
@@ -11,14 +11,12 @@ Result line below (no progress chatter, no soft closers).
 - Use the result format below once each book is complete
 - For multiple books or links, finish one complete workflow before starting the next
 
-
 ## Resolve
 - Accept a Goodreads URL or a title and author
 - Use only Goodreads data
 - Try the exact Goodreads URL first
 - If it is blocked, use indexed Goodreads results and Goodreads edition pages
 - Do not use another source
-
 
 ### Duplicate Check
 Before resolving any other data, search filenames only for the title in:
@@ -27,7 +25,6 @@ Before resolving any other data, search filenames only for the title in:
 - `Envoy/Books/`
 
 A matching filename is a duplicate. Stop and report it.
-
 
 ### Edition and Identity
 - Use any English edition with a valid ISBN
@@ -39,12 +36,10 @@ A matching filename is a duplicate. Stop and report it.
 - Treat clear Goodreads name variants as one person
 - Ask only when multiple distinct authors make filename ownership unclear
 
-
 ### File Identity
 - Split `Title: Subtitle` at the first colon
 - Derive the target filename as `Title, Author.md`
 - Avoid any extra `.` or other punctuation in the Title or the Author
-
 
 ## Apply the Template
 - Copy `Bins/Templates/Template - Book.md` exactly to `Envoy/Books/Title, Author.md`
@@ -58,7 +53,6 @@ A matching filename is a duplicate. Stop and report it.
 - Do not read it
 - Do not modify, clear, replace, validate, or reason about it
 - Edit only content before the `## Personal` heading
-
 
 ## Populate
 Populate existing public book-information fields before `## Personal` from Goodreads data.
@@ -77,7 +71,6 @@ Rule of thumb - FOLLOW THE TEMPLATE, DO NOT INVENT WHAT DOES NOT EXIST.
 - Keep Votes as an integer without separators
 - Record every unavailable Goodreads field for the result
 
-
 ### Tags
 - Reuse existing Harmony tags only
 - Set `#progress/released`
@@ -88,12 +81,11 @@ Rule of thumb - FOLLOW THE TEMPLATE, DO NOT INVENT WHAT DOES NOT EXIST.
 - Never invent a tag
 - Stop and ask if no existing genre tag fits
 
-
 ### Overview
 - Write an original overview of at most two paragraphs
 - Give an engaging distant view: shape, atmosphere, scope, and central terrain
 - Do not reveal underlying information, add spoilers, marketing copy, personal evaluation, title, or
- author.
+ author
 
 For nonfiction:
 
@@ -106,7 +98,6 @@ For fiction:
 
 Do not add a topic link for fiction or multi-topic books by default.
 
-
 ## Validate
 - Confirm the memo exists only in `Envoy/Books/`
 - Confirm the filename is `Title, Author.md`
@@ -116,8 +107,7 @@ Do not add a topic link for fiction or multi-topic books by default.
 - Confirm one existing genre tag and no generic tag placeholders
 - Confirm an original, spoiler-free overview without title or author
 - Scan only content before `## Personal` for `{{`, `Quick summary`, `2026-xx-xx`, `★★★★★`, and
- generic book tags.
-
+ generic book tags
 
 ## Result
 Respond with exactly one line per book:
@@ -126,3 +116,4 @@ Respond with exactly one line per book:
 - `Created: Envoy/Books/Title, Author.md (Goodreads missing: ISBN, Length)`
 - `Exists: <existing path>`
 - `Blocked: <title> (Goodreads unavailable)`
+

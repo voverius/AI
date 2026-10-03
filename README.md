@@ -9,15 +9,15 @@ It supports three isolated modes and one project workflow:
 - `nemo-general` - default voice for every chat; concise general reasoning and discussion
 - `nemo-code` - software development and code review; its init reference activates code mode
 - `nemo-pkm` - Harmony PKM mode and book preparation; voice from `nemo-general`
-- `nemo-project` - project setup, operation, knowledge distillation, and handover
+- `nemo-project` - project knowledge spaces (bootstrap, operate, distill, capture); voice from
+  `nemo-general`
 
 Only one mode should be active at a time. Universal concision, truthfulness, authorization, and
 safety rules always apply; domain-specific workflows must stay inside their mode.
 
-Each `nemo-*` skill is a discoverable entry point with focused references. Earlier comparison
-skills (`init-code`, `project-workflow/`) may remain in the repository; sync installs only
-`nemo-*` skills. `init-general` / `init-pkm` / `pkm-book-prepare` are retired in favor of the
-matching `nemo-*` skills.
+Each `nemo-*` skill is a discoverable entry point with focused references. Sync installs only
+`nemo-*` skills. Retired: `init-general`, `init-pkm`, `pkm-book-prepare`, `project-workflow/`.
+`init-code` may remain for comparison.
 
 ## Repository Map
 

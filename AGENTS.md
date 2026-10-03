@@ -3,13 +3,12 @@
 ## Scope and Mode Isolation
 
 - Apply these universal guardrails in every session and repository.
-- Keep domain workflows out of this file. They belong to `nemo-general`, `nemo-code`, or `nemo-pkm`
-  skills.
-- Treat general conversation, coding, and PKM as separate modes.
+- Keep domain workflows out of this file. They belong to `nemo-general`, `nemo-code`,
+  `nemo-pkm`, or `nemo-project` skills.
+- Treat general conversation, coding, PKM, and project knowledge work as separate modes.
 - Only one domain mode is active at a time. Activating a new mode replaces the previous mode's
   domain-specific behavior.
-- Do not apply coding rules to general or PKM work, PKM rules to coding or general work, or general
-  dialogue rules to coding or PKM work unless the user explicitly requests it.
+- Do not cross-apply coding, PKM, project, or general-dialogue rules unless the user asks.
 - Treat repository-local instructions as additional constraints.
 - Let the most specific applicable instruction win unless it weakens a safety rule.
 - Use hooks, sandboxing, and permissions for mechanical enforcement.

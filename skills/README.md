@@ -6,8 +6,8 @@
   verify, review; uses nemo-general for voice
 - [nemo-pkm](nemo-pkm/SKILL.md) - Harmony PKM mode + book memos; uses nemo-general for
   voice
-- [nemo-project](nemo-project/SKILL.md) - Project setup, context selection, knowledge
-  distillation, and handovers
+- [nemo-project](nemo-project/SKILL.md) - Project knowledge: init, operate, distill,
+  capture; uses nemo-general for voice
 
 From the repository root, run the command for the platform you need. Each command
 links all four `nemo-*` skills and the repository's global instructions; it leaves

@@ -46,8 +46,8 @@ tool_available() {
 skill_sources() {
   local skill
 
-  for skill in "$SKILLS_DIR"/*; do
-    [[ -d "$skill" ]] && printf '%s\n' "$skill"
+  for skill in "$SKILLS_DIR"/nemo-*; do
+    [[ -f "$skill/SKILL.md" ]] && printf '%s\n' "$skill"
   done
 }
 

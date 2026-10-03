@@ -4,14 +4,20 @@ This repository is the version-controlled source of truth for personal AI rules,
 setup. Clone it on a new machine, sync it into supported AI tools, and keep behavioral changes here
 instead of editing tool-managed copies.
 
-It supports three isolated modes:
+It supports three isolated modes and one project workflow:
 
-- `init-general` — concise general reasoning, research, and discussion.
-- `init-code` — software development with explicit planning, minimal changes, TDD, and verification.
-- `init-pkm` — Harmony PKM work using only PKM domain rules; coding behavior does not apply.
+- `nemo-general` — default voice for every chat; concise general reasoning and discussion.
+- `nemo-code` — software development and code review; its init reference activates code mode.
+- `nemo-pkm` — Harmony PKM mode and book preparation.
+- `nemo-project` — project setup, operation, knowledge distillation, and handover.
 
 Only one mode should be active at a time. Universal concision, truthfulness, authorization, and
 safety rules always apply; domain-specific workflows must stay inside their mode.
+
+Each `nemo-*` skill is a discoverable entry point with focused references. Earlier comparison
+skills (`init-code`, `init-pkm`, `pkm-book-prepare`, `project-workflow/`) may remain in the
+repository; sync installs only `nemo-*` skills. `init-general` is retired in favor of
+`nemo-general`.
 
 ## Repository Map
 

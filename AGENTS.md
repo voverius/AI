@@ -3,7 +3,7 @@
 ## Scope and Mode Isolation
 
 - Apply these universal guardrails in every session and repository.
-- Keep domain workflows out of this file. They belong to `init-general`, `init-code`, or `pkm-*`
+- Keep domain workflows out of this file. They belong to `nemo-general`, `nemo-code`, or `nemo-pkm`
   skills.
 - Treat general conversation, coding, and PKM as separate modes.
 - Only one domain mode is active at a time. Activating a new mode replaces the previous mode's

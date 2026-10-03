@@ -1,5 +1,7 @@
 # Bootstrap
 
+New project: use bootstrap-create in [access](access.md) (skill entry already checked
+access for an existing root).
 Read [lifecycle](lifecycle.md), [places](places.md), [ownership](ownership.md), and
 [startup](startup.md).
 
@@ -11,10 +13,11 @@ Read [lifecycle](lifecycle.md), [places](places.md), [ownership](ownership.md), 
    README: purpose, AGENTS link, inbox link; add other role links when content exists.
    Setup creates no topic or handover. Preserve existing layout, code, unrelated instructions.
    Do not process inputs just to finish setup
-3. For existing knowledge: identify subject owners and build the index. On requested
-   restructuring, move shared facts from incidental tool/task docs into domain owners,
-   preserving evidence. Group the index by retrieval purpose; branch indexes only when they
-   cut irrelevant reading. Keep README free of topic and task state
+3. For existing knowledge: treat `docs/` as the wiki ([wiki](wiki.md)); identify subject
+   owners and build `docs/index.md`. On requested restructuring, move shared facts from
+   incidental tool/task docs into domain owners, preserving evidence. Group the index by
+   retrieval purpose; branch indexes only when they cut irrelevant reading. Keep README
+   free of topic and task state. Create `docs/log.md` only when wiki writes begin
 
 ## Done check
 

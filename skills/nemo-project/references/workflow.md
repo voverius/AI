@@ -2,12 +2,13 @@
 
 Project knowledge and working context. Voice: `nemo-general`.
 
-Load by task:
+Access already ran at skill entry. Load by task:
 
 - Init / repair → [lifecycle](lifecycle.md) + [init](init.md)
 - Operate / continue → [operate](operate.md) (load [lifecycle](lifecycle.md) before
   changing files or filing)
-- Distill → [lifecycle](lifecycle.md) + [distill](distill.md)
+- Distill / wiki ingest → [lifecycle](lifecycle.md) + [distill](distill.md)
+  ([wiki](wiki.md) via lifecycle)
 - Capture → [lifecycle](lifecycle.md) + [capture](capture.md)
 - Read-only retrieval → [operate](operate.md) step 1 only; skip filing sections of
   lifecycle

@@ -17,6 +17,12 @@
 - Split when parts are independently retrieved or maintained (not by file-count habit)
 - Prefer authoritative external locations over copying their implementation
 
+## Wiki shape
+
+`docs/` follows [wiki](wiki.md): agent-maintained pages between human and raw sources.
+Entity, concept, summary, and synthesis pages live there. Good query answers that should
+survive the chat are filed back into `docs/`.
+
 ## Indexes
 
 - README maps roles; Knowledge points to `docs/index.md` (or the established equivalent)
@@ -24,6 +30,7 @@
 - Grouped entries while scannable; branch indexes only when they cut unrelated reading
 - One primary index entry per topic; cross-links welcome
 - Indexes hold retrieval cues, not fact copies or exhaustive inventories
+- `docs/log.md` is chronology only; not a second index
 - README does not grow with topic count
 
 ## Writer duties

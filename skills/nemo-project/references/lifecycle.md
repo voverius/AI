@@ -1,10 +1,13 @@
 # Project lifecycle
 
-A project holds useful knowledge and working context. Files outlive chats. Purpose may be ongoing.
+A project holds useful knowledge and working context. Files outlive chats. Purpose may be
+ongoing.
 
 Read only the sections your branch needs:
 
+- Root and permissions → [access](access.md)
 - Layout → [places](places.md)
+- Docs as compounding wiki → [wiki](wiki.md)
 - Subjects, indexes, quality → [ownership](ownership.md)
 - Cleanup after processing → [retention](retention.md)
 

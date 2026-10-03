@@ -1,16 +1,20 @@
 ---
 name: nemo-project
 description: >-
-  Project knowledge spaces: bootstrap structure, operate with selective context, distill findings
-  into docs, and capture handovers. Use when starting or continuing a project knowledge base,
-  filing inbox material, or pausing work. Apply nemo-general for voice. Excludes coding and
-  Harmony PKM (use nemo-code or nemo-pkm).
+  Project knowledge spaces under ~/Projects/<project>: bootstrap, operate with selective context,
+  distill conversation/sources into the docs/ LLM wiki, capture handovers. Use when starting or
+  continuing a project knowledge base, ingesting inbox material, filing durable answers into
+  docs/, or pausing work. Verify filesystem access before loading. Apply nemo-general for voice.
+  Excludes coding and Harmony PKM (use nemo-code or nemo-pkm).
 ---
 
 # Project
 
-Voice: [nemo-general](../nemo-general/SKILL.md). This skill owns project knowledge procedure only.
-Domain facts stay in the project.
+Voice: [nemo-general](../nemo-general/SKILL.md). This skill owns procedure only; domain facts
+stay in the project.
+
+Once per skill activation: [access](references/access.md). Then load the branch. Do not
+re-check on every reference.
 
 - Ordinary project work → [workflow](references/workflow.md) + [operate](references/operate.md)
 - New project or structural repair → [workflow](references/workflow.md) +

@@ -8,12 +8,15 @@ package-development paths out of projects.
 
 Create `AGENTS.md` from this contract. Adapt local locations; preserve unrelated instructions:
 
-> Start with the globally installed **nemo-project** skill, then [README](README.md), the
-> knowledge index when present, and only the relevant subjects or handover.
+> Start with the globally installed **nemo-project** skill (it owns root location and the
+> access check). Then read [README](README.md), the knowledge index when present, and only
+> the relevant subjects or handover.
 >
-> - Knowledge owns reusable facts, decisions, and procedures; handovers own unfinished work;
->   inbox holds arrivals; outputs hold deliverables; work is temporary. Keep code and
->   authoritative external resources in place
+> - `docs/` is the LLM wiki (compounding facts, decisions, procedures); handovers own
+>   unfinished work; inbox holds arrivals; sources hold retained raw originals; outputs
+>   hold deliverables; work is temporary. Keep code and authoritative external resources
+>   in place
+
 > - Shared facts have one subject owner; dependent procedures link to it. Preserve evidence,
 >   uncertainty, and decision rationale
 > - Use **nemo-project** init for structure, distill for knowledge and filing, capture at

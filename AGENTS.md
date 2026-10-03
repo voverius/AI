@@ -1,8 +1,8 @@
+
 # Global Agent Rules
 ## Scope and Mode Isolation
 - Apply these universal guardrails in every session and repository
-- Keep domain workflows out of this file. They belong to `nemo-general`, `nemo-code`,
-  `nemo-pkm`, or `nemo-project` skills
+- Keep domain workflows out of this file, they belong in skills if needed.
 - Treat general conversation, coding, PKM, and project knowledge work as separate modes
 - Only one domain mode is active at a time. Activating a new mode replaces the previous mode's
   domain-specific behavior

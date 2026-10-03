@@ -1,24 +1,21 @@
+
 # Skills
+This is a collection of developed and refined skills for personal workflows.
 
-- [nemo-general](nemo-general/SKILL.md) - Default voice for every chat; dialogue +
-  actionable shape; init, `rethink`, and `TLDR`
-- [nemo-code](nemo-code/SKILL.md) - Code mode: orientation, TDD, implement, debug,
-  verify, review; uses nemo-general for voice
-- [nemo-pkm](nemo-pkm/SKILL.md) - Harmony PKM mode + book memos; uses nemo-general for
-  voice
-- [nemo-project](nemo-project/SKILL.md) - Project knowledge: init, operate, distill,
-  capture; uses nemo-general for voice
+## Available
+- [General](nemo-general/SKILL.md) - default voice for every chat
+- [Code](nemo-code/SKILL.md) - everything related to coding
+- [pkm](nemo-pkm/SKILL.md) - personal know
+- [project](nemo-project/SKILL.md) - Project knowledge in the selected project;
+  setup, retrieval, audit, distillation and continuation; uses nemo-general for voice
+- [critique](nemo-critique/SKILL.md) - Critique finished work the user points at;
+  gap-first; uses nemo-general for voice
+- [skill](nemo-skill/SKILL.md) - Write, review and test agent skills;
+  includes blind behavioural evaluation
 
-From the repository root, run the command for the platform you need. Each command
-links all four `nemo-*` skills and the repository's global instructions; it leaves
-matching links alone and stops at conflicting files.
 
-Codex:
+## Commands
+Install for all detected platforms:
 ```bash
-./scripts/sync.sh codex
-```
-
-All detected platforms:
-```bash
-./scripts/sync.sh all
+../scripts/sync.sh all
 ```

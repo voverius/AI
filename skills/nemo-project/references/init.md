@@ -1,21 +1,25 @@
 
 # Setup, repair and audit
-Read knowledge.md in this reference directory before structural changes. Root resolution belongs to
-the entry skill. This procedure does not choose another location.
+Apply the knowledge rules loaded through the entry for structure and audits. Root resolution belongs
+to the entry skill. This procedure does not choose another location.
 
 For **setup**, inspect purpose, boundaries, existing entries and layout. Preserve unrelated
-instructions and existing equivalents. An empty project receives only AGENTS.md, README.md and
-inbox/. README contains purpose, an AGENTS link and an inbox link. Add other roles when populated.
-Setup alone creates no subject, index, log or handover and does not process arrivals.
+instructions and existing equivalents. Bootstrap creates AGENTS.md, README.md, docs/index.md and
+inbox/. README links the operating contract, knowledge index and inbox, and states purpose,
+boundaries, main directory roles and external locations. README never lists subjects or individual
+artifacts. The index states the knowledge scope and that no subjects exist yet. Add subject links as
+knowledge arrives, not empty category trees. Other role directories appear when populated. Setup
+alone does not invent knowledge, logs or handovers and does not process arrivals.
 
-Use this project contract, adapting local roles where necessary. The README reference is relative to
-the generated project entry, not this template:
+Use this project contract, substituting the actual project name and adapting local roles. The README
+reference is relative to the generated project entry, not this template:
 
 ```markdown
 # Project operating contract
 Use the globally installed nemo-project skill for setup, retrieval, knowledge maintenance and
-continuation. This directory is the project root. An explicitly requested different location takes
-precedence. Start with README.md and load only relevant knowledge or task state.
+continuation. Project knowledge lives at ~/Projects/<project>/, replacing <project> with this
+project's name. External repositories are sources or implementation locations, not project roots.
+Start with README.md and docs/index.md, then load only relevant subjects or task state.
 
 Keep reusable facts and decisions in their subject owner, deliverables separate from knowledge, and
 unfinished work in the matching handover. Preserve evidence and uncertainty. The changing agent
@@ -33,14 +37,25 @@ not repair under a read-only request.
 
 For authorized **repair**, address the demonstrated defects using knowledge.md. Move shared facts
 out of incidental tool/task documents into their subjects, retaining evidence and references.
-Preserve useful material and existing layout unless reorganization was requested.
+Preserve useful material and existing layout unless reorganization was requested. Replace obsolete
+setup guidance that contradicts the current contract, rather than adding new links beside it.
 
-For **migration**, replace superseded workflow names in applicable project contracts while
+For an authorized **location migration**, verify the source and canonical destination, inspect both
+for existing content, and agree on collisions before moving. Preserve unique content and local
+instructions. Update root declarations, external consumers and affected links. Verify the
+destination is complete and reachable before retiring the old tree. Never overwrite a populated
+destination or leave two writable knowledge owners. Report any inaccessible consumer rather than
+claiming migration complete.
+
+For **skill migration**, replace superseded workflow names in applicable project contracts while
 preserving local rules. Inspect other consumers before retiring an installed skill family. Use
 existing installation/removal mechanisms and verify global discovery without a local fallback.
 
-Done: generated contract responsibilities are present, README links existing roles, maintained
+Audit is done when the scoped findings identify locations, consequences and inspection limits, or
+report no findings. Leave project files unchanged unless the user requests a saved report.
+
+Setup or repair is done when the canonical root is explicit, docs/index.md exists and is linked,
+applicable contract responsibilities are present, README states purpose and links roles, maintained
 subjects are reachable, links resolve, and useful evidence survives. An unchanged rerun makes no
 changes. For new or migrated host integration, verify a fresh ordinary request without supplying a
 skill path. Syntax checks alone do not prove discovery.
-

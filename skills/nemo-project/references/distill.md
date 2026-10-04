@@ -1,18 +1,26 @@
 
 # Preserve findings and process inputs
 Apply the knowledge rules loaded through the entry skill. Work only on the relevant, understood set
-of inputs and findings. Leave unrelated arrivals alone.
+of inputs and findings. Leave unrelated arrivals alone. Intake creates maintained knowledge. Create
+a separate deliverable only when the user requests one.
 
 1. Read existing subject owners and necessary source material. Record unreadable or partially
    processed material and its impact. It remains pending. A request only to keep or file an artifact
    preserves it without forcing extraction
-2. Merge information that improves future work into the owning subjects, preserving evidence,
+2. Choose one subject owner for each reusable claim before writing. Group claims by the question
+   they answer, then update existing owners or create focused pages.
+   One input may update several pages, and several inputs may inform one page. Synthesize key
+   information across sources rather than copying notes or creating one summary per arrival.
+   Merge information that improves future work into the owning subjects, preserving evidence,
    meaningful failures, decision rationale and unresolved ideas with their status. A deliverable
    alone does not preserve reusable knowledge. Apply the shared navigation and consistency rules to
    the affected records
 3. Read back retained claims against their sources before cleanup. Verify useful information
    survived, uncertainty remains visible, affected deliverables agree and the knowledge is
-   retrievable. Repeating with no new information leaves state unchanged
+   retrievable. For each changed fact, compare the affected subject pages: keep its value and
+   evidence in one owner, replacing repeated values elsewhere with links. Deliverables may summarize
+   owners, but are not extra knowledge owners. Check related links and index routes. Repeating with
+   no new information leaves state unchanged
 
 ## Retention and cleanup
 Explicit retention and authorization instructions take precedence. Move processed retained originals

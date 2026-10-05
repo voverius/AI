@@ -12,6 +12,11 @@ Exercise independently callable routes without earlier setup in the same chat. I
 targets when multiple workspaces are supported. Track untested routes explicitly. A successful
 combined lifecycle does not prove each branch works alone.
 
+Test interactions with the actual entry contract and neighboring skills, including nearby requests
+that must not activate them. For saved knowledge, grade useful claim coverage, correctness,
+uncertainty, ownership, retrieval and noise separately; file existence or a word count is not a
+quality measure. Have a fresh reader answer realistic questions from the resulting knowledge.
+
 Freeze the candidate during a run. The skill under test and its real dependencies remain accessible
 to the actor. Keep evaluator notes, expected answers, prior outputs and alternative candidates
 outside actor access. Fixtures must resemble ordinary user material, not contain hints about the
@@ -23,6 +28,10 @@ supported). Give it only the natural task, raw inputs, permitted workspace and n
 constraints. Use separate writable workspaces for independent runs. Do not send the author's
 reasoning, suspected bug, desired implementation, rubric, expected answer or earlier failure
 messages.
+
+Pass the normal global and local instruction entry points when the worker does not inherit them.
+Record this as supplied environment context; do not substitute the target skill's path in a
+discovery test.
 
 A new name is not a fresh context. Do not reuse the author's or a previous tester's session. If the
 host cannot prevent history inheritance, use a genuinely fresh supported session or mark the test
@@ -75,8 +84,17 @@ a new actor and untouched input. Include a fresh variation to check that the cor
 Never manually repair output and count it as an actor pass; do not discard failed runs from the
 conclusion.
 
+Repeat critical cases under the same conditions before claiming reliability. Report every attempt,
+including failed and interrupted runs; one eventual success does not establish consistent behavior.
+Challenge reviewer findings against the actual requirement and evidence rather than accepting a
+positive verdict or majority vote. Prefer removing a conflicting rule over adding repeated warnings.
+
+If clear instructions repeatedly fail, test the same case with adequate reasoning or an independent
+capable actor before adding more prose. Record model, reasoning level and host differences; do not
+attribute a gain to the skill when those conditions also changed. A reviewer must check the original
+requests and inputs, including decisions made in conversation, not merely the writer's summary.
+
 Scale runs to risk and cost. Use a capable inexpensive model for bounded cases; keep evaluator
 judgments separate from actor execution. Stop when the defined checks pass, or report the concrete
 limitation. Missing agent capability or budget means untested, not passed. A few successful cases
 support only those tested behaviours, not universal reliability.
-

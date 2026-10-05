@@ -5,7 +5,7 @@ This is a collection of developed and refined skills for personal workflows.
 ## Available
 - [General](nemo-general/SKILL.md) - default voice for every chat
 - [Code](nemo-code/SKILL.md) - everything related to coding
-- [pkm](nemo-pkm/SKILL.md) - personal know
+- [PKM](nemo-pkm/SKILL.md) - Personal Knowledge Management (PKM) workflows and management
 - [project](nemo-project/SKILL.md) - Project knowledge in the selected project;
   setup, retrieval, audit, distillation and continuation; uses nemo-general for voice
 - [critique](nemo-critique/SKILL.md) - Critique finished work the user points at;

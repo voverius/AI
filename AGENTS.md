@@ -3,10 +3,13 @@
 ## Scope and Mode Isolation
 - Apply these universal guardrails in every session and repository
 - Keep domain workflows out of this file, they belong in skills if needed.
-- Treat general conversation, coding, PKM, and project knowledge work as separate modes
-- Only one domain mode is active at a time. Activating a new mode replaces the previous mode's
-  domain-specific behavior
-- Do not cross-apply coding, PKM, project, or general-dialogue rules unless the user asks
+- Apply each workflow only to the work it owns; communication preferences apply across workflows
+- Combine workflows when the task crosses boundaries: code rules govern implementation, project
+  rules govern saved knowledge, and workspace-specific PKM rules govern that workspace only
+- A workflow does not change the selected project, authorize extra work or replace another
+  workflow's responsibilities
+- When delegating, pass applicable instruction entry points and authorized paths; fresh workers
+  may not inherit the parent's instructions
 - Treat repository-local instructions as additional constraints
 - Let the most specific applicable instruction win unless it weakens a safety rule
 - Use hooks, sandboxing, and permissions for mechanical enforcement
@@ -21,6 +24,8 @@
 
 ## Judgment
 - Inspect relevant context before acting; do not silently guess
+- Resolve named skills through the host catalog or installed skill directories, following symlinks,
+  before declaring them unavailable; a missing catalog entry alone is not proof of absence
 - State assumptions when they materially affect the result
 - Surface conflicting requirements and meaningful trade-offs
 - Push back when a request is unsafe, internally inconsistent, or needlessly complex
@@ -41,6 +46,10 @@
 - Modify only the active workspace or a location explicitly requested by the user
 - Preserve existing user changes and unrelated work, including untracked files
 - Keep changes scoped to the requested outcome
+- For each write, use an explicit working directory or absolute paths for the selected target;
+  do not assume a previous command changed the next tool call's directory
+- If a write lands in the wrong place, stop affected work and inspect the damage. Restore only
+  from verified prior contents; do not reconstruct overwritten user files from memory
 - Do not copy credentials, tokens, sessions, machine-local configuration, or private data into a
   repository
 

@@ -11,7 +11,7 @@ usage() {
   cat <<'EOF'
 Usage: sync.sh <claude|codex|cursor|all>
 
-Symlink the canonical instructions and repository skills for the selected AI tool.
+Install canonical instructions and repository skills for the selected AI tool.
 EOF
 }
 
@@ -81,13 +81,52 @@ sync_target() {
   ln -s "$source" "$target"
 }
 
+sync_cursor_instructions() {
+  local target="$1"
+  local target_dir
+  local expected
+  local temporary
+
+  target_dir="$(dirname "$target")"
+  expected="$(printf '%s\n' '---' 'alwaysApply: true' '---' '' \
+    "Read and follow [the global agent rules](<$AGENTS_FILE>) before working.")"
+
+  if [[ -L "$target" ]]; then
+    if [[ "$(readlink "$target")" != "$AGENTS_FILE" ]]; then
+      printf 'Conflict: %s points to another instruction source\n' "$target" >&2
+      return 1
+    fi
+  elif [[ -f "$target" && "$(cat "$target")" == "$expected" ]]; then
+    return 0
+  elif [[ -e "$target" ]]; then
+    printf 'Conflict: %s already exists\n' "$target" >&2
+    return 1
+  fi
+  if [[ -e "$target_dir" && ! -d "$target_dir" ]]; then
+    printf 'Conflict: %s is not a directory\n' "$target_dir" >&2
+    return 1
+  fi
+
+  mkdir -p "$target_dir"
+  temporary="$(mktemp "$target_dir/.nemo-rule.XXXXXX")"
+  if ! printf '%s\n' "$expected" > "$temporary" || ! mv -f "$temporary" "$target"; then
+    rm -f "$temporary"
+    return 1
+  fi
+  printf 'Rule: %s -> %s\n' "$target" "$AGENTS_FILE"
+}
+
 sync_tool() {
   local tool="$1"
   local skills_dir
   local source
   local has_conflict=0
 
-  if ! sync_target "$AGENTS_FILE" "$(tool_instructions_path "$tool")"; then
+  if [[ "$tool" == cursor ]]; then
+    if ! sync_cursor_instructions "$(tool_instructions_path "$tool")"; then
+      has_conflict=1
+    fi
+  elif ! sync_target "$AGENTS_FILE" "$(tool_instructions_path "$tool")"; then
     has_conflict=1
   fi
 

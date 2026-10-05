@@ -7,18 +7,20 @@ For **setup**, inspect purpose, boundaries, existing entries and layout. Preserv
 instructions and existing equivalents. Bootstrap creates AGENTS.md, README.md, docs/index.md and
 inbox/. README links the operating contract, knowledge index and inbox, and states purpose,
 boundaries, main directory roles and external locations. README never lists subjects or individual
-artifacts. The index states the knowledge scope and that no subjects exist yet. Add subject links as
-knowledge arrives, not empty category trees. Other role directories appear when populated. Setup
-alone does not invent knowledge, logs or handovers and does not process arrivals.
+artifacts. Record external locations only when established and distinguish them from this root.
+The index states the knowledge scope; show an empty-state cue only while it has no subjects.
+Replace that cue with routes as knowledge arrives, not bootstrap history or empty category trees.
+Other role directories appear when populated. Setup alone does not invent knowledge, logs or
+handovers and does not process arrivals.
 
-Use this project contract, substituting the actual project name and adapting local roles. The README
+Use this project contract, substituting the established root and adapting local roles. The README
 reference is relative to the generated project entry, not this template:
 
 ```markdown
 # Project operating contract
 Use the globally installed nemo-project skill for setup, retrieval, knowledge maintenance and
-continuation. Project knowledge lives at ~/Projects/<project>/, replacing <project> with this
-project's name. External repositories are sources or implementation locations, not project roots.
+continuation. Project knowledge lives at <project-root>.
+External repositories are sources or implementation locations, not project roots.
 Start with README.md and docs/index.md, then load only relevant subjects or task state.
 
 Keep reusable facts and decisions in their subject owner, deliverables separate from knowledge, and

@@ -31,11 +31,15 @@ retrieval or maintenance. Reuse existing owners. Merge tightly related material.
 independent use, not by file count, conversation, source file or tool name. Ask only when competing
 meanings materially affect scope.
 
-Keep each fact with the entity or subject it describes. Referencing pages link to that owner rather
-than repeat its values. A tool's settings belong with the tool, not in a shared entity inventory.
-Shared domain/entity facts have one owner independent of consuming tools. Tool-specific
-configuration and procedures link to it. Keep decisions and rationale with their subject. One source
-may inform several subjects and one subject may use several sources.
+Give each reusable claim one subject owner, independent of the tool or incident that revealed it.
+Entity identity, access and capabilities belong with the entity; tool settings and procedures belong
+with the tool. Keep decisions and rationale with the subject they govern. One source may inform
+several subjects and one subject may use several sources. Related pages link the owner without
+repeating its values; repeating a claim beside a link still duplicates ownership.
+
+Write claims directly and keep their limits beside them. State shared evidence limits once instead
+of qualifying every sentence. Omit processing narration, empty sections and links that add no
+retrieval value. Concision must preserve the distinctions needed for the next decision.
 
 Preserve source identity and supporting evidence. Distinguish observations, reported facts,
 inferences, decisions and proposals. Decisions establish intent, not execution. Supersede
@@ -56,9 +60,9 @@ to docs/index.md. Never turn README into a file inventory: no subject-page lists
 handover lists. Directory-level indexes handle navigation within populated roles when needed. The
 index supplies subject links and short retrieval cues, not copies of facts or an exhaustive file
 inventory. Use grouped entries until branch indexes reduce irrelevant reading. Give each subject a
-primary route. Link other subject owners under Related using linked titles, rather than recapping
-their claims. Inline entity links may identify relationships, but owned values and decisions stay on
-the owner page. The index exists from bootstrap, even before the first subject.
+primary route. Relationships are claims too: record each with the subject whose configuration or
+state it describes. Other subjects link that owner by title without restating the relationship.
+The index exists from bootstrap, even before the first subject.
 
 The writer updates affected index routes and incoming links in the same change as additions, splits,
 moves, merges or removal. Check reachability, link resolution and unique ownership. Review affected
@@ -66,5 +70,7 @@ deliverables and handovers: refresh editable summaries or mark them outdated whi
 retained originals. An unchanged task leaves files unchanged.
 
 When parallel work is used, assign separate writable areas. One integrator reconciles shared
-subjects and indexes against current files. Await or stop workers before finalizing. Report any
-unaccounted worker or unresolved overlap instead of claiming completion.
+subjects and indexes against current files and original inputs, checking claim ownership, evidence
+and preserved user decisions. Workers can extract or draft; their completion claims do not replace
+that review. Await or stop workers before finalizing. Report any unaccounted worker or unresolved
+overlap instead of claiming completion.

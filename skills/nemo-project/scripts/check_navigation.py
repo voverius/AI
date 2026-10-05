@@ -7,6 +7,28 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 
+def link_paths(text):
+    text = re.sub(r'(?ms)^```.*?^```[^\n]*', '', text)
+    text = re.sub(r'`[^`\n]*`', '', text)
+    definitions = {}
+    for label, angled, bare in re.findall(
+        r'(?m)^ {0,3}\[([^\]\n]+)\]:\s*(?:<([^>]+)>|(\S+))', text
+    ):
+        definitions[' '.join(label.split()).casefold()] = angled or bare
+    paths = [angled or bare for angled, bare in re.findall(
+        r'\[[^\]]*\]\(\s*(?:<([^>]+)>|([^\s)]+))', text
+    )]
+    labels = [reference or label for label, reference in re.findall(
+        r'\[([^\]]+)\]\[([^\]]*)\]', text
+    )]
+    labels.extend(re.findall(r'\[([^\]]+)\](?![:(\[])', text))
+    for label in labels:
+        target = definitions.get(' '.join(label.split()).casefold())
+        if target:
+            paths.append(target)
+    return paths
+
+
 def check(root):
     errors = []
     for name in ('AGENTS.md', 'README.md', 'docs/index.md'):
@@ -15,13 +37,14 @@ def check(root):
     if not (root / 'inbox').is_dir():
         errors.append('Missing inbox/')
     targets = {}
-    pages = [root / 'README.md', *sorted((root / 'docs').rglob('*.md'))]
+    pages = [root / 'README.md']
+    for role in ('docs', 'outputs', 'handovers'):
+        pages.extend(sorted((root / role).rglob('*.md')))
     for page in pages:
         if not page.is_file():
             continue
-        text = re.sub(r'(?ms)^```.*?^```[^\n]*', '', page.read_text())
         found = set()
-        for value in re.findall(r'\[[^\]\n]*\]\(([^)\n]+)\)', text):
+        for value in link_paths(page.read_text()):
             value = value.strip().strip('<>')
             if not value or value.startswith('#') or urlsplit(value).scheme:
                 continue
@@ -60,8 +83,6 @@ if __name__ == '__main__':
     if len(sys.argv) != 2:
         raise SystemExit('Usage: check_navigation.py PROJECT_ROOT')
     selected = Path(sys.argv[1]).expanduser().absolute()
-    if selected.parent.resolve() != (Path.home() / 'Projects').resolve():
-        raise SystemExit('Use ~/Projects/<project>, not the implementation repository')
     root = selected.resolve()
     if not root.is_dir():
         raise SystemExit('Project root must be an existing directory')

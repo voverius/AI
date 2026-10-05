@@ -1,9 +1,9 @@
 ---
 name: nemo-pkm
 description: >-
-  Harmony personal knowledge management: initialize PKM mode, follow Harmony local docs, and run
-  PKM tasks. Use at the start of Harmony work or when the user asks for PKM, books, or knowledge
-  work.
+  Maintain the Harmony personal knowledge workspace using its local schema and book templates.
+  Use for explicitly selected Harmony work or Harmony book preparation. General learning,
+  research notes and project knowledge use their own workflows; mentioning PKM is not enough.
 ---
 
 # PKM
@@ -18,5 +18,4 @@ Harmony's local documentation is authoritative for domain rules.
 - [book-prepare](references/book-prepare.md) - Goodreads lookup, book template, tags and validation
   Read after initialization for book memo preparation
 
-Keep PKM separate from code mode. The active mode lasts until the user switches it.
-
+Apply Harmony rules only inside the selected Harmony workspace. They do not govern other projects.

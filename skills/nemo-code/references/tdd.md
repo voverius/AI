@@ -20,7 +20,8 @@ No horizontal slicing (all tests, then all code).
 
 ## Green
 - Smallest production change that passes the failing test
-- Do not broaden past what the test proves
+- Keep each change minimal; repeat the cycle until the full requested behavior and its stated
+  variants are covered. A focused test does not narrow the user's request
 - Re-run the focused test until green
 
 ## Refactor
@@ -39,4 +40,3 @@ behavior.
 
 If no harness exists or a test is genuinely impractical: state why, then the strongest alternative
 verification. "Inconvenient" or "small" is not an exception.
-

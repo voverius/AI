@@ -3,9 +3,11 @@
 Review alone does not authorize edits.
 
 ## Scope
-Pin what to review: PR, branch, commit, or working tree. Fixed point: `git diff <point>...HEAD`.
-If the base is missing, inspect what exists; ask only when the base choice would change the review.
-Confirm the ref resolves and the diff is non-empty before deep review.
+Identify the requested comparison: working changes, staged changes, a branch, a PR, or named files.
+Use the matching diff; a branch comparison does not include uncommitted work. Include relevant
+untracked files when they are part of the requested change. Confirm available refs before using
+them. If Git metadata or a baseline is absent, inspect the named files and state that comparison
+limit. Ask only when the missing baseline would change the review.
 
 ## Two axes (two passes)
 Keep **Standards** and **Spec** separate so one cannot mask the other.

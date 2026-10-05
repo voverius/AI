@@ -3,16 +3,14 @@ name: nemo-code
 description: >-
   Software development: implementation, TDD, debugging, verification, and code review. Use when
   coding, fixing bugs, writing tests, reviewing diffs/PRs, or initializing code mode. Apply
-  nemo-general for voice. Excludes Harmony PKM and project lifecycle (use nemo-pkm or
-  nemo-project).
+  nemo-general for voice. Use nemo-project alongside this skill when the task uses saved context
+  or maintains knowledge in a selected project; Harmony content uses nemo-pkm.
 ---
 
 # Code
 Voice: [nemo-general](../nemo-general/SKILL.md). This skill owns coding procedure only.
 
 ## References
-- [workflow](references/workflow.md) - Session scope and shared safeguards. Read for initialization,
-  implementation or debugging. For reviews, read only when edits are also requested
 - [init](references/init.md) - Initialization-only response and boundaries. Read for code-mode setup
 - [orientation](references/orientation.md) - Workspace inspection, scope and implementation choices
   Read before implementation or debugging
@@ -22,10 +20,8 @@ Voice: [nemo-general](../nemo-general/SKILL.md). This skill owns coding procedur
 - [debug](references/debug.md) - Reproduction, hypothesis testing, regression and cleanup. Read for
   debugging before choosing a fix
 - [verify](references/verify.md) - Verification scope and completion evidence. Read before
-  completing
-  implementation or debugging
+  completing implementation or debugging
 - [review](references/review.md) - Separate standards and specification checks, with finding format
   Read for code reviews. Review alone does not authorize edits
 
 No commit/push unless the user asks.
-

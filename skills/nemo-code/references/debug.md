@@ -1,40 +1,18 @@
 
 # Debugging
-Hard bugs and perf regressions: feedback loop before theories.
+Inspect the symptom, relevant code and available evidence before choosing a fix. Redact secrets
+from tool output and retained evidence.
 
-Redact secrets in shown output (`<REDACTED>`).
+1. Reproduce the failure at a public boundary with a focused test, CLI fixture or other repeatable
+   check. Confirm it exercises the intended workspace and fails for the reported reason. Reduce
+   the case until unrelated setup is removed; measure a baseline for performance problems
+2. Test a specific explanation against that reproduction, changing one variable at a time. Use
+   the debugger or a small probe before adding logs. For ambiguous failures, compare plausible
+   causes with discriminating checks; do not invent a quota of hypotheses for an obvious defect
+3. Apply the smallest supported fix, add regression coverage and rerun the original reproduction.
+   Remove temporary instrumentation and artifacts created by the investigation. Report the actual
+   result and remaining limits
 
-## 1. Tight red loop (mandatory)
-No hypothesizing from code until you have a tight, red-capable loop you have already run once
-(show invocation + redacted output):
-
-- **Red-capable**: hits the bug path; asserts the user's symptom (not "didn't crash")
-- **Deterministic** (or high enough repro rate)
-- **Fast** (seconds when possible)
-- **Agent-runnable**
-
-Build one, prefer earlier: failing test, curl/HTTP, CLI + fixture, headless UI, replay payload,
-throwaway harness, fuzz, bisect/differential.
-
-If you cannot: stop, list attempts, ask for access or a redacted artifact.
-No Phase 2 without a loop.
-
-## 2. Reproduce and minimise
-Confirm the user's failure mode. Shrink until every remaining piece is load-bearing.
-
-## 3. Hypothesise
-3-5 ranked, falsifiable hypotheses before testing ("If X, then probe Y changes the symptom").
-Show the list when cheap; do not block if the user is AFK.
-
-## 4. Instrument
-One variable at a time. Debugger/REPL first, then tagged logs `[DEBUG-…]`. Perf: measure baseline
-first.
-
-## 5. Fix + regression
-Correct seam: failing regression → fix → green → re-run Phase 1 loop on the original scenario.
-No correct seam: document that finding.
-
-## 6. Cleanup
-Phase 1 loop green; regression in place (or seam gap noted); all `[DEBUG-…]` gone; throwaways
-deleted.
-
+If execution is unavailable, continue useful read-only diagnosis and distinguish suspected causes
+from confirmed ones. Request only the missing access or redacted evidence needed to advance. Do not
+claim reproduction, a tested fix or a successful regression check without running it.

@@ -3,7 +3,8 @@
 
 ## Boundary
 - Software development, repo maintenance, debugging, code review
-- No PKM / Harmony. No project-lifecycle filing (`nemo-project`)
+- Use `nemo-project` for relevant saved context and authorized knowledge updates in a selected
+  project; keep implementation in its repository. Do not create a knowledge project automatically
 - Voice from `nemo-general`; procedure from these refs
 
 ## Before editing
@@ -20,4 +21,3 @@
 - Simplest viable approach; push back on needless complexity
 - Non-trivial work: short plan with success criteria
 - Stop when ambiguity blocks a correct implementation
-

@@ -85,6 +85,61 @@ class SyncTests(unittest.TestCase):
                     self.assertEqual((self.root / f'skills/{platform}' / skill.name).resolve(),
                                      skill)
 
+    def test_managed_skill_symlink_is_repointed(self):
+        self.assertEqual(self.sync('codex').returncode, 0)
+        skill = next((self.repository / 'skills').glob('nemo-*'))
+        target = self.root / 'skills/codex' / skill.name
+        stale = self.repository / 'skills' / f'.stale-{skill.name}'
+        stale.mkdir(exist_ok=True)
+        self.addCleanup(lambda: stale.rmdir() if stale.exists() else None)
+        target.unlink()
+        target.symlink_to(stale)
+        result = self.sync('codex')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(target.readlink(), skill)
+
+    def test_foreign_skill_symlink_is_preserved(self):
+        self.assertEqual(self.sync('codex').returncode, 0)
+        skill = next((self.repository / 'skills').glob('nemo-*'))
+        target = self.root / 'skills/codex' / skill.name
+        foreign = self.root / 'foreign-skill'
+        foreign.mkdir()
+        target.unlink()
+        target.symlink_to(foreign)
+        result = self.sync('codex')
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn('Conflict:', result.stderr)
+        self.assertEqual(target.readlink(), foreign)
+
+    def test_dangling_managed_skill_is_pruned_then_reinstalled(self):
+        self.assertEqual(self.sync('codex').returncode, 0)
+        skill = next((self.repository / 'skills').glob('nemo-*'))
+        target = self.root / 'skills/codex' / skill.name
+        missing = self.repository / 'skills' / '.missing-skill-for-test'
+        target.unlink()
+        target.symlink_to(missing)
+        self.assertFalse(target.exists())
+        result = self.sync('codex')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(target.readlink(), skill)
+
+    def test_remove_uninstalls_managed_skill(self):
+        self.assertEqual(self.sync('codex').returncode, 0)
+        skill = next((self.repository / 'skills').glob('nemo-*'))
+        target = self.root / 'skills/codex' / skill.name
+        self.assertTrue(target.is_symlink())
+        environment = dict(os.environ, TASK_TEST_ROOT=str(self.root),
+                           TASK_SYNC_SCRIPT=str(self.repository / 'scripts/sync.sh'),
+                           TASK_SKILL=skill.name)
+        result = subprocess.run(['bash', '-c', '''
+            source "$TASK_SYNC_SCRIPT" help >/dev/null
+            tool_available() { [[ "$1" == codex ]]; }
+            tool_skills_path() { printf '%s\\n' "$TASK_TEST_ROOT/skills/$1"; }
+            remove_managed_skill "$TASK_SKILL" codex
+            '''], env=environment, text=True, capture_output=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertFalse(target.exists())
+
 
 if __name__ == '__main__':
     unittest.main()

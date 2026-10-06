@@ -10,8 +10,13 @@ readonly SKILLS_DIR="$REPO_DIR/skills"
 usage() {
   cat <<'EOF'
 Usage: sync.sh <claude|codex|cursor|all>
+       sync.sh remove <skill-name> [claude|codex|cursor|all]
 
 Install canonical instructions and repository skills for the selected AI tool.
+Managed nemo-* skill symlinks and instruction links that already point inside this
+repository are repointed when the source path changes. Foreign files stay conflicts.
+Stale managed nemo-* symlinks that point into this repo but no longer have a skill
+source are removed during sync.
 EOF
 }
 
@@ -37,6 +42,7 @@ tool_available() {
     codex) command -v codex >/dev/null 2>&1 ;;
     cursor)
       command -v cursor >/dev/null 2>&1 ||
+        [[ -d "$HOME/.cursor" ]] ||
         [[ -d /Applications/Cursor.app ]] ||
         [[ -d "$HOME/Applications/Cursor.app" ]]
       ;;
@@ -51,6 +57,51 @@ skill_sources() {
   done
 }
 
+prune_stale_skills() {
+  local skills_dir="$1"
+  local entry current name
+
+  [[ -d "$skills_dir" ]] || return 0
+
+  for entry in "$skills_dir"/nemo-*; do
+    [[ -L "$entry" ]] || continue
+    current="$(readlink "$entry")"
+    name="${entry##*/}"
+    [[ "$current" == "$SKILLS_DIR"/* ]] || continue
+    if [[ -f "$SKILLS_DIR/$name/SKILL.md" && -e "$entry" ]]; then
+      continue
+    fi
+    printf 'Remove: %s (stale managed skill)\n' "$entry"
+    rm -f "$entry"
+  done
+}
+
+remove_managed_skill() {
+  local name="$1"
+  local tool="$2"
+  local target
+
+  case "$name" in
+    nemo-*) ;;
+    *)
+      printf 'Error: only managed nemo-* skill names can be removed\n' >&2
+      return 2
+      ;;
+  esac
+
+  target="$(tool_skills_path "$tool")/$name"
+  if [[ -L "$target" && "$(readlink "$target")" == "$SKILLS_DIR"/* ]]; then
+    printf 'Remove: %s\n' "$target"
+    rm -f "$target"
+    return 0
+  fi
+  if [[ -e "$target" || -L "$target" ]]; then
+    printf 'Conflict: %s is not a managed skill link\n' "$target" >&2
+    return 1
+  fi
+  return 0
+}
+
 sync_target() {
   local source="$1"
   local target="$2"
@@ -63,11 +114,24 @@ sync_target() {
     return 1
   fi
 
-  if [[ -L "$target" && "$(readlink "$target")" == "$source" ]]; then
-    return 0
+  if [[ -L "$target" ]]; then
+    if [[ "$(readlink "$target")" == "$source" ]]; then
+      return 0
+    fi
+    # Repoint only managed links that already point inside this repository.
+    if [[ "$(readlink "$target")" == "$REPO_DIR"/* ]]; then
+      if [[ "$source" == "$SKILLS_DIR"/nemo-* && "$(basename "$target")" == "$(basename "$source")" ]] ||
+         [[ "$source" == "$AGENTS_FILE" ]]; then
+        printf 'Relink: %s -> %s\n' "$target" "$source"
+        ln -sfn "$source" "$target"
+        return 0
+      fi
+    fi
+    printf 'Conflict: %s already exists\n' "$target" >&2
+    return 1
   fi
 
-  if [[ -e "$target" || -L "$target" ]]; then
+  if [[ -e "$target" ]]; then
     printf 'Conflict: %s already exists\n' "$target" >&2
     return 1
   fi
@@ -131,6 +195,7 @@ sync_tool() {
   fi
 
   skills_dir="$(tool_skills_path "$tool")"
+  prune_stale_skills "$skills_dir"
 
   while IFS= read -r source; do
     if ! sync_target "$source" "$skills_dir/${source##*/}"; then
@@ -147,8 +212,38 @@ main() {
   local candidates=()
   local tool
   local has_conflict=0
+  local remove_scope
 
   case "$selection" in
+    remove)
+      if [[ -z "${2:-}" ]]; then
+        usage >&2
+        return 2
+      fi
+      remove_scope="${3:-all}"
+      case "$remove_scope" in
+        claude|codex|cursor) tools=("$remove_scope") ;;
+        all)
+          for tool in claude codex cursor; do
+            tool_available "$tool" && tools+=("$tool")
+          done
+          ;;
+        *)
+          usage >&2
+          return 2
+          ;;
+      esac
+      if ((${#tools[@]} == 0)); then
+        printf 'Error: no supported AI tool detected\n' >&2
+        return 1
+      fi
+      for tool in "${tools[@]}"; do
+        if ! remove_managed_skill "$2" "$tool"; then
+          has_conflict=1
+        fi
+      done
+      return "$has_conflict"
+      ;;
     claude|codex|cursor) tools=("$selection") ;;
     all)
       candidates=(claude codex cursor)

@@ -2,9 +2,9 @@
 name: nemo-code
 description: >-
   Software development: implementation, TDD, debugging, verification, and code review. Use when
-  coding, fixing bugs, writing tests, reviewing diffs/PRs, or initializing code mode. Apply
-  nemo-general for voice. Use nemo-project alongside this skill when the task uses saved context
-  or maintains knowledge in a selected project; Harmony content uses nemo-pkm.
+  coding, fixing bugs, writing tests, reviewing diffs/PRs, or initializing code mode. Not for
+  critique of docs/plans/skills (nemo-critique) or skill-package authoring (nemo-skill). Apply
+  nemo-general for voice. Use nemo-project for saved project knowledge; Harmony uses nemo-pkm.
 ---
 
 # Code

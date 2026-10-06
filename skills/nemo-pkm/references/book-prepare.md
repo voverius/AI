@@ -5,6 +5,7 @@ Voice from `nemo-general`. This task is actionable: follow
 Result line below (no progress chatter, no soft closers).
 
 ## Operating Rules
+- Resolve the Harmony root first ([init](init.md)); all paths below are under that root
 - Create notes only in `Envoy/Books/`
 - Do not promote a memo
 - Work silently until the Result line

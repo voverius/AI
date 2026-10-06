@@ -54,6 +54,15 @@ intent, not that any physical action occurred. If authority or provenance is unc
 conflict instead of silently restoring an older state. An attributed maintained decision records
 intent; absence of the original chat transcript alone does not justify reversing it.
 
+Before treating file drift as a defect, check version control when available: who changed the file,
+whether it is committed, and what baseline produced the hash. A disposable `/tmp` baseline is not
+authority over committed user work. Never propose revert, reset or restore against user-authored
+changes to “match” an older audit hash; re-baseline or record the conflict. Findings that depend on
+temporary evidence must state the baseline identity and that it is not durable.
+
+Open gaps have one owner, usually a handover. Subjects and deliverables link that owner; they do not
+restate the same open gap.
+
 ## Navigation and consistency
 README explains the project purpose, boundaries and main directory roles. Its knowledge link points
 to docs/index.md. Never turn README into a file inventory: no subject-page lists, artifact lists or

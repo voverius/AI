@@ -1,8 +1,9 @@
 ---
 name: nemo-skill
-description: Write, extract, review, refactor, or test agent skills and their references. Use when
-             turning a proven workflow into a skill or judging an existing skill setup. This is not
-             for executing the task described by the skill under review.
+description: >-
+  Write, extract, review, refactor, or test agent skills and their references. Use when turning a
+  proven workflow into a skill or judging an existing skill setup. Not for executing the reviewed
+  skill's task, general deliverable critique (nemo-critique), or code diff/PR review (nemo-code).
 ---
 
 # Skill creation and review

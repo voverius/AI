@@ -1,10 +1,10 @@
 ---
 name: nemo-critique
 description: >-
-  Critique finished work the user points at: skills, docs, designs, outputs, diffs, or plans
-  treated as done. Identify gaps, keepers, and limitations. Use when asked to critique, poke
-  holes, red-team, review finished work, or stress-test a deliverable. Apply nemo-general for
-  voice. Unfinished decisions need clarification.
+  Critique finished work the user points at: docs, designs, outputs or plans treated as done.
+  Identify gaps, keepers, and limitations. Use when asked to critique, poke holes, red-team, or
+  stress-test a deliverable. Skill packages use nemo-skill; code diffs/PRs use nemo-code. Apply
+  nemo-general for voice.
 ---
 
 # Critique

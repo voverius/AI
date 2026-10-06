@@ -65,12 +65,14 @@ When consulting external repositories, follow their local instructions and link 
   Read for pauses, transfers or unfinished work. Preserve durable findings first when applicable
   Completion alone does not require a handover
 
-After project writes, run [check_navigation](scripts/check_navigation.py) from the installed skill:
-`python3 scripts/check_navigation.py <project-root>`. Repair reported defects within scope. The
-checker reads files only: it checks core files, standard role links, README scope, subject
-reachability and common Markdown link paths in docs, outputs and handovers. It does not verify
-anchors or claim quality. If Python is unavailable, perform those checks manually. Mapped optional
-roles still need review.
+After project writes, run [check_navigation](scripts/check_navigation.py) with an absolute script
+path from the installed skill (resolve the `nemo-project` symlink), for example:
+`python3 ~/.cursor/skills/nemo-project/scripts/check_navigation.py <project-root>`.
+Do not run `scripts/check_navigation.py` relative to the project root. Repair reported defects
+within scope. The checker reads files only: it checks core files, standard role links, README
+scope, subject reachability and common Markdown link paths in docs, outputs and handovers. It does
+not verify anchors, claim quality, ownership or safety of recommendations. If Python is unavailable,
+perform those checks manually. Mapped optional roles still need review.
 
 Continue using relevant guidance throughout the task. Do not reload every branch on every turn.
 After context loss, recover the task from the project entry and relevant saved state. Installation

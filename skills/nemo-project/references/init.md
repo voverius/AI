@@ -19,7 +19,7 @@ reference is relative to the generated project entry, not this template:
 ```markdown
 # Project operating contract
 Use the globally installed nemo-project skill for setup, retrieval, knowledge maintenance and
-continuation. Project knowledge lives at <project-root>.
+continuation, and nemo-general for communication. Project knowledge lives at <project-root>.
 External repositories are sources or implementation locations, not project roots.
 Start with README.md and docs/index.md, then load only relevant subjects or task state.
 
@@ -51,7 +51,10 @@ claiming migration complete.
 
 For **skill migration**, replace superseded workflow names in applicable project contracts while
 preserving local rules. Inspect other consumers before retiring an installed skill family. Use
-existing installation/removal mechanisms and verify global discovery without a local fallback.
+`scripts/sync.sh` to install or repoint managed `nemo-*` links; sync also removes stale managed
+symlinks that no longer have a skill source. Uninstall with
+`scripts/sync.sh remove <skill-name> [claude|codex|cursor|all]`. Verify global discovery without a
+local fallback.
 
 Audit is done when the scoped findings identify locations, consequences and inspection limits, or
 report no findings. Leave project files unchanged unless the user requests a saved report.

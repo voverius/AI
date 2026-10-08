@@ -39,7 +39,12 @@ tool_instructions_path() {
 tool_available() {
   case "$1" in
     claude) command -v claude >/dev/null 2>&1 ;;
-    codex) command -v codex >/dev/null 2>&1 ;;
+    codex)
+      command -v codex >/dev/null 2>&1 ||
+        [[ -d "$HOME/.codex" ]] ||
+        [[ -d /Applications/Codex.app ]] ||
+        [[ -d "$HOME/Applications/Codex.app" ]]
+      ;;
     cursor)
       command -v cursor >/dev/null 2>&1 ||
         [[ -d "$HOME/.cursor" ]] ||
@@ -102,6 +107,24 @@ remove_managed_skill() {
   return 0
 }
 
+confirm_replace() {
+  local target="$1"
+  local answer
+
+  if [[ -d "$target" && ! -L "$target" ]]; then
+    printf 'Conflict: %s is a directory\n' "$target" >&2
+    return 1
+  fi
+
+  printf 'Replace %s with the repository version? [Y/n] ' "$target" >&2
+  if IFS= read -r answer && [[ -z "$answer" || "$answer" == [yY] ]]; then
+    printf '\n' >&2
+    return 0
+  fi
+  printf '\nConflict: %s kept unchanged\n' "$target" >&2
+  return 1
+}
+
 sync_target() {
   local source="$1"
   local target="$2"
@@ -127,13 +150,10 @@ sync_target() {
         return 0
       fi
     fi
-    printf 'Conflict: %s already exists\n' "$target" >&2
-    return 1
   fi
 
-  if [[ -e "$target" ]]; then
-    printf 'Conflict: %s already exists\n' "$target" >&2
-    return 1
+  if [[ -e "$target" || -L "$target" ]]; then
+    confirm_replace "$target" || return 1
   fi
 
   if [[ ! -d "$target_dir" ]]; then
@@ -142,7 +162,7 @@ sync_target() {
   fi
 
   printf 'Link: %s -> %s\n' "$target" "$source"
-  ln -s "$source" "$target"
+  ln -sfn "$source" "$target"
 }
 
 sync_cursor_instructions() {
@@ -157,14 +177,12 @@ sync_cursor_instructions() {
 
   if [[ -L "$target" ]]; then
     if [[ "$(readlink "$target")" != "$AGENTS_FILE" ]]; then
-      printf 'Conflict: %s points to another instruction source\n' "$target" >&2
-      return 1
+      confirm_replace "$target" || return 1
     fi
   elif [[ -f "$target" && "$(cat "$target")" == "$expected" ]]; then
     return 0
   elif [[ -e "$target" ]]; then
-    printf 'Conflict: %s already exists\n' "$target" >&2
-    return 1
+    confirm_replace "$target" || return 1
   fi
   if [[ -e "$target_dir" && ! -d "$target_dir" ]]; then
     printf 'Conflict: %s is not a directory\n' "$target_dir" >&2
@@ -197,11 +215,11 @@ sync_tool() {
   skills_dir="$(tool_skills_path "$tool")"
   prune_stale_skills "$skills_dir"
 
-  while IFS= read -r source; do
+  while IFS= read -r source <&3; do
     if ! sync_target "$source" "$skills_dir/${source##*/}"; then
       has_conflict=1
     fi
-  done < <(skill_sources)
+  done 3< <(skill_sources)
 
   return "$has_conflict"
 }

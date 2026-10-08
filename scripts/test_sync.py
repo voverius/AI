@@ -13,7 +13,7 @@ class SyncTests(unittest.TestCase):
         self.root = Path(self.directory.name)
         self.repository = Path(__file__).resolve().parent.parent
 
-    def sync(self, platform):
+    def sync(self, platform, answer=''):
         environment = dict(os.environ, TASK_TEST_ROOT=str(self.root), TASK_PLATFORM=platform,
                            TASK_SYNC_SCRIPT=str(self.repository / 'scripts/sync.sh'))
         return subprocess.run(['bash', '-c', '''
@@ -21,7 +21,31 @@ class SyncTests(unittest.TestCase):
             tool_instructions_path() { printf '%s\\n' "$TASK_TEST_ROOT/rules/$1.mdc"; }
             tool_skills_path() { printf '%s\\n' "$TASK_TEST_ROOT/skills/$1"; }
             sync_tool "$TASK_PLATFORM"
-            '''], env=environment, text=True, capture_output=True)
+            '''], env=environment, input=answer, text=True, capture_output=True)
+
+    def test_all_detects_codex_desktop_without_cli(self):
+        for marker in ('.codex', 'Applications/Codex.app'):
+            with self.subTest(marker=marker):
+                directory = self.root / marker
+                directory.mkdir(parents=True)
+                environment = dict(os.environ, TASK_TEST_ROOT=str(self.root),
+                                   TASK_SYNC_SCRIPT=str(self.repository / 'scripts/sync.sh'))
+                result = subprocess.run(['bash', '-c', '''
+                    source "$TASK_SYNC_SCRIPT" help >/dev/null
+                    # Redirect home-directory probes without changing the real HOME.
+                    definition="$(declare -f tool_available)"
+                    eval "${definition//\\$HOME/\\$TASK_TEST_ROOT}"
+                    command() { [[ "$1" != -v ]] && builtin command "$@"; }
+                    tool_instructions_path() { printf '%s\\n' "$TASK_TEST_ROOT/rules/$1.mdc"; }
+                    tool_skills_path() { printf '%s\\n' "$TASK_TEST_ROOT/skills/$1"; }
+                    main all
+                    '''], env=environment, input='', text=True, capture_output=True)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual((self.root / 'rules/codex.mdc').resolve(),
+                                 self.repository / 'AGENTS.md')
+                for skill in (self.repository / 'skills').glob('nemo-*'):
+                    self.assertEqual((self.root / 'skills/codex' / skill.name).resolve(), skill)
+                directory.rmdir()
 
     def test_cursor_rule_applies_and_points_to_shared_source(self):
         result = self.sync('cursor')
@@ -72,6 +96,78 @@ class SyncTests(unittest.TestCase):
         (self.root / 'rules').write_text('Keep this file')
         self.assertNotEqual(self.sync('cursor').returncode, 0)
         self.assertEqual((self.root / 'rules').read_text(), 'Keep this file')
+
+    def test_instruction_replacement_requires_confirmation(self):
+        for platform in ('claude', 'codex', 'cursor'):
+            for answer in ('n\n', '', 'y\n', '\n'):
+                with self.subTest(platform=platform, answer=answer):
+                    target = self.root / f'rules/{platform}.mdc'
+                    target.parent.mkdir(exist_ok=True)
+                    target.write_text('Existing instructions')
+                    result = self.sync(platform, answer)
+                    self.assertIn('[Y/n]', result.stderr)
+                    if answer in ('n\n', ''):
+                        self.assertNotEqual(result.returncode, 0)
+                        self.assertEqual(target.read_text(), 'Existing instructions')
+                    else:
+                        self.assertEqual(result.returncode, 0, result.stderr)
+                        if platform == 'cursor':
+                            self.assertIn('alwaysApply: true', target.read_text())
+                        else:
+                            self.assertEqual(target.readlink(), self.repository / 'AGENTS.md')
+                    target.unlink()
+
+    def test_confirmed_foreign_instruction_link_preserves_source(self):
+        original = self.root / 'original-instructions'
+        original.write_text('Keep the original source')
+        for platform in ('claude', 'codex', 'cursor'):
+            with self.subTest(platform=platform):
+                target = self.root / f'rules/{platform}.mdc'
+                target.parent.mkdir(exist_ok=True)
+                target.symlink_to(original)
+                result = self.sync(platform, 'Y\n')
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(original.read_text(), 'Keep the original source')
+                if platform == 'cursor':
+                    self.assertFalse(target.is_symlink())
+                else:
+                    self.assertEqual(target.readlink(), self.repository / 'AGENTS.md')
+
+    def test_confirmed_foreign_skill_link_is_replaced(self):
+        self.assertEqual(self.sync('codex').returncode, 0)
+        skill = next((self.repository / 'skills').glob('nemo-*'))
+        target = self.root / 'skills/codex' / skill.name
+        foreign = self.root / 'foreign-skill'
+        foreign.mkdir()
+        target.unlink()
+        target.symlink_to(foreign)
+        result = self.sync('codex', 'y\n')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(target.readlink(), skill)
+        self.assertTrue(foreign.is_dir())
+
+    def test_all_continues_after_declined_replacement(self):
+        for platform in ('claude', 'codex', 'cursor'):
+            target = self.root / f'rules/{platform}.mdc'
+            target.parent.mkdir(exist_ok=True)
+            target.write_text('Existing instructions')
+        environment = dict(os.environ, TASK_TEST_ROOT=str(self.root),
+                           TASK_SYNC_SCRIPT=str(self.repository / 'scripts/sync.sh'))
+        result = subprocess.run(['bash', '-c', '''
+            source "$TASK_SYNC_SCRIPT" help >/dev/null
+            tool_available() { return 0; }
+            tool_instructions_path() { printf '%s\\n' "$TASK_TEST_ROOT/rules/$1.mdc"; }
+            tool_skills_path() { printf '%s\\n' "$TASK_TEST_ROOT/skills/$1"; }
+            main all
+            '''], env=environment, input='y\nn\ny\n', text=True, capture_output=True)
+        self.assertEqual(result.returncode, 1, result.stderr)
+        self.assertEqual((self.root / 'rules/claude.mdc').readlink(),
+                         self.repository / 'AGENTS.md')
+        self.assertEqual((self.root / 'rules/codex.mdc').read_text(), 'Existing instructions')
+        self.assertIn('alwaysApply: true', (self.root / 'rules/cursor.mdc').read_text())
+        for platform in ('claude', 'codex', 'cursor'):
+            for skill in (self.repository / 'skills').glob('nemo-*'):
+                self.assertEqual((self.root / 'skills' / platform / skill.name).resolve(), skill)
 
     def test_other_platforms_keep_links_and_all_skills_install(self):
         for platform in ('codex', 'claude', 'cursor'):

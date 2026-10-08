@@ -3,8 +3,8 @@ name: nemo-project
 description: >-
   Maintain project knowledge across chats. Use for project setup, saved-context questions,
   investigations, deliverables, source intake, knowledge audits or repairs, and handovers. Supports
-  planning and knowledge for external code repositories. Code implementation and personal knowledge
-  management use their own workflows.
+  planning and knowledge for external code repositories. Code implementation and work inside a
+  selected personal knowledge library use their own workflows.
 ---
 
 # Project knowledge

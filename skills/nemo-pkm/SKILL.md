@@ -1,21 +1,26 @@
 ---
 name: nemo-pkm
 description: >-
-  Maintain the Harmony personal knowledge workspace using its local schema and book templates.
-  Use for explicitly selected Harmony work or Harmony book preparation. General learning,
-  research notes and project knowledge use their own workflows; mentioning PKM is not enough.
+  Work in an explicitly selected personal knowledge library using its own structure and rules.
+  Use for PKM initialization, note work and book preparation in that library. Use nemo-project
+  for project knowledge; questions about PKM as a concept do not select a library.
 ---
 
 # PKM
 Apply [nemo-general](../nemo-general/SKILL.md) for voice.
-Harmony's local documentation is authoritative for domain rules.
+Select the library named by the user or established by the active workspace. Verify its root and
+inspect its local instructions, index and relevant existing notes before content work. If several
+libraries fit or none is established, ask which one; do not infer a root from a familiar folder
+name. Use absolute paths within a filesystem library. Its local documentation owns the schema,
+note locations, templates, vocabulary and promotion rules. If no local rules exist, follow the
+existing organization and ask only when a write destination or format is unclear. Do not impose
+one library's layout on another or switch libraries silently.
 
 ## References
-- [workflow](references/workflow.md) - Session scope and local authority. Read for initialization
-  and substantive PKM work
-- [init](references/init.md) - Required local-document loading and initialization-only response
-  Read before a Harmony task, then follow its local documentation
-- [book-prepare](references/book-prepare.md) - Goodreads lookup, book template, tags and validation
-  Read after initialization for book memo preparation
+- [workflow](references/workflow.md) - Retrieval, note drafting and library write boundaries
+  Read for substantive PKM work
+- [init](references/init.md) - Initialization-only check and response. Read only for initialization
+- [book-prepare](references/book-prepare.md) - Goodreads lookup, local book template and validation
+  Read for book memo preparation after resolving the library and its book rules
 
-Apply Harmony rules only inside the selected Harmony workspace. They do not govern other projects.
+The selected library's rules apply only there. Project knowledge remains under `nemo-project`.

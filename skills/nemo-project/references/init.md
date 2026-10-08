@@ -36,6 +36,8 @@ For **audit**, inspect the requested scope for broken routes, unreachable subjec
 contradictory claims, stale summaries and inappropriate ownership. Broaden only when the evidence
 requires it. Missing unused roles are not findings. Report concrete locations and consequences. Do
 not repair under a read-only request.
+Trace source references through retrieval and continuation too: reachable local copies can still
+misrepresent a living owner or lack snapshot purpose. Apply the authority rules in knowledge.md.
 
 For authorized **repair**, address the demonstrated defects using knowledge.md. Move shared facts
 out of incidental tool/task documents into their subjects, retaining evidence and references.
@@ -48,6 +50,8 @@ instructions. Update root declarations, external consumers and affected links. V
 destination is complete and reachable before retiring the old tree. Never overwrite a populated
 destination or leave two writable knowledge owners. Report any inaccessible consumer rather than
 claiming migration complete.
+First compare resolved roots: if both paths name the same project, no move is needed. Compare
+colliding content and required behavior before asking about a genuine unresolved difference.
 
 For **skill migration**, replace superseded workflow names in applicable project contracts while
 preserving local rules. Inspect other consumers before retiring an installed skill family. Use

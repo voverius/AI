@@ -22,12 +22,17 @@ Result line below (no progress chatter, no soft closers).
 - Do not use another source
 
 ### Duplicate Check
-Before resolving any other data, search filenames only for the title in:
+Before external lookup or writing, locate candidates by title, author, aliases and source identifier in:
 
 - the library's existing book-record locations
 - the mapped book draft location
 
-A matching filename is a duplicate. Stop and report it.
+Compare identity in public metadata only; stop reading at any protected personal section. Normalize
+Goodreads links to their numeric ID. An existing memo for that ID, or the same work and author in an
+edition allowed below, satisfies preparation even under a different filename. Return Exists without
+fetching or rewriting. A matching filename alone does not establish identity: inspect public title,
+author and edition/ISBN before deciding. Preserve distinct works or required editions; ask only when
+identity or a real filename collision is unresolved. Do not refresh an existing memo unless requested.
 
 ### Edition and Identity
 - Use any English edition with a valid ISBN
@@ -45,8 +50,9 @@ A matching filename is a duplicate. Stop and report it.
 - Avoid any extra `.` or other punctuation in the Title or the Author
 
 ## Apply the Template
-- If a book template exists, copy it exactly to the mapped book draft location; do not read it into
-  model context or reconstruct it from memory
+- If a book template exists, copy its bytes exactly to the mapped book draft location before editing;
+  do not reconstruct it from memory. Inspect only public fields to learn its schema; never load a
+  protected personal template section into model context
 - If no template exists, use the library's documented book format or consistent existing pattern
 - Do not duplicate either schema in this skill
 
@@ -70,6 +76,12 @@ Rule of thumb - FOLLOW THE TEMPLATE, DO NOT INVENT WHAT DOES NOT EXIST.
 - Use the template's missing-value convention for unavailable Goodreads values
 - Keep numeric vote counts as integers if that field exists
 - Record every unavailable Goodreads field for the result
+- Ratings, votes, price and other changing source values describe the retrieved snapshot. Preserve
+  their snapshot status, source, observation date and catalog purpose in the library's public format
+  If that format cannot express snapshot context, leave changing fields unset using its missing-value
+  convention and report the restriction; do not invent fields or modify protected personal content
+  Indexed fallback values are unverified for current state; disclose that limit instead of claiming
+  a live lookup
 
 ### Tags
 - Reuse the selected library's existing tags only
@@ -115,3 +127,7 @@ Respond with exactly one line per book:
 - `Created: <relative path to book draft> (Goodreads missing: ISBN, Length)`
 - `Exists: <existing path>`
 - `Blocked: <title> (Goodreads unavailable)`
+
+On a Created line, append relevant qualifications in the same parentheses: `indexed Goodreads values
+unverified for current state` and/or `changing fields omitted: snapshot context unavailable`. Combine
+these with any missing-field list; the one-line format must not hide a retrieval or retention limit.

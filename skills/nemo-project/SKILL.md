@@ -40,8 +40,9 @@ Combine routes when the request needs them. Load only their required references.
 
 - **Question or continuation:** read README, the knowledge index when present, and only relevant
   subjects or the handover matching the requested task. Search index cues, then likely branches
-  Broaden only if necessary. Include a source-subject link in factual answers and verify changing
-  external facts before action
+  Broaden only if necessary. Include a source-subject link in factual answers. Follow its provenance
+  to verify living-source claims when the answer or next step needs current state, including in a
+  fresh chat. On access failure, state what remains unverified; saved state is not a fallback truth
   Ordinary questions, reviews and audits are read-only unless changes are authorized
 - **Investigate or plan:** use relevant saved knowledge and necessary sources. Separate supported
   findings, proposals and unresolved questions. Save new reusable findings through distill and

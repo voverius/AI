@@ -12,6 +12,10 @@ not authorize performing pending work or advancing from preparation to execution
 
 Use links and short retrieval cues for maintained facts. Include dates only when validity needs
 them, not as routine update stamps.
+For living facts, point through the subject to the authoritative source and name the checks the next
+step requires. Saved progress, approval or cached values do not establish current external state.
+Keep local decisions distinct from external status; on resume verify what can change before using it.
+If access fails, record the gap and a safe next step instead of assuming the snapshot still holds.
 
 Cold-read the result: can a new agent locate the relevant material, distinguish evidence from
 uncertainty, and continue without repeating completed work? Repair its links. Unchanged state needs
@@ -22,4 +26,3 @@ and its authority in that subject, then align affected summaries. Historical sou
 Mark completion or cancellation explicitly when a handover exists. Remove obsolete next actions.
 Keep only a useful result pointer or genuinely unresolved dependency. Completion does not invent
 another task, and a completed task with no continuation needs no new handover.
-

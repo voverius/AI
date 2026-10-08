@@ -9,6 +9,7 @@ description: >-
 # PKM
 Apply [nemo-general](../nemo-general/SKILL.md) for voice.
 Select the library named by the user or established by the active workspace. Verify its root and
+resolve symbolic links before treating alternative paths as separate libraries. Then
 inspect its local instructions, index and relevant existing notes before content work. If several
 libraries fit or none is established, ask which one; do not infer a root from a familiar folder
 name. Use absolute paths within a filesystem library. Its local documentation owns the schema,

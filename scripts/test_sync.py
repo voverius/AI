@@ -185,9 +185,7 @@ class SyncTests(unittest.TestCase):
         self.assertEqual(self.sync('codex').returncode, 0)
         skill = next((self.repository / 'skills').glob('nemo-*'))
         target = self.root / 'skills/codex' / skill.name
-        stale = self.repository / 'skills' / f'.stale-{skill.name}'
-        stale.mkdir(exist_ok=True)
-        self.addCleanup(lambda: stale.rmdir() if stale.exists() else None)
+        stale = next(p for p in (self.repository / 'skills').glob('nemo-*') if p != skill)
         target.unlink()
         target.symlink_to(stale)
         result = self.sync('codex')
@@ -235,6 +233,178 @@ class SyncTests(unittest.TestCase):
             '''], env=environment, text=True, capture_output=True)
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertFalse(target.exists())
+
+    def test_equivalent_link_representations_leave_every_entry_unchanged(self):
+        for platform in ('claude', 'codex', 'cursor'):
+            with self.subTest(platform=platform):
+                self.assertEqual(self.sync(platform).returncode, 0)
+                targets = list((self.root / 'skills' / platform).iterdir())
+                if platform != 'cursor':
+                    targets.append(self.root / 'rules' / f'{platform}.mdc')
+                alias = self.root / f'{platform}-repo-alias'
+                alias.symlink_to(self.repository, target_is_directory=True)
+                for target in targets:
+                    source = target.resolve()
+                    target.unlink()
+                    target.symlink_to(os.path.relpath(alias / source.relative_to(self.repository),
+                                                     target.parent))
+                before = {p: (p.readlink(), p.lstat().st_ino, p.lstat().st_mtime_ns)
+                          for p in targets}
+                result = self.sync(platform)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertEqual(result.stdout, '')
+                self.assertEqual(result.stderr, '')
+                self.assertEqual(before, {p: (p.readlink(), p.lstat().st_ino,
+                                              p.lstat().st_mtime_ns) for p in targets})
+
+    def test_equal_instruction_copy_explains_propagation_difference(self):
+        target = self.root / 'rules/codex.mdc'
+        target.parent.mkdir()
+        target.write_bytes((self.repository / 'AGENTS.md').read_bytes())
+        result = self.sync('codex')
+        self.assertEqual(result.returncode, 1)
+        self.assertIn('content matches', result.stderr)
+        self.assertIn('follow future', result.stderr)
+        self.assertFalse(target.is_symlink())
+        self.assertEqual(self.sync('codex', 'y\n').returncode, 0)
+        before = target.lstat()
+        result = self.sync('codex')
+        self.assertEqual((result.returncode, result.stdout, result.stderr), (0, '', ''))
+        self.assertEqual(target.lstat().st_mtime_ns, before.st_mtime_ns)
+
+    def test_cursor_legacy_relative_link_and_equivalent_wrapper(self):
+        target = self.root / 'rules/cursor.mdc'
+        target.parent.mkdir()
+        target.symlink_to(os.path.relpath(self.repository / 'AGENTS.md', target.parent))
+        result = self.sync('cursor')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(result.stderr, '')
+        alias = self.root / 'rules-alias.md'
+        alias.symlink_to(self.repository / 'AGENTS.md')
+        target.write_text('---\nalwaysApply: true\n---\n\n'
+                          f'Read and follow [the global agent rules](<{alias}>) before working.\n\n')
+        before = target.stat().st_mtime_ns
+        result = self.sync('cursor')
+        self.assertEqual((result.returncode, result.stdout, result.stderr), (0, '', ''))
+        self.assertEqual(target.stat().st_mtime_ns, before)
+
+    def test_foreign_equal_file_link_requires_propagation_choice(self):
+        target = self.root / 'rules/claude.mdc'
+        target.parent.mkdir()
+        foreign = self.root / 'foreign.md'
+        foreign.write_bytes((self.repository / 'AGENTS.md').read_bytes())
+        target.symlink_to(foreign)
+        result = self.sync('claude')
+        self.assertEqual(result.returncode, 1)
+        self.assertIn('follow future', result.stderr)
+        self.assertEqual(target.readlink(), foreign)
+
+    def test_parent_failure_never_prompts_for_replacement(self):
+        (self.root / 'rules').write_text('not a directory')
+        for platform in ('claude', 'codex', 'cursor'):
+            result = self.sync(platform, 'y\n')
+            self.assertEqual(result.returncode, 1)
+            self.assertNotIn('[Y/n]', result.stderr)
+            self.assertEqual((self.root / 'rules').read_text(), 'not a directory')
+
+    def test_link_to_a_hardlinked_copy_needs_a_propagation_choice(self):
+        foreign = self.root / 'hardlinked-rules.md'
+        foreign.hardlink_to(self.repository / 'AGENTS.md')
+        target = self.root / 'rules/codex.mdc'
+        target.parent.mkdir()
+        target.symlink_to(foreign)
+        result = self.sync('codex')
+        self.assertEqual(result.returncode, 1)
+        self.assertIn('follow future', result.stderr)
+        self.assertEqual(target.readlink(), foreign)
+
+    def test_cursor_extra_instruction_is_a_real_choice(self):
+        self.assertEqual(self.sync('cursor').returncode, 0)
+        target = self.root / 'rules/cursor.mdc'
+        content = target.read_text() + '\nKeep this local policy.\n'
+        target.write_text(content)
+        result = self.sync('cursor', 'n\n')
+        self.assertEqual(result.returncode, 1)
+        self.assertIn('[Y/n]', result.stderr)
+        self.assertEqual(target.read_text(), content)
+
+    def test_directory_link_with_dot_or_trailing_slash_is_unchanged(self):
+        self.assertEqual(self.sync('codex').returncode, 0)
+        skill = next((self.repository / 'skills').glob('nemo-*'))
+        target = self.root / 'skills/codex' / skill.name
+        for suffix in ('/.', '/'):
+            with self.subTest(suffix=suffix):
+                target.unlink()
+                target.symlink_to(str(skill) + suffix)
+                before = target.lstat().st_mtime_ns
+                result = self.sync('codex')
+                self.assertEqual((result.returncode, result.stdout, result.stderr), (0, '', ''))
+                self.assertEqual(target.lstat().st_mtime_ns, before)
+
+    def test_relative_managed_repoint_and_remove(self):
+        self.assertEqual(self.sync('codex').returncode, 0)
+        skills = list((self.repository / 'skills').glob('nemo-*'))
+        target = self.root / 'skills/codex' / skills[0].name
+        target.unlink()
+        target.symlink_to(os.path.relpath(skills[1], target.parent))
+        result = self.sync('codex')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('Relink:', result.stdout)
+        target.unlink()
+        target.symlink_to(os.path.relpath(skills[0], target.parent))
+        environment = dict(os.environ, TASK_TEST_ROOT=str(self.root),
+                           TASK_SYNC_SCRIPT=str(self.repository / 'scripts/sync.sh'),
+                           TASK_SKILL=skills[0].name)
+        result = subprocess.run(['bash', '-c', '''
+            source "$TASK_SYNC_SCRIPT" help >/dev/null
+            tool_skills_path() { printf '%s\\n' "$TASK_TEST_ROOT/skills/$1"; }
+            remove_managed_skill "$TASK_SKILL" codex
+            remove_managed_skill "$TASK_SKILL" codex
+            '''], env=environment, text=True, capture_output=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(result.stdout.count('Remove:'), 1)
+        self.assertFalse(target.is_symlink())
+
+    def test_prefix_with_parent_escape_is_foreign_and_loops_are_preserved(self):
+        self.assertEqual(self.sync('codex').returncode, 0)
+        skill = next((self.repository / 'skills').glob('nemo-*'))
+        target = self.root / 'skills/codex' / skill.name
+        target.unlink()
+        foreign_path = str(self.repository / 'skills') + '/../../foreign-skill'
+        target.symlink_to(foreign_path)
+        result = self.sync('codex')
+        self.assertEqual(result.returncode, 1)
+        self.assertIn('[Y/n]', result.stderr)
+        self.assertEqual(str(target.readlink()), foreign_path)
+        target.unlink()
+        target.symlink_to(target.name)
+        result = self.sync('codex')
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(str(target.readlink()), target.name)
+
+    def test_remove_rejects_names_that_escape_the_skill_directory(self):
+        environment = dict(os.environ, TASK_SYNC_SCRIPT=str(self.repository / 'scripts/sync.sh'),
+                           TASK_TEST_ROOT=str(self.root))
+        result = subprocess.run(['bash', '-c', '''
+            source "$TASK_SYNC_SCRIPT" help >/dev/null
+            tool_skills_path() { printf '%s\\n' "$TASK_TEST_ROOT/skills/$1"; }
+            remove_managed_skill 'nemo-x/../../elsewhere' codex
+            '''], env=environment, text=True, capture_output=True)
+        self.assertEqual(result.returncode, 2)
+        self.assertIn('skill names', result.stderr)
+
+    def test_cursor_equivalent_markdown_link_and_line_endings_are_unchanged(self):
+        self.assertEqual(self.sync('cursor').returncode, 0)
+        target = self.root / 'rules/cursor.mdc'
+        for newline in ('\n', '\r\n'):
+            with self.subTest(newline=newline):
+                content = ('---\nalwaysApply: true\n---\n\nRead and follow '
+                           f'[the global agent rules]({self.repository}/AGENTS.md) before working.\n\n')
+                target.write_bytes(content.replace('\n', newline).encode())
+                before = target.stat().st_mtime_ns
+                result = self.sync('cursor')
+                self.assertEqual((result.returncode, result.stdout, result.stderr), (0, '', ''))
+                self.assertEqual(target.stat().st_mtime_ns, before)
 
 
 if __name__ == '__main__':

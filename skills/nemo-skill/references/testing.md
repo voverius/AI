@@ -6,6 +6,10 @@ Choose a small set of realistic requests and raw inputs from the skill's intende
 observable result, forbidden side effects and decisive checks outside the actor's workspace. Cover a
 normal task, a relevant boundary or missing-input case, and a nearby request that should not
 activate the skill. Add lifecycle or repeat-run cases only when the skill claims those behaviours.
+For identity and persistence changes, vary representations, source revisions and access failures.
+Measure no-op behavior by content, timestamps and prompts, not a successful exit alone. Have a fresh
+reader use a source changed after capture alongside immutable evidence and local decisions. A case
+must expose the old assumption through observed actions or answers, not search for new rule wording.
 
 Derive cases from the supported outcomes and dependencies, not just the implementation's menus.
 Exercise independently callable routes without earlier setup in the same chat. Include ambiguous
@@ -16,6 +20,10 @@ Test interactions with the actual entry contract and neighboring skills, includi
 that must not activate them. For saved knowledge, grade useful claim coverage, correctness,
 uncertainty, ownership, retrieval and noise separately; file existence or a word count is not a
 quality measure. Have a fresh reader answer realistic questions from the resulting knowledge.
+For distillation changes, mix a conversation, reusable procedure, operational record and evaluation
+report. Inspect whether subjects retain useful guidance and decisions without task narration or
+run details, whether retained evidence survives separately, and whether unfinished actions remain
+retrievable. A changed word count or a check for new instruction wording cannot establish this.
 
 Freeze the candidate during a run. The skill under test and its real dependencies remain accessible
 to the actor. Keep evaluator notes, expected answers, prior outputs and alternative candidates

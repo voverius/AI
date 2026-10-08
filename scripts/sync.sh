@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-readonly REPO_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+readonly SCRIPT_DIR="$(cd -P "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+readonly REPO_DIR="$(cd -P "$SCRIPT_DIR/.." && pwd)"
 readonly AGENTS_FILE="$REPO_DIR/AGENTS.md"
 readonly SKILLS_DIR="$REPO_DIR/skills"
 
@@ -62,6 +62,27 @@ skill_sources() {
   done
 }
 
+# Resolve relative/chained links before deciding ownership; unreadable paths stay foreign.
+link_destination() {
+  local path="$1" parent current count=0
+  while :; do
+    parent="$(cd -P "$(dirname "$path")" 2>/dev/null && pwd)" || return 1
+    path="$parent/$(basename "$path")"
+    if [[ -d "$path" && ! -L "$path" ]]; then
+      (cd -P "$path" && pwd)
+      return
+    fi
+    [[ -L "$path" ]] || { printf '%s\n' "$path"; return 0; }
+    ((count += 1))
+    ((count <= 40)) || return 1
+    current="$(readlink "$path")" || return 1
+    case "$current" in
+      /*) path="$current" ;;
+      *) path="$parent/$current" ;;
+    esac
+  done
+}
+
 prune_stale_skills() {
   local skills_dir="$1"
   local entry current name
@@ -70,7 +91,7 @@ prune_stale_skills() {
 
   for entry in "$skills_dir"/nemo-*; do
     [[ -L "$entry" ]] || continue
-    current="$(readlink "$entry")"
+    current="$(link_destination "$entry")" || continue
     name="${entry##*/}"
     [[ "$current" == "$SKILLS_DIR"/* ]] || continue
     if [[ -f "$SKILLS_DIR/$name/SKILL.md" && -e "$entry" ]]; then
@@ -87,6 +108,10 @@ remove_managed_skill() {
   local target
 
   case "$name" in
+    */*)
+      printf 'Error: skill names cannot contain path separators\n' >&2
+      return 2
+      ;;
     nemo-*) ;;
     *)
       printf 'Error: only managed nemo-* skill names can be removed\n' >&2
@@ -95,7 +120,8 @@ remove_managed_skill() {
   esac
 
   target="$(tool_skills_path "$tool")/$name"
-  if [[ -L "$target" && "$(readlink "$target")" == "$SKILLS_DIR"/* ]]; then
+  if [[ -L "$target" ]] &&
+     [[ "$(link_destination "$target")" == "$SKILLS_DIR"/* ]]; then
     printf 'Remove: %s\n' "$target"
     rm -f "$target"
     return 0
@@ -109,11 +135,22 @@ remove_managed_skill() {
 
 confirm_replace() {
   local target="$1"
+  local source="${2:-}"
   local answer
 
   if [[ -d "$target" && ! -L "$target" ]]; then
     printf 'Conflict: %s is a directory\n' "$target" >&2
     return 1
+  fi
+
+  if [[ -n "$source" && -f "$target" && -f "$source" ]] && cmp -s "$source" "$target"; then
+    printf 'Difference: content matches, but this target does not follow future repository replacements.\n' >&2
+  elif [[ -n "$source" && -L "$target" ]]; then
+    printf 'Difference: link %s points to %s; required source is %s.\n' "$target" "$(readlink "$target")" "$source" >&2
+  elif [[ -n "$source" ]]; then
+    printf 'Difference: %s has different content from %s; installation requires a live source link.\n' "$target" "$source" >&2
+  else
+    printf 'Difference: %s requires an alwaysApply wrapper referencing %s.\n' "$target" "$AGENTS_FILE" >&2
   fi
 
   printf 'Replace %s with the repository version? [Y/n] ' "$target" >&2
@@ -138,11 +175,12 @@ sync_target() {
   fi
 
   if [[ -L "$target" ]]; then
-    if [[ "$(readlink "$target")" == "$source" ]]; then
+    if [[ "$target" -ef "$source" ]] &&
+       [[ "$(link_destination "$target")" == "$(link_destination "$source")" ]]; then
       return 0
     fi
     # Repoint only managed links that already point inside this repository.
-    if [[ "$(readlink "$target")" == "$REPO_DIR"/* ]]; then
+    if [[ "$(link_destination "$target")" == "$REPO_DIR"/* ]]; then
       if [[ "$source" == "$SKILLS_DIR"/nemo-* && "$(basename "$target")" == "$(basename "$source")" ]] ||
          [[ "$source" == "$AGENTS_FILE" ]]; then
         printf 'Relink: %s -> %s\n' "$target" "$source"
@@ -153,7 +191,7 @@ sync_target() {
   fi
 
   if [[ -e "$target" || -L "$target" ]]; then
-    confirm_replace "$target" || return 1
+    confirm_replace "$target" "$source" || return 1
   fi
 
   if [[ ! -d "$target_dir" ]]; then
@@ -169,24 +207,51 @@ sync_cursor_instructions() {
   local target="$1"
   local target_dir
   local expected
+  local content prefix reference
   local temporary
 
   target_dir="$(dirname "$target")"
   expected="$(printf '%s\n' '---' 'alwaysApply: true' '---' '' \
     "Read and follow [the global agent rules](<$AGENTS_FILE>) before working.")"
 
-  if [[ -L "$target" ]]; then
-    if [[ "$(readlink "$target")" != "$AGENTS_FILE" ]]; then
-      confirm_replace "$target" || return 1
-    fi
-  elif [[ -f "$target" && "$(cat "$target")" == "$expected" ]]; then
-    return 0
-  elif [[ -e "$target" ]]; then
-    confirm_replace "$target" || return 1
-  fi
   if [[ -e "$target_dir" && ! -d "$target_dir" ]]; then
     printf 'Conflict: %s is not a directory\n' "$target_dir" >&2
     return 1
+  fi
+
+  if [[ -f "$target" ]]; then
+    content="$(cat "$target")"
+    content="${content//$'\r\n'/$'\n'}"
+    while [[ "$content" == *$'\n' || "$content" == *$'\r' ]]; do
+      content="${content%?}"
+    done
+    prefix="$(printf '%s\n' '---' 'alwaysApply: true' '---' '' 'Read and follow [the global agent rules](')"
+    if [[ "$content" == "$expected" ]]; then
+      return 0
+    fi
+    # Only this complete wrapper is equivalent; additional instructions remain a choice.
+    if [[ "$content" == "$prefix"*') before working.' ]]; then
+      reference="${content#"$prefix"}"
+      reference="${reference%') before working.'}"
+      if [[ "$reference" == '<'*'>' ]]; then
+        reference="${reference#<}"
+        reference="${reference%>}"
+      fi
+      [[ "$reference" == /* ]] || reference="$target_dir/$reference"
+      if [[ "$reference" -ef "$AGENTS_FILE" ]] &&
+         [[ "$(link_destination "$reference")" == "$(link_destination "$AGENTS_FILE")" ]]; then
+        return 0
+      fi
+    fi
+  fi
+
+  if [[ -L "$target" ]]; then
+    if [[ ! "$target" -ef "$AGENTS_FILE" ]] ||
+       [[ "$(link_destination "$target")" != "$(link_destination "$AGENTS_FILE")" ]]; then
+      confirm_replace "$target" || return 1
+    fi
+  elif [[ -e "$target" ]]; then
+    confirm_replace "$target" || return 1
   fi
 
   mkdir -p "$target_dir"

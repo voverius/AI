@@ -16,13 +16,17 @@ a separate deliverable only when the user requests one.
    information across sources rather than copying notes or creating one summary per arrival.
    Merge information that improves future work into the owning subjects: direct guidance, compact
    state, decision rationale and reusable lessons. Preserve supporting evidence separately under
-   its role; preserving a failure does not require its task history in the subject. Unfinished
+   its role. Preserving a failure does not require its task history in the subject. Unfinished
    actions belong in the matching handover. A deliverable alone does not preserve reusable
    knowledge. Apply the shared navigation and consistency rules to the affected records
 3. Read back retained claims against their sources before cleanup. Verify useful information
    survived, uncertainty remains visible, affected deliverables agree and the knowledge is
-   retrievable. Does each subject answer a recurring question without a task story? Material that
-   only answers “what happened in this run?” belongs in the retained report, not the subject.
+   retrievable. Apply the page standard in knowledge.md and inspect the whole article, not only the
+   corrected lines. Can a reader understand and use the knowledge without the original prompt or
+   leaving for a task report? Check concrete detail, concise headings, brief source cues and link
+   boundaries. Material that only answers "what happened in this run?" belongs in the retained
+   report,
+   not the subject.
    Verify a reader can recover the procedure, policy and relevant state without reading run history.
    For each changed fact, compare the affected subject pages: keep its value and
    evidence in one owner, replacing repeated values elsewhere with links. Deliverables may summarize
@@ -36,9 +40,9 @@ out of inbox/ into sources/ or its mapped equivalent, preserve bytes and update 
 original at its path overrides moving. Compare colliding names before filing. Preserve distinct
 material without overwriting it.
 Resolve identities and compare bytes before treating a retained-name collision as a conflict.
-An already filed original with the same identity and bytes satisfies retention; do not copy or
+An already filed original with the same identity and bytes satisfies retention. Do not copy or
 rename it again. Equal bytes at different identities can still need separate provenance or retention
-locations; explain that requirement before choosing. Distinct versions remain distinct evidence.
+locations. Explain that requirement before choosing. Distinct versions remain distinct evidence.
 
 Disposable inputs and generated intermediates become eligible for deletion only after complete
 processing and preservation checks. Delete when the current authorization permits cleanup. If an
@@ -52,3 +56,4 @@ evidence to meet a size target.
 
 Done means relevant knowledge is supported and retrievable, not that the inbox is empty. Report
 unresolved processing, conflicts or cleanup briefly.
+

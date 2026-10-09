@@ -8,7 +8,7 @@ instructions and existing equivalents. Bootstrap creates AGENTS.md, README.md, d
 inbox/. README links the operating contract, knowledge index and inbox, and states purpose,
 boundaries, main directory roles and external locations. README never lists subjects or individual
 artifacts. Record external locations only when established and distinguish them from this root.
-The index states the knowledge scope; show an empty-state cue only while it has no subjects.
+The index states the knowledge scope. Show an empty-state cue only while it has no subjects.
 Replace that cue with routes as knowledge arrives, not bootstrap history or empty category trees.
 Other role directories appear when populated. Setup alone does not invent knowledge, logs or
 handovers and does not process arrivals.
@@ -26,6 +26,7 @@ Start with README.md and docs/index.md, then load only relevant subjects or task
 Keep reusable facts and decisions in their subject owner, deliverables separate from knowledge, and
 unfinished work in the matching handover. Preserve evidence and uncertainty. The changing agent
 maintains affected indexes and incoming links. One integrator reconciles parallel changes.
+Subject pages follow the installed skill's knowledge-page standard.
 
 Questions and audits are read-only unless changes are authorized. At a substantive work boundary,
 save new useful findings and capture unfinished work when needed. Unchanged state needs no files. If
@@ -33,7 +34,8 @@ the global skill is unavailable, report it instead of substituting a local devel
 ```
 
 For **audit**, inspect the requested scope for broken routes, unreachable subjects, duplicated or
-contradictory claims, stale summaries and inappropriate ownership. Broaden only when the evidence
+contradictory claims, stale summaries and inappropriate ownership. Check subject substance, page
+structure and link boundaries against knowledge.md. Broaden only when the evidence
 requires it. Missing unused roles are not findings. Report concrete locations and consequences. Do
 not repair under a read-only request.
 Trace source references through retrieval and continuation too: reachable local copies can still
@@ -55,7 +57,7 @@ colliding content and required behavior before asking about a genuine unresolved
 
 For **skill migration**, replace superseded workflow names in applicable project contracts while
 preserving local rules. Inspect other consumers before retiring an installed skill family. Use
-`scripts/sync.sh` to install or repoint managed `nemo-*` links; sync also removes stale managed
+`scripts/sync.sh` to install or repoint managed `nemo-*` links. Sync also removes stale managed
 symlinks that no longer have a skill source. Uninstall with
 `scripts/sync.sh remove <skill-name> [claude|codex|cursor|all]`. Verify global discovery without a
 local fallback.
@@ -68,3 +70,4 @@ applicable contract responsibilities are present, README states purpose and link
 subjects are reachable, links resolve, and useful evidence survives. An unchanged rerun makes no
 changes. For new or migrated host integration, verify a fresh ordinary request without supplying a
 skill path. Syntax checks alone do not prove discovery.
+

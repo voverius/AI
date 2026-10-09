@@ -48,7 +48,7 @@ def check(root):
             value = value.strip().strip('<>')
             if not value or value.startswith('#') or urlsplit(value).scheme:
                 continue
-            target = (page.parent / unquote(value.split('#')[0])).resolve()
+            target = (page.parent / Path(unquote(value.split('#')[0])).expanduser()).resolve()
             found.add(target)
             if not target.exists():
                 errors.append(f'{page.relative_to(root)}: missing link target {value}')

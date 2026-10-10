@@ -20,7 +20,8 @@ If access fails, record the gap and a safe next step instead of assuming the sna
 
 Cold-read the result: can a new agent locate the relevant material, distinguish evidence from
 uncertainty, and continue without repeating completed work? Repair its links. Unchanged state needs
-no rewrite.
+no rewrite. Re-seeing already recorded evidence with the same next action is not a reason to edit
+the handover.
 
 When closure changes an outcome already stated in maintained knowledge, save the user's decision
 and its authority in that subject, then align affected summaries. Historical sources stay unchanged.

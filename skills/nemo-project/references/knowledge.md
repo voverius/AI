@@ -56,9 +56,11 @@ article template.
 
 Optimize for information density. Each paragraph must add a fact, distinction, mechanism, rationale
 or usable example. Shortening must preserve substance. For structures, interfaces or formats, show
-the smallest representative example instead of several paragraphs describing its existence.
-Keep qualifications beside the claims they limit and avoid repeated disclaimers. Omit research
-dates, counts and inspection narration unless needed to understand the knowledge itself.
+the smallest representative example a reader can apply, such as metadata and body rather than only a
+directory tree. When the subject covers creating or evaluating something, include a usable method,
+not only that checks exist. Keep qualifications beside the claims they limit and avoid repeated
+disclaimers. Omit research dates, counts and inspection narration unless needed to understand the
+knowledge itself.
 
 Choose content by what it explains about the subject. Describe how parts interact, how decisions
 are made and what results, rather than listing disconnected components. Use an example when it
@@ -68,8 +70,10 @@ in the original prompt is not evidence of uniqueness, quality or suitability.
 
 The page must explain its subject without requiring the original question, chat, report or lesson
 plan. Generalize findings into concepts and relationships, integrating them with existing subjects.
-Save teaching plans, task proposals and unfinished implementation separately under their roles.
-Do not create a page for every input or force one broad question into a single omnibus article.
+Update the existing section that owns a topic rather than appending a parallel section with
+overlapping guidance. Save teaching plans, task proposals and unfinished implementation separately
+under their roles. Do not create a page for every input or force one broad question into a single
+omnibus article.
 
 ## Source and link boundaries
 Subject pages and knowledge indexes link within the knowledge graph and to authoritative sources.
@@ -147,7 +151,9 @@ changes to "match" an older audit hash. Re-baseline or record the conflict. Find
 temporary evidence must state the baseline identity and that it is not durable.
 
 Open tasks have one owner, usually a handover. Knowledge pages retain only uncertainty needed to
-understand their claims. They do not repeat pending actions or link to continuation records.
+understand their claims. They do not record pending actions, pause instructions, current
+authorization status or run chronology as subject facts, and they do not link to continuation
+records.
 
 ## Navigation and consistency
 README explains the project purpose, boundaries and main directory roles. Its knowledge link points

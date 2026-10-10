@@ -80,8 +80,11 @@ scope, subject reachability and common Markdown link paths in docs, outputs and 
 not verify anchors, claim quality, ownership or safety of recommendations. If Python is unavailable,
 perform those checks manually. Mapped optional roles still need review.
 
-Before delivery, also read the changed subjects as standalone knowledge. Check their substance,
-examples, source cues and link boundaries against knowledge.md. Passing navigation is insufficient.
+Before delivery, read changed subjects as standalone knowledge against knowledge.md. Fail delivery
+if a format, interface or method is described without a representative example a reader can apply;
+if a new lesson sits beside overlapping guidance instead of updating it; if pending actions, pause
+instructions or run chronology appear as subject facts; or if navigation alone is the quality
+evidence.
 
 Continue using relevant guidance throughout the task. Do not reload every branch on every turn.
 After context loss, recover the task from the project entry and relevant saved state. Installation

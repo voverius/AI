@@ -22,13 +22,12 @@ a separate deliverable only when the user requests one.
 3. Read back retained claims against their sources before cleanup. Verify useful information
    survived, uncertainty remains visible, affected deliverables agree and the knowledge is
    retrievable. Apply the page standard in knowledge.md and inspect the whole article, not only the
-   corrected lines. Can a reader understand and use the knowledge without the original prompt or
-   leaving for a task report? Check concrete detail, concise headings, brief source cues and link
-   boundaries. Material that only answers "what happened in this run?" belongs in the retained
-   report,
-   not the subject.
-   Verify a reader can recover the procedure, policy and relevant state without reading run history.
-   For each changed fact, compare the affected subject pages: keep its value and
+   corrected lines. For each addition, ask: does it belong inside an existing section rather than a
+   new parallel one? If a format or method is claimed, is there a smallest example a reader can
+   apply? Strip pending actions, pause wording and run chronology to the report or handover.
+   Material that only answers "what happened in this run?" belongs in the retained report, not the
+   subject. Verify a reader can recover the procedure, policy and relevant state without reading
+   run history. For each changed fact, compare the affected subject pages: keep its value and
    evidence in one owner, replacing repeated values elsewhere with links. Deliverables may summarize
    owners, but are not extra knowledge owners. Check related links and index routes. Repeating with
    no new information leaves state unchanged
@@ -41,8 +40,11 @@ original at its path overrides moving. Compare colliding names before filing. Pr
 material without overwriting it.
 Resolve identities and compare bytes before treating a retained-name collision as a conflict.
 An already filed original with the same identity and bytes satisfies retention. Do not copy or
-rename it again. Equal bytes at different identities can still need separate provenance or retention
-locations. Explain that requirement before choosing. Distinct versions remain distinct evidence.
+rename it again. If the arrival matches that filed evidence and adds no new unfinished action, leave
+knowledge, sources and handovers unchanged. Clearing a duplicate inbox copy after that check is the
+only permitted change. Equal bytes at different identities can still need separate provenance or
+retention locations. Explain that requirement before choosing. Distinct versions remain distinct
+evidence.
 
 Disposable inputs and generated intermediates become eligible for deletion only after complete
 processing and preservation checks. Delete when the current authorization permits cleanup. If an

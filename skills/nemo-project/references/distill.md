@@ -46,16 +46,16 @@ only permitted change. Equal bytes at different identities can still need separa
 retention locations. Explain that requirement before choosing. Distinct versions remain distinct
 evidence.
 
-Disposable inputs and generated intermediates become eligible for deletion only after complete
-processing and preservation checks. Delete when the current authorization permits cleanup. If an
-applicable rule requires approval, finish preservation and report exactly what remains pending. This
-procedure does not grant destructive permissions.
+After findings are preserved in knowledge (and any user-requested deliverable is written), delete
+`work/` scratch for the finished task. Delete a kept `work/<item>/` when its recorded claim no
+longer needs defense. Ask when done-status or why is unclear. Matched scratch cleanup does not need
+path-by-path approval. Do not move scratch into `outputs/` to avoid deletion. Do not create archives
+of temporaries.
 
-Keep uncertain or unprocessed material, durable deliverables and maintained components. Cleanup
-never extends to external originals, repositories or unrelated user work. Remove superseded task
-detail only after preserving unique useful content. Do not create archives or discard useful
-evidence to meet a size target.
+Keep uncertain or unprocessed inbox material, user-requested deliverables and maintained knowledge.
+Cleanup never extends to external originals, repositories or unrelated user work.
 
-Done means relevant knowledge is supported and retrievable, not that the inbox is empty. Report
-unresolved processing, conflicts or cleanup briefly.
+Done means knowledge is supported and retrievable, and finished-task `work/` is cleaned under
+knowledge.md, not merely that the inbox is empty. Report unresolved processing, conflicts or
+cleanup briefly.
 

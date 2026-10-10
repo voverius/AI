@@ -50,12 +50,17 @@ Combine routes when the request needs them. Load only their required references.
   Ordinary questions, reviews and audits are read-only unless changes are authorized
 - **Investigate or plan:** use relevant saved knowledge and necessary sources. Separate supported
   findings, proposals and unresolved questions. Save new reusable findings through distill and
-  capture unfinished work when needed. Discussion alone does not require a deliverable
-- **Produce a requested deliverable:** write the artifact in outputs/ or its mapped equivalent,
-  unless the user specifies another destination or a chat-only answer. Check its contents against
-  the request and supporting evidence, verify the saved file exists, and return its link. Link the
-  populated directory from README using its existing role cue, without listing individual files
-  An output may summarize knowledge without becoming another owner of reusable claims
+  capture unfinished work when needed. Discussion alone does not require a deliverable or an
+  outputs/ file. Scratch may use work/ under knowledge.md lifecycle rules
+- **Produce a requested deliverable:** only when the user explicitly asks to save or keep one.
+  Write it in outputs/ or its mapped equivalent, unless they name another destination or want a
+  chat-only answer. Do not invent outputs/ reports. Check contents against the request and
+  evidence, verify the file exists, and return its link. Link the populated directory from README
+  using its existing role cue, without listing individual files. An output may summarize knowledge
+  without becoming another owner of reusable claims
+- **Finish a task:** distill reusable findings, then clean work/ per knowledge.md (delete scratch;
+  keep a subtree only with a recorded open-claim why). Ask if done-status or retention is unclear.
+  Capture unfinished work in a handover when continuation remains
 
 External implementation or sending a result requires its own authorization and appropriate workflow.
 When consulting external repositories, follow their local instructions and link authoritative files.

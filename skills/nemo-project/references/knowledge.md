@@ -11,9 +11,30 @@ created when needed. Use established equivalents for those optional roles from R
 | docs/ | Maintained subject knowledge and its retrieval index |
 | inbox/ | Arrivals awaiting processing |
 | sources/ | Originals explicitly retained, preserved without rewriting |
-| outputs/ | Deliverables intended for use, requested drafts and explicitly retained dated reports |
-| work/ | Temporary extracts, experiments, scoped test evidence and intermediate drafts |
+| outputs/ | User-requested deliverables the human will use later |
+| work/ | Active-task scratch and, rarely, a subtree kept only with a concrete why |
 | handovers/ | Continuation state for unfinished tasks |
+
+### `outputs/`
+Write here only when the user explicitly asks to save or keep a deliverable (or clear equivalent).
+Chat-only answers stay in chat. Do not use `outputs/` as a temp canvas, dump an output message as a
+file, auto-file “useful” reports, or store agent scratch.
+
+### `work/`
+Agents may create `work/` without asking. Default intent is **scratch**: intermediates for the
+current task, deleted when that task is fully done or abandoned. **Kept work** is an entire
+`work/<item>/` subtree retained only when a concrete why exists: a named open claim it still
+defends, recorded in that subtree (short README or equivalent) with an end condition. No why means
+scratch. Prefer conclusions in knowledge or a user-requested output over keeping raw trees. Do not
+grandfather old folders; the same rules apply to existing `work/`.
+
+### Done includes cleanup
+When a task is fully done, cleanup is required. Distill reusable findings into knowledge first.
+Write `outputs/` only if the user asked for a retained deliverable. Then delete scratch and any
+`work/` subtree whose claim is closed, superseded or no longer needs defense. If done-status or
+retention why is unclear, ask (for example whether to clean `work/`) instead of inventing
+retention. Matched scratch deletion does not need path-by-path approval. Ask before deleting kept
+work only when unclear, large or shared. Handover closure follows capture.md.
 
 Keep code and external authoritative resources in their existing homes. Missing optional folders are
 not defects. Create an activity log only for an explicit audit-trail requirement. Dates and versions

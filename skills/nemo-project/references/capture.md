@@ -26,6 +26,7 @@ the handover.
 When closure changes an outcome already stated in maintained knowledge, save the user's decision
 and its authority in that subject, then align affected summaries. Historical sources stay unchanged.
 Mark completion or cancellation explicitly when a handover exists. Remove obsolete next actions.
-Keep only a useful result pointer or genuinely unresolved dependency. Completion does not invent
-another task, and a completed task with no continuation needs no new handover.
+Keep only a useful result pointer or genuinely unresolved dependency. On task completion or
+abandonment, distill then clean that workstream's `work/` per knowledge.md. Completion does not
+invent another task, and a completed task with no continuation needs no new handover.
 

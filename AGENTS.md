@@ -28,7 +28,9 @@
   result against it. Address the shared cause rather than only the cited instances. Preserve literal
   requirements and do not turn inferred intent into extra work
 - Resolve named skills through the host catalog or installed skill directories, following symlinks,
-  before declaring them unavailable. A missing catalog entry alone is not proof of absence
+  before declaring them unavailable. A missing catalog entry alone is not proof of absence. Links
+  inside a skill file resolve against the directory containing that file, never against the working
+  directory
 - State assumptions when they materially affect the result
 - Surface conflicting requirements and meaningful trade-offs
 - Push back when a request is unsafe, internally inconsistent, or needlessly complex

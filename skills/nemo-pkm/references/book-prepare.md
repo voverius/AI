@@ -1,16 +1,16 @@
 
 # Book preparation in a PKM library
-Voice from `nemo-general`. This task is actionable: follow
-[shape](../../nemo-general/references/shape.md) while working, but the only user-facing reply is the
-Result line below (no progress chatter, no soft closers).
+Voice from `nemo-general`. This task is actionable:
+follow [shape](../../nemo-general/references/shape.md) while working, but the only user-facing
+reply is the result line below. No progress chatter and no soft closers.
 
-## Operating Rules
+## Operating rules
 - Resolve the selected library through [the entry skill](../SKILL.md)
 - From its local rules and existing notes, identify the book draft location, existing book-record
   locations, and any book template or tag vocabulary. Ask if the destination or format is unclear
 - Create a note only in the mapped book draft location
 - Do not promote a memo
-- Work silently until the Result line
+- Work silently until the result line
 - Use the result format below once each book is complete
 - For multiple books or links, finish one complete workflow before starting the next
 
@@ -21,22 +21,24 @@ Result line below (no progress chatter, no soft closers).
 - If it is blocked, use indexed Goodreads results and Goodreads edition pages
 - Do not use another source
 
-### Duplicate Check
-Before external lookup or writing, locate candidates by title, author, aliases and source identifier in:
+### Duplicate check
+Before external lookup or writing, locate candidates by title, author, aliases, and source
+identifier in:
 
 - the library's existing book-record locations
 - the mapped book draft location
 
-Compare identity in public metadata only; stop reading at any protected personal section. Normalize
+Compare identity in public metadata only. Stop reading at any protected personal section. Normalize
 Goodreads links to their numeric ID. An existing memo for that ID, or the same work and author in an
 edition allowed below, satisfies preparation even under a different filename. Return Exists without
-fetching or rewriting. A matching filename alone does not establish identity: inspect public title,
-author and edition/ISBN before deciding. Preserve distinct works or required editions; ask only when
-identity or a real filename collision is unresolved. Do not refresh an existing memo unless requested.
+fetching or rewriting. A matching filename alone does not establish identity. Inspect public title,
+author, and edition or ISBN before deciding. Preserve distinct works or required editions. Ask only
+when identity or a real filename collision is unresolved. Do not refresh an existing memo unless
+requested.
 
-### Edition and Identity
+### Edition and identity
 - Use any English edition with a valid ISBN
-- Prefer ISBN-13; otherwise use ISBN-10
+- Prefer ISBN-13. Otherwise use ISBN-10
 - If several English editions qualify, use the most complete Goodreads record
 - Ask only when the book identity is ambiguous
 - Do not ask the user to choose an edition
@@ -44,15 +46,15 @@ identity or a real filename collision is unresolved. Do not refresh an existing 
 - Treat clear Goodreads name variants as one person
 - Ask only when multiple distinct authors make filename ownership unclear
 
-### File Identity
+### File identity
 - Split `Title: Subtitle` at the first colon
 - Derive the target filename as `Title, Author.md` unless local rules require another format
 - Avoid any extra `.` or other punctuation in the Title or the Author
 
-## Apply the Template
-- If a book template exists, copy its bytes exactly to the mapped book draft location before editing;
-  do not reconstruct it from memory. Inspect only public fields to learn its schema; never load a
-  protected personal template section into model context
+## Apply the template
+- If a book template exists, copy its bytes exactly to the mapped book draft location before
+  editing. Do not reconstruct it from memory. Inspect only public fields to learn its schema. Never
+  load a protected personal template section into model context
 - If no template exists, use the library's documented book format or consistent existing pattern
 - Do not duplicate either schema in this skill
 
@@ -64,23 +66,22 @@ If the template has a `## Personal` section, that section and everything after i
 
 ## Populate
 Populate existing public book-information fields from Goodreads data without crossing a protected
-personal section.
-Rule of thumb - FOLLOW THE TEMPLATE, DO NOT INVENT WHAT DOES NOT EXIST.
+personal section. Follow the template. Do not invent fields that the template does not define.
 
-- Fill title, subtitle, author, alias and cover fields only where the template defines them
-- Use the local format for links and fields; wikilinks, when required, contain note names rather
+- Fill title, subtitle, author, alias, and cover fields only where the template defines them
+- Use the local format for links and fields. Wikilinks, when required, contain note names rather
   than directory paths
 - When no subtitle exists, leave any template subtitle placeholder unchanged
 - Set Goodreads exactly as `[Goodreads](https://www.goodreads.com/book/show/<numeric-id>)`
-- Keep only the numeric Goodreads ID; remove title slugs, query strings, and fragments
+- Keep only the numeric Goodreads ID. Remove title slugs, query strings, and fragments
 - Use the template's missing-value convention for unavailable Goodreads values
 - Keep numeric vote counts as integers if that field exists
 - Record every unavailable Goodreads field for the result
-- Ratings, votes, price and other changing source values describe the retrieved snapshot. Preserve
-  their snapshot status, source, observation date and catalog purpose in the library's public format
-  If that format cannot express snapshot context, leave changing fields unset using its missing-value
-  convention and report the restriction; do not invent fields or modify protected personal content
-  Indexed fallback values are unverified for current state; disclose that limit instead of claiming
+- Ratings, votes, price, and other changing source values follow the snapshot rule in the global
+  agent rules. Preserve their snapshot status in the library's public format. If that format cannot
+  express snapshot context, leave changing fields unset using its missing-value convention and
+  report the restriction. Do not invent fields or modify protected personal content
+- Indexed fallback values are unverified for current state. Disclose that limit instead of claiming
   a live lookup
 
 ### Tags
@@ -95,8 +96,8 @@ Rule of thumb - FOLLOW THE TEMPLATE, DO NOT INVENT WHAT DOES NOT EXIST.
 ### Overview
 - Write an original overview of at most two paragraphs
 - Give an engaging distant view: shape, atmosphere, scope, and central terrain
-- Do not reveal underlying information, add spoilers, marketing copy, personal evaluation, title, or
- author
+- Do not reveal underlying information, add spoilers, marketing copy, personal evaluation, title,
+  or author
 
 For nonfiction:
 
@@ -117,11 +118,12 @@ Do not add a topic link for fiction or multi-topic books by default.
 - Confirm an English ISBN when Goodreads provides one
 - Confirm required existing tags and no generic tag placeholders
 - Confirm an original, spoiler-free overview without title or author
-- Scan only the editable section for `{{`, `Quick summary`, `2026-xx-xx`, `★★★★★`, and generic
-  book tags
+- Scan only the editable section for unreplaced placeholders, as the library's template defines
+  them
 
 ## Result
-Respond with exactly one line per book:
+One line per book. The reply is the text of one line below, between the backticks, without the
+backticks and with no other characters.
 
 - `Created: <relative path to book draft>`
 - `Created: <relative path to book draft> (Goodreads missing: ISBN, Length)`
@@ -129,5 +131,7 @@ Respond with exactly one line per book:
 - `Blocked: <title> (Goodreads unavailable)`
 
 On a Created line, append relevant qualifications in the same parentheses: `indexed Goodreads values
-unverified for current state` and/or `changing fields omitted: snapshot context unavailable`. Combine
-these with any missing-field list; the one-line format must not hide a retrieval or retention limit.
+unverified for current state` and/or `changing fields omitted: snapshot context unavailable`.
+Combine these with any missing-field list. The one-line format must not hide a retrieval or
+retention limit.
+

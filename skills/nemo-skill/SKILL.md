@@ -8,6 +8,7 @@ description: >-
 
 # Skill creation and review
 Use `nemo-general` for communication preferences.
+
 Inspect the requested source, applicable instructions and existing changes. Establish the
 intended users, trigger, inputs, result and authorization boundary from available evidence. Ask
 only about consequential gaps. Reviewing a skill does not activate its target workflow or
@@ -24,5 +25,6 @@ authorize edits.
   Minor wording changes need proportionate checks
 
 Done means the requested artifact or review exists, relevant checks were inspected, and remaining
-limitations are stated. Installation is distinct from source editing; use the existing installer
+limitations are stated. Installation is distinct from source editing. Use the existing installer
 when authorized. Report what changed and what tests actually demonstrated.
+

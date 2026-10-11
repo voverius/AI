@@ -87,6 +87,7 @@ Keep source, installation and migration claims separate. For installation or mig
 the relevant live discovery entries, links and consumers within the agreed scope. A source edit or
 installer exit status does not prove host consistency. Retire unrelated entries only when
 authorized.
+
 Update completion records to match verified scope and evidence availability. Temporary evidence is
 not a durable audit trail. Missing evidence limits the claim rather than proving success.
 

@@ -1,7 +1,8 @@
 
 # Setup, repair and audit
-Apply the knowledge rules loaded through the entry for structure and audits. Root resolution belongs
-to the entry skill. This procedure does not choose another location.
+Apply the knowledge rules loaded through the entry for structure and audits. Read
+[resolve](resolve.md) before the first project read. This procedure does not choose another
+location.
 
 For **setup**, inspect purpose, boundaries, existing entries and layout. Preserve unrelated
 instructions and existing equivalents. Bootstrap creates AGENTS.md, README.md, docs/index.md and
@@ -35,11 +36,11 @@ the global skill is unavailable, report it instead of substituting a local devel
 
 For **audit**, inspect the requested scope for broken routes, unreachable subjects, duplicated or
 contradictory claims, stale summaries and inappropriate ownership. Check subject substance, page
-structure and link boundaries against knowledge.md. Broaden only when the evidence
-requires it. Missing unused roles are not findings. Report concrete locations and consequences. Do
-not repair under a read-only request.
-Trace source references through retrieval and continuation too: reachable local copies can still
-misrepresent a living owner or lack snapshot purpose. Apply the authority rules in knowledge.md.
+structure and link boundaries against knowledge.md. Broaden only when the evidence requires it.
+Missing unused roles are not findings. Report concrete locations and consequences. Do not repair
+under a read-only request. Trace source references through retrieval and continuation too.
+Reachable local copies can still misrepresent a living owner or lack snapshot purpose. Apply the
+freshness rules in the global agent rules and the project claim rules in knowledge.md.
 
 For authorized **repair**, address the demonstrated defects using knowledge.md. Move shared facts
 out of incidental tool/task documents into their subjects, retaining evidence and references.
@@ -52,22 +53,23 @@ instructions. Update root declarations, external consumers and affected links. V
 destination is complete and reachable before retiring the old tree. Never overwrite a populated
 destination or leave two writable knowledge owners. Report any inaccessible consumer rather than
 claiming migration complete.
+
 First compare resolved roots: if both paths name the same project, no move is needed. Compare
 colliding content and required behavior before asking about a genuine unresolved difference.
 
 For **skill migration**, replace superseded workflow names in applicable project contracts while
-preserving local rules. Inspect other consumers before retiring an installed skill family. Use
-`scripts/sync.sh` to install or repoint managed `nemo-*` links. Sync also removes stale managed
-symlinks that no longer have a skill source. Uninstall with
-`scripts/sync.sh remove <skill-name> [claude|codex|cursor|all]`. Verify global discovery without a
-local fallback.
+preserving local rules. Inspect other consumers before retiring an installed skill family. Use the
+repository-root `scripts/sync.sh` to install or repoint managed `nemo-*` links. That command is not
+inside the skill directory. Sync also removes stale managed symlinks that no longer have a skill
+source. Uninstall with `scripts/sync.sh remove <skill-name> [claude|codex|cursor|all]` from the
+repository root. Verify global discovery without a local fallback.
 
 Audit is done when the scoped findings identify locations, consequences and inspection limits, or
 report no findings. Leave project files unchanged unless the user requests a saved report.
 
 Setup or repair is done when the canonical root is explicit, docs/index.md exists and is linked,
 applicable contract responsibilities are present, README states purpose and links roles, maintained
-subjects are reachable, links resolve, and useful evidence survives. An unchanged rerun makes no
-changes. For new or migrated host integration, verify a fresh ordinary request without supplying a
-skill path. Syntax checks alone do not prove discovery.
+subjects are reachable, links resolve, and useful evidence survives. An unchanged rerun is the
+no-op in the global agent rules. For new or migrated host integration, verify a fresh ordinary
+request without supplying a skill path. Syntax checks alone do not prove discovery.
 

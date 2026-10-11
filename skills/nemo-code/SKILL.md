@@ -4,25 +4,26 @@ description: >-
   Software development: implementation, TDD, debugging, verification, and code review. Use when
   coding, fixing bugs, writing tests, reviewing diffs/PRs, or initializing code mode. Not for
   critique of docs/plans/skills (nemo-critique) or skill-package authoring (nemo-skill). Apply
-  nemo-general for voice. Use nemo-project for saved project knowledge; personal libraries use
+  nemo-general for voice. Use nemo-project for saved project knowledge. Personal libraries use
   nemo-pkm.
 ---
 
 # Code
-Voice: [nemo-general](../nemo-general/SKILL.md). This skill owns coding procedure only.
+Voice: nemo-general. This skill owns coding procedure only.
+
+Commit and push only when the user asks, as the global agent rules require.
 
 ## References
-- [init](references/init.md) - Initialization-only response and boundaries. Read for code-mode setup
-- [orientation](references/orientation.md) - Workspace inspection, scope and implementation choices
-  Read before implementation or debugging
-- [tdd](references/tdd.md) - Test seams, red-green-refactor, test quality and exceptions. Read for
-  behaviour changes. During debugging, apply after reproduction identifies a regression seam
-- [implement](references/implement.md) - Minimal changes and edit boundaries. Read when implementing
-- [debug](references/debug.md) - Reproduction, hypothesis testing, regression and cleanup. Read for
-  debugging before choosing a fix
-- [verify](references/verify.md) - Verification scope and completion evidence. Read before
-  completing implementation or debugging
+- [workflow](references/workflow.md) - Workspace inspection, minimal edits, and verification
+  Required read before implementation or debugging
+- [tdd](references/tdd.md) - Test seams, red-green-refactor, test quality, and exceptions
+  Required read before any production edit for implementation and debugging. The only skips are
+  the exceptions listed in tdd.md
+- [debug](references/debug.md) - Reproduction, hypothesis testing, regression, and cleanup
+  Required read for a bug fix, before choosing the fix
 - [review](references/review.md) - Separate standards and specification checks, with finding format
   Read for code reviews. Review alone does not authorize edits
 
-No commit/push unless the user asks.
+Initialization-only: read the nemo-general init reference and reply with the code-mode string.
+Do not load the references above.
+

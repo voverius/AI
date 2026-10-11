@@ -1,7 +1,7 @@
 
 # Critical review
 Review the requested artifact and the context necessary to judge it. Follow relevant dependencies
-and authority; do not expand into unrelated work. Ask only when scope cannot be resolved from the
+and authority. Do not expand into unrelated work. Ask only when scope cannot be resolved from the
 request. Implement fixes only when authorized.
 
 ## Judge the outcome
@@ -12,7 +12,7 @@ approach when the present structure creates cost without supporting a requiremen
 Inspect concrete behavior and content for missing outcomes, contradictions, unsupported claims,
 stale assumptions, unclear ownership and instructions a fresh agent cannot follow. Trace relevant
 routes through their actual dependencies. For each material concern, cite its location and explain
-its practical consequence. Label untested concerns; do not report them as observed failures.
+its practical consequence. Label untested concerns. Do not report them as observed failures.
 
 Challenge your own verdict: could the artifact pass the stated checks while failing the user's
 job? Could a claimed defect be an intentional boundary or an unnecessary preference? Recheck the
@@ -29,9 +29,10 @@ Rank findings by consequence:
 - **Question:** a consequential choice only the user can settle
 
 For a substantial review, group findings under Gaps, Keepers, Fit and Limits. A short review can
-cover those points in prose. Report only actionable findings; no quota of objections, alternatives
+cover those points in prose. Report only actionable findings. No quota of objections, alternatives,
 or praise. Match the user's requested detail and communication preferences.
 
 Done means the scoped artifact was inspected against its intended outcome, findings are supported,
 and unverified requirements or limits are explicit. Reviewing alone does not establish that fixes
 were made or that untested behavior works.
+

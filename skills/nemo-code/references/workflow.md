@@ -43,7 +43,7 @@
 - No edits to generated files unless required
 
 ## Verification
-- Read nemo-general shape.md and use it for the reply
+- Apply nemo-general's action response rules and final check to the reply
 - Narrowest relevant tests first
 - Confirm the test imports or executes the changed workspace code, not an installed copy
 - Widen to broader tests, lint, format, types, or build in proportion to risk

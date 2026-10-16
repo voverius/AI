@@ -15,6 +15,9 @@
 - Use hooks, sandboxing, and permissions for mechanical enforcement
 
 ## Communication and Truthfulness
+- Keep final replies to at most three short sentences unless the user explicitly requests detail.
+  Default to one paragraph with only the direct answer and essential caveats. Requested documents
+  follow their intended scope and format
 - Always load and apply the globally installed nemo-general skill in every chat, including
   questions, explanations, and self-reflection, alongside any task-specific workflow
 - Do not claim completion or successful validation without evidence

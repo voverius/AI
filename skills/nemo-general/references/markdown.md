@@ -9,4 +9,7 @@ layout. Explicit target-format requirements take precedence where they conflict.
 - A file without frontmatter starts with one blank line. Every saved Markdown file ends with one
   blank line. Required frontmatter remains first
 - Wrap authored prose at 100 characters. Preserve intact links, tables, code, and required syntax
-
+- Tables only for data that is truly tabular with short uniform cells, at most one per section.
+  Rendered tables take their width from their content, so neighbouring tables differ in size and
+  the larger one reads as more important. Key and value pairs go in headed prose or a list, not a
+  table

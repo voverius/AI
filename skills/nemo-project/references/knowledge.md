@@ -27,7 +27,9 @@ listing individual files.
 
 ### `work/`
 Agents may create `work/` without asking. Default intent is **scratch**: intermediates for the
-current task, deleted when that task is fully done or abandoned. **Kept work** is an entire
+current task, deleted when that task is fully done or abandoned. Active scratch needs no separate
+retention rationale. Verify task status before treating an existing subtree as kept work or overdue
+cleanup. **Kept work** is an entire
 `work/<item>/` subtree retained only when a concrete why exists: a named open claim it still
 defends, recorded in that subtree (short README or equivalent) with an end condition. No why means
 scratch. Prefer conclusions in knowledge or a user-requested output over keeping raw trees. Do not
@@ -36,10 +38,11 @@ grandfather old folders. The same rules apply to existing `work/`.
 ### Done includes cleanup
 When a task is fully done, cleanup is required. Distill reusable findings into knowledge first.
 Write `outputs/` only if the user asked for a retained deliverable. Then delete scratch and any
-`work/` subtree whose claim is closed, superseded or no longer needs defense. If done-status or
-retention why is unclear, ask (for example whether to clean `work/`) instead of inventing
-retention. Matched scratch deletion does not need path-by-path approval. Ask before deleting kept
-work only when unclear, large, or shared. Do not move scratch into `outputs/` to avoid deletion.
+`work/` subtree whose claim is closed, superseded or no longer needs defense. This task-owned cleanup
+is pre-authorized under the global rules and must not generate routine approval prompts. Resolve
+unclear ownership or retention from the matching task state instead of inventing a reason to keep
+material. Preserve unrelated work and evidence still needed for open claims, and report concrete
+unresolved ownership or retention gaps. Do not move scratch into `outputs/` to avoid deletion.
 Do not create archives of temporaries. Cleanup never extends to external originals, repositories,
 or unrelated user work. Handover closure follows capture.md.
 
@@ -90,12 +93,12 @@ disclaimers. Omit research dates, counts and inspection narration unless needed 
 knowledge itself.
 
 ### Value gate (what earns a place in docs/)
-Keep a claim only if a future reader could not cheaply derive it from common sense, the linked
-authoritative source alone, or adjacent paragraphs already on the page. Prefer surprises,
-constraints, failure modes, ownership decisions and non-obvious mechanisms. Drop sun-will-rise
-facts, product-shopping residue from one chat, stale prices or version pins unless the pin is the
-decision, and anything that only restates the source docs. When unsure, leave it out of docs/ and
-keep it in chat, a handover or a user-requested output.
+Keep material that adds useful synthesis, constraints, failure modes, local decisions or non-obvious
+mechanisms. Include foundational facts only when removing them would make that contribution or a
+usable example hard to understand. Availability in a linked source alone does not disqualify this
+necessary context. Drop redundant facts, standalone restatements of documentation, product-shopping
+residue from one chat, and stale prices or version pins unless the pin is the decision. When unsure,
+leave it out of docs/ and keep it in chat, a handover or a user-requested output.
 
 Choose content by what it explains about the subject. Describe how parts interact, how decisions
 are made and what results, rather than listing disconnected components. Use an example when it
@@ -111,10 +114,11 @@ under their roles. Do not create a page for every input or force one broad quest
 omnibus article.
 
 ## Source and link boundaries
-Subject pages and knowledge indexes link within the knowledge graph and to authoritative sources.
-Do not link them to project outputs, work, inbox, retained-source folders or handovers. Reports and
-continuation records can point to knowledge, not the reverse. Preserve evidence separately and
-attribute necessary source identity and uncertainty in the subject itself.
+Subject pages and knowledge indexes link within the knowledge graph and to authoritative sources,
+including deliberately retained source evidence. Give retained evidence a direct, stable link and
+the identity and limits needed to interpret it. Do not link knowledge to project outputs, temporary
+work, inbox or handovers. Reports and continuation records can point to knowledge. A source link
+does not justify retaining an otherwise unnecessary copy.
 
 External documentation remains external. Link its canonical URL with a very brief cue for what it
 provides. Preserve the concepts, connections and local decisions useful here rather than reproducing

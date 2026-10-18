@@ -1,8 +1,9 @@
 
 # Preserve findings and process inputs
 Apply the knowledge rules loaded through the entry skill. Work only on the relevant, understood set
-of inputs and findings. Leave unrelated arrivals alone. Intake creates maintained knowledge. A
-deliverable is allowed only under the outputs rules in knowledge.md.
+of inputs and findings. Leave unrelated arrivals alone. A fully processed input may add no useful
+information and need no knowledge change. Handle requested source retention independently of that
+outcome. A deliverable is allowed only under the outputs rules in knowledge.md.
 
 1. Read existing subject owners and necessary source material. Record unreadable or partially
    processed material and its impact. It remains pending. A request only to keep or file an artifact

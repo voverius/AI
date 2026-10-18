@@ -9,7 +9,8 @@ current state, apply the freshness rules in the global agent rules. On access fa
 remains unverified.
 
 An investigation uses the same reads, then separates supported findings, proposals, and unresolved
-questions. Save a new reusable finding through distill.md. Scratch may use `work/` under the
-knowledge.md lifecycle. Capture unfinished work when continuation remains. A question stays
-read-only unless the request authorizes a change. Discussion alone does not create an outputs file.
+questions. When knowledge changes are authorized, save a new reusable finding through distill.md.
+Scratch may use `work/` under the knowledge.md lifecycle. Capture unfinished work when continuation
+remains. A question stays read-only unless the request authorizes a change. Discussion alone does
+not create an outputs file.
 

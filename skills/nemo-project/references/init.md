@@ -57,12 +57,11 @@ claiming migration complete.
 First compare resolved roots: if both paths name the same project, no move is needed. Compare
 colliding content and required behavior before asking about a genuine unresolved difference.
 
-For **skill migration**, replace superseded workflow names in applicable project contracts while
-preserving local rules. Inspect other consumers before retiring an installed skill family. Use the
-repository-root `scripts/sync.sh` to install or repoint managed `nemo-*` links. That command is not
-inside the skill directory. Sync also removes stale managed symlinks that no longer have a skill
-source. Uninstall with `scripts/sync.sh remove <skill-name> [claude|codex|cursor|all]` from the
-repository root. Verify global discovery without a local fallback.
+For **skill migration**, replace superseded workflow names in the selected project's contracts and
+references while preserving local rules. Host installation, repointing and retirement belong to the
+skill installation workflow under the requested host scope.
+Identify any separate host work without assuming that a project migration authorizes it. When host
+integration is requested, verify discovery through that workflow rather than a project-local copy.
 
 Audit is done when the scoped findings identify locations, consequences and inspection limits, or
 report no findings. Leave project files unchanged unless the user requests a saved report.

@@ -16,7 +16,8 @@ Keep **Standards** and **Spec** separate so one cannot mask the other.
 - **Spec**: implements what was asked (issue, spec, or request). No missing pieces or scope creep
 
 Prefer two parallel sub-agents (one prompt per axis). Else two sequential passes in one agent.
-Report under `## Standards` and `## Spec`. Do not merge or cross-rank into one winner.
+Keep the axes distinct, using headings for a substantial review or labeled items for a short one,
+following nemo-general. Do not merge or cross-rank into one winner.
 
 ### Standards
 - Read repo standards (`CODING_STANDARDS.md`, `CONTRIBUTING.md`, `AGENTS.md`, …). Repo wins
@@ -26,11 +27,13 @@ Report under `## Standards` and `## Spec`. Do not merge or cross-rank into one w
 - Skip what automation already enforces unless the diff clearly bypasses it
 
 ### Spec
-Resolve spec: commit/PR issue refs → user path → `docs/` / `specs/` match → ask.
-None and user confirms none: "no spec available" for this axis.
+Resolve expectations from the user request, linked issue or spec, relevant tests and callers.
+Ask only when missing information would materially change the review. Without a formal spec,
+state that limit and continue checking correctness and regressions against available contracts.
 
 Report missing or partial requirements, unasked behavior, and wrong-looking implementation. Quote
-the requirement per finding.
+an explicit requirement or identify the existing behavior or caller contract supporting an inferred
+expectation.
 
 ## Output
 - Prioritize actionable defects: wrong behavior, missing requirements, regressions,

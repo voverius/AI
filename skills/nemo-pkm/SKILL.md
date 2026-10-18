@@ -11,7 +11,8 @@ Apply nemo-general for voice.
 
 Select the library named by the user or established by the active workspace. Verify its root and
 resolve symbolic links before treating alternative paths as separate libraries. Then inspect its
-local instructions, index, and relevant existing notes before content work. If several libraries
+local instructions and index. Load the applicable reference before reading relevant existing
+notes, so branch-specific protected sections stay unread. If several libraries
 fit or none is established, ask which one. Do not infer a root from a familiar folder name. Use
 absolute paths within a filesystem library. Its local documentation owns the schema, note
 locations, templates, vocabulary, and promotion rules. If no local rules exist, follow the existing

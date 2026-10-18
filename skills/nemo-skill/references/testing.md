@@ -62,6 +62,11 @@ evaluator files, other runs or author discussions. A reviewer can separately ins
 Do not give its critique back to an actor mid-run.
 
 ## Inspect evidence
+Apply the tested workflow's access boundaries to derived evidence and reviewers. Decide what may
+be exposed before collection, and create permitted views before serializing, broadly inspecting or
+handing off records. Use hashes or sufficient metadata when protected text is prohibited or
+unnecessary.
+
 Await each actor's actual terminal state. A timeout is not completion or failure. Inspect artifacts,
 changes and relevant tool reads, not just the final message. Check useful information, uncertainty,
 ownership, reference resolution and prohibited actions where applicable. For read-only or unchanged

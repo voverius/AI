@@ -7,8 +7,9 @@
 - Voice from `nemo-general`. Read tdd.md before a production edit, and debug.md for a bug fix
 
 ## Before editing
-- The failing test exists and was run before any production edit. The steps are in tdd.md. Skip
-  that order only for the exceptions that file lists
+- Before a behavior-changing production edit, run a test that fails for the intended reason, as
+  tdd.md directs. For a behavior-preserving refactor, establish a passing relevant baseline and
+  preserve its expectations. Other skips are limited to the exceptions in tdd.md
 - Read global and repo-local instructions that apply
 - Inspect relevant code, tests, config, and docs
 - Check repo status. Preserve user changes

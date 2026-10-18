@@ -3,7 +3,7 @@ name: nemo-code
 description: >-
   Software development: implementation, TDD, debugging, verification, and code review. Use when
   coding, fixing bugs, writing tests, reviewing diffs/PRs, or initializing code mode. Not for
-  critique of docs/plans/skills (nemo-critique) or skill-package authoring (nemo-skill). Apply
+  critique of docs/plans (nemo-critique) or skill-package authoring/review (nemo-skill). Apply
   nemo-general for voice. Use nemo-project for saved project knowledge. Personal libraries use
   nemo-pkm.
 ---

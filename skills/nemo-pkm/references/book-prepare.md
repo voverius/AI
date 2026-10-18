@@ -15,11 +15,16 @@ reply is the result line below. No progress chatter and no soft closers.
 - For multiple books or links, finish one complete workflow before starting the next
 
 ## Resolve
-- Accept a Goodreads URL or a title and author
+- Accept a Goodreads URL, a title and author, or supplied Goodreads material
 - Use only Goodreads data
-- Try the exact Goodreads URL first
+- After the duplicate check, use sufficient supplied material as attributed snapshot evidence.
+  Preserve its source and observation date in the library's public format. Retrieve only missing
+  information or values that the request requires to be current
+- When lookup is needed, try the exact Goodreads URL first
 - If it is blocked, use indexed Goodreads results and Goodreads edition pages
 - Do not use another source
+- If lookup is unavailable, use sufficient supplied material with its limits or return Blocked.
+  Do not invent metadata or claim a live retrieval
 
 ### Duplicate check
 Before external lookup or writing, locate candidates by title, author, aliases, and source
@@ -37,8 +42,9 @@ when identity or a real filename collision is unresolved. Do not refresh an exis
 requested.
 
 ### Edition and identity
-- Use any English edition with a valid ISBN
+- Use an English edition, preferring one with a valid ISBN when available
 - Prefer ISBN-13. Otherwise use ISBN-10
+- If no ISBN is available, use the missing-value convention and qualify the Created result
 - If several English editions qualify, use the most complete Goodreads record
 - Ask only when the book identity is ambiguous
 - Do not ask the user to choose an edition
@@ -72,7 +78,8 @@ personal section. Follow the template. Do not invent fields that the template do
 - Use the local format for links and fields. Wikilinks, when required, contain note names rather
   than directory paths
 - When no subtitle exists, leave any template subtitle placeholder unchanged
-- Set Goodreads exactly as `[Goodreads](https://www.goodreads.com/book/show/<numeric-id>)`
+- Store `https://www.goodreads.com/book/show/<numeric-id>` in the library's field format.
+  If no format is specified, use `[Goodreads](https://www.goodreads.com/book/show/<numeric-id>)`
 - Keep only the numeric Goodreads ID. Remove title slugs, query strings, and fragments
 - Use the template's missing-value convention for unavailable Goodreads values
 - Keep numeric vote counts as integers if that field exists
@@ -130,8 +137,9 @@ backticks and with no other characters.
 - `Exists: <existing path>`
 - `Blocked: <title> (Goodreads unavailable)`
 
-On a Created line, append relevant qualifications in the same parentheses: `indexed Goodreads values
-unverified for current state` and/or `changing fields omitted: snapshot context unavailable`.
+On a Created line, append relevant qualifications in the same parentheses: `supplied Goodreads
+snapshot` with its observation date or unknown date, `indexed Goodreads values unverified for
+current state` and/or `changing fields omitted: snapshot context unavailable`.
 Combine these with any missing-field list. The one-line format must not hide a retrieval or
 retention limit.
 

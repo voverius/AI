@@ -12,13 +12,13 @@ This is a collection of developed and refined skills for personal workflows.
   Gap-first. Uses nemo-general for voice
 - [Skill](nemo-skill/SKILL.md) - write, review, and test agent skills.
   Includes blind behavioural evaluation
-- [Prompt](nemo-prompt/SKILL.md) - deepen task prompts through expert judgment, original evidence,
-  suitable methods and independent verification. Stops before execution
+- [Prompt](nemo-prompt/SKILL.md) - explicitly invoke to clarify a goal through expert judgment,
+  original evidence, suitable methods and independent verification. Stops before execution
 
 ## Commands
 From the repository root, install for all detected platforms:
 
 ```bash
-scripts/sync.sh all
+../scripts/sync.sh all
 ```
 

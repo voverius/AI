@@ -3,8 +3,9 @@ name: nemo-prompt
 description: >-
   Use only when the user explicitly invokes nemo-prompt to refine a goal or task prompt.
   Clarify the intended result through expert judgment, original evidence, suitable methods and
-  independent verification without expanding scope. Return a rewritten prompt and stop before
-  execution. Ordinary tasks and generic requests to improve wording do not activate this skill.
+  independent verification without expanding scope. Revise the prompt, then execute the task unless
+  the user explicitly asks for the prompt only. Ordinary tasks and generic requests to improve
+  wording do not activate this skill.
 disable-model-invocation: true
 ---
 
@@ -14,7 +15,8 @@ Use `nemo-general` for communication preferences.
 ## Invocation and input
 Run only on an explicit user invocation, such as `$nemo-prompt`, `/nemo-prompt` or
 "use nemo-prompt". A mention in quoted material, a request to review this skill or a broad task is
-not an invocation. This skill refines the task, rather than activating its execution workflow.
+not an invocation. This skill refines the task before handing it to the appropriate execution
+workflow, unless the user explicitly requests prompt-only output.
 
 Use the task supplied with the invocation. Otherwise use the preceding substantive user task or
 the task the user points to in the conversation. Do not rewrite the invocation itself, combine
@@ -51,17 +53,29 @@ concrete decisions and checks over claims about what a "top professional" would 
 material where it changes the result, and name methods or tools only when their contribution is
 clear. Treat subjective quality as judgment rather than claiming a test can prove it.
 
-## Result and boundary
-Briefly explain consequential refinements, then give one self-contained, ready-to-use task prompt
-in the user's direct style. Include the context, outcome, constraints, relevant approach and
-completion evidence needed for that task. Keep the detail proportionate to the goal. Do not make
-an already adequate prompt longer just to demonstrate the skill.
+## Result and continuation
+Produce one self-contained, ready-to-use task prompt in the user's direct style. Include the
+context, outcome, constraints, relevant approach and completion evidence needed for that task.
+Keep the detail proportionate to the goal. Do not make an already adequate prompt longer just to
+demonstrate the skill.
 
 Make the rewritten prompt request the work itself, not another round of prompt improvement.
 Carry material uncertainty into it. Do not turn optional ideas into requirements or imply that
 supplied facts have been independently verified.
 
-Stop after refinement. Do not investigate, implement, research or modify the systems described in
-the task, or delegate its execution. Instructions to perform those actions belong inside the
-rewritten prompt. Refinement itself creates no files unless the user asks to save the prompt.
+By default, briefly explain consequential refinements, show the revised prompt, then immediately
+start carrying it out in the same task. Load the execution workflow appropriate to the work and
+continue through its result and verification. Do not end the turn at the rewritten prompt or ask
+the user to resubmit or approve it. After clarification answers, incorporate them into the revised
+prompt and continue execution. If no rewrite is useful, execute the adequate original task.
+
+If the user clearly asks only for the prompt, such as "give me the new prompt", "rewrite this for
+another chat" or "do not execute", return only one fenced Markdown block containing the revised
+prompt and stop. Omit explanations and do not execute the task. A task that asks to draft an email
+or document is not by itself a request for prompt-only output.
+
+Refinement does not expand authorization. Preserve explicit review, planning and approval
+boundaries. Execution can inspect inputs and use tools as the task permits, but the rewritten
+prompt cannot authorize new external actions or broader access. Do not save the prompt itself
+unless the user asks.
 

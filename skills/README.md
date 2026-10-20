@@ -13,7 +13,8 @@ This is a collection of developed and refined skills for personal workflows.
 - [Skill](nemo-skill/SKILL.md) - write, review, and test agent skills.
   Includes blind behavioural evaluation
 - [Prompt](nemo-prompt/SKILL.md) - explicitly invoke to clarify a goal through expert judgment,
-  original evidence, suitable methods and independent verification. Stops before execution
+  original evidence, suitable methods and independent verification, then carry out the task.
+  Explicit prompt-only requests return the revised prompt without execution
 
 ## Commands
 From the repository root, install for all detected platforms:

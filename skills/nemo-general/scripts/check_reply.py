@@ -69,9 +69,11 @@ def validate(payload):
     sentence_prose = re.sub(r'\n[ \t]+', ' ', sentence_prose)
     sentence_prose = re.sub(r'(?<!\n)\n(?!\n)', ' ', sentence_prose)
     sentences = [part for part in re.split(r'(?<=[.!?])\s+|\n+', sentence_prose.strip()) if part]
+    report_text = re.sub(table_pattern, '', text).rstrip()
+    report_prose = re.sub(table_pattern, '', prose).rstrip()
     report = mode == 'report' and re.fullmatch(
-        r'[^\n]+\n[ \t]*\n(?:[-*+] [^\n]+(?:\n[ \t]+[^\n]+)*(?:\n|$)){1,3}', text)
-    units = ([line for line in re.split(r'\n+', re.sub(r'\n[ \t]+', ' ', prose).strip())
+        r'[^\n]+\n[ \t]*\n(?:[-*+] [^\n]+(?:\n[ \t]+[^\n]+)*(?:\n|$)){1,3}', report_text)
+    units = ([line for line in re.split(r'\n+', re.sub(r'\n[ \t]+', ' ', report_prose).strip())
               if line] if report else sentences)
     if mode == 'report' and not report:
         errors.append('Use the completion-report layout: plain opener, blank line and labeled bullets.')

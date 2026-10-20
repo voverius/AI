@@ -210,6 +210,23 @@ class ReplyTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout)
         self.assertEqual(json.loads(result.stdout)['text'], text)
 
+    def test_report_allows_trailing_table_without_relaxing_prose_limits(self):
+        report = ('The checks are incomplete.\n\n'
+                  '- **Validation:** 18 unit checks passed. Integration checks were not run\n'
+                  '- **Next:** restore the test service\n')
+        table = ('\n| Check | Result |\n| --- | --- |\n'
+                 '| Unit | ✅ Passed |\n| Integration | ⚠️ Not run |')
+        text = report + table
+        result = self.check_reply(text, 'report')
+        self.assertEqual(result.returncode, 0, result.stdout)
+        self.assertEqual(json.loads(result.stdout)['text'], text)
+        for invalid in (
+                report + '- **Owner:** Maya\n- **Deadline:** Friday\n' + table,
+                text + '\n\nAn extra paragraph is still outside the report layout.',
+                report + table.replace('| Unit | ✅ Passed |', '| Unit | ✅ Passed | extra |')):
+            with self.subTest(invalid=invalid):
+                self.assertEqual(self.check_reply(invalid, 'report').returncode, 1)
+
     def test_table_does_not_hide_excessive_prose(self):
         text = ('One. Two. Three. Four.\n\n'
                 '| Project | Status |\n| --- | --- |\n| Search | Complete |')

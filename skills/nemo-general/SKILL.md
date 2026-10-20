@@ -15,6 +15,9 @@ stop when another workflow is used.
 
 The global agent rules are the instruction file the host loads for every chat.
 
+Initialization-only: read [init](references/init.md) before task skills or workspace inspection,
+follow the selected route and stop.
+
 ## Reply contract
 For ordinary conversation and task results, use at most 3 short sentences or list items. Answer a
 simple factual question in 1 direct sentence, stopping once the requested fact is clear. Completion

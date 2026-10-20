@@ -26,6 +26,16 @@ reply is the result line below. No progress chatter and no soft closers.
 - If lookup is unavailable, use sufficient supplied material with its limits or return Blocked.
   Do not invent metadata or claim a live retrieval
 
+### Public content boundary
+Use the entry's [protected-content procedure](../SKILL.md#protected-content) before searching or
+displaying note or template contents. Match title, author and ID only against the permitted public
+view, including searches that return only filenames. Keep the same boundary for previews, edits,
+validation, errors and diffs. Local copying may carry the complete suffix as opaque bytes without
+displaying or interpreting it.
+
+If permitted tools cannot provide the public view or complete the required exact template copy,
+stop this book with Blocked and name only the prerequisite that actually failed.
+
 ### Duplicate check
 Before external lookup or writing, locate candidates by title, author, aliases, and source
 identifier in:
@@ -33,9 +43,9 @@ identifier in:
 - the library's existing book-record locations
 - the mapped book draft location
 
-Compare identity in public metadata only. Stop reading at any protected personal section. Normalize
-Goodreads links to their numeric ID. An existing memo for that ID, or the same work and author in an
-edition allowed below, satisfies preparation even under a different filename. Return Exists without
+Compare identity in the permitted public view only. Normalize Goodreads links to their numeric ID.
+An existing memo for that ID, or the same work and author in an edition allowed below, satisfies
+preparation even under a different filename. Return Exists without
 fetching or rewriting. A matching filename alone does not establish identity. Inspect public title,
 author, and edition or ISBN before deciding. Preserve distinct works or required editions. Ask only
 when identity or a real filename collision is unresolved. Do not refresh an existing memo unless
@@ -64,11 +74,9 @@ requested.
 - If no template exists, use the library's documented book format or consistent existing pattern
 - Do not duplicate either schema in this skill
 
-If the template has a `## Personal` section, that section and everything after it are prohibited:
-
-- Do not read it
-- Do not modify, clear, replace, validate, or reason about it
-- Edit only content before the `## Personal` heading
+If the template has a `## Personal` section, preserve that section and everything after it as an
+opaque suffix. Fill only the public prefix through the protected-content procedure, using the
+library's actual heading when it differs. Do not expose, interpret, modify or validate the suffix.
 
 ## Populate
 Populate existing public book-information fields from Goodreads data without crossing a protected
@@ -135,11 +143,11 @@ backticks and with no other characters.
 - `Created: <relative path to book draft>`
 - `Created: <relative path to book draft> (Goodreads missing: ISBN, Length)`
 - `Exists: <existing path>`
-- `Blocked: <title> (Goodreads unavailable)`
+- `Blocked: <title> (<specific blocker>)`
 
 On a Created line, append relevant qualifications in the same parentheses: `supplied Goodreads
 snapshot` with its observation date or unknown date, `indexed Goodreads values unverified for
 current state` and/or `changing fields omitted: snapshot context unavailable`.
-Combine these with any missing-field list. The one-line format must not hide a retrieval or
-retention limit.
+Combine these with any missing-field list. The one-line format must not hide a retrieval, permission
+or retention limit.
 

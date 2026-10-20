@@ -1,17 +1,38 @@
 ---
 name: nemo-prompt
 description: >-
-  Deepen a task prompt without expanding its scope. Use when asked to improve a prompt through
-  expert judgment, original evidence, suitable methods and independent verification. Produce a
-  rewritten prompt before execution. Skill creation and review use nemo-skill.
+  Use only when the user explicitly invokes nemo-prompt to refine a goal or task prompt.
+  Clarify the intended result through expert judgment, original evidence, suitable methods and
+  independent verification without expanding scope. Return a rewritten prompt and stop before
+  execution. Ordinary tasks and generic requests to improve wording do not activate this skill.
+disable-model-invocation: true
 ---
 
 # Prompt improvement
-
 Use `nemo-general` for communication preferences.
 
-Before rewriting the user's task prompt, identify how to make the work deeper without expanding
-its scope. Keep the intended outcome, constraints and deliverable fixed.
+## Invocation and input
+Run only on an explicit user invocation, such as `$nemo-prompt`, `/nemo-prompt` or
+"use nemo-prompt". A mention in quoted material, a request to review this skill or a broad task is
+not an invocation. This skill refines the task, rather than activating its execution workflow.
+
+Use the task supplied with the invocation. Otherwise use the preceding substantive user task or
+the task the user points to in the conversation. Do not rewrite the invocation itself, combine
+unrelated earlier tasks or invent a missing request. If the target task is absent or ambiguous,
+ask one focused question and wait.
+
+## Refinement
+Use the available conversation and supplied material. Identify the intended outcome, explicit
+constraints and any requested deliverable. Distinguish the user's desired result from a suggested
+way to achieve it. Make a broad goal concrete without silently choosing an architecture,
+replacing the goal or shrinking it to an easier task.
+
+Keep explicit requirements and the user's freedom to choose. Do not strengthen preferences into
+absolute bans, add unrequested deliverables or narrow the goal to a diagnostic example. Surface
+conflicts and consequential trade-offs. If a missing user decision would materially change the
+goal or scope, ask one focused question before rewriting.
+Missing execution inputs can remain instructions to obtain them in the rewritten prompt, rather
+than blocking refinement or inventing facts, access, measurements or commitments.
 
 Examine:
 
@@ -25,9 +46,22 @@ Examine:
 4. **Verification:** What observable evidence, test or independent standard could support or
    contradict the result? Distinguish what can be checked from what remains a judgment call
 
-Recommend only changes that materially improve this task. If something is already adequate, say
-so. Do not invent missing facts or assume access to unavailable evidence.
+Use these lenses to find material improvements, not to fill four compulsory sections. Prefer
+concrete decisions and checks over claims about what a "top professional" would do. Use original
+material where it changes the result, and name methods or tools only when their contribution is
+clear. Treat subjective quality as judgment rather than claiming a test can prove it.
 
-Then rewrite the prompt to incorporate those changes as concrete instructions. Preserve its scope,
-flag consequential missing inputs, and stop before executing the rewritten prompt.
+## Result and boundary
+Briefly explain consequential refinements, then give one self-contained, ready-to-use task prompt
+in the user's direct style. Include the context, outcome, constraints, relevant approach and
+completion evidence needed for that task. Keep the detail proportionate to the goal. Do not make
+an already adequate prompt longer just to demonstrate the skill.
+
+Make the rewritten prompt request the work itself, not another round of prompt improvement.
+Carry material uncertainty into it. Do not turn optional ideas into requirements or imply that
+supplied facts have been independently verified.
+
+Stop after refinement. Do not investigate, implement, research or modify the systems described in
+the task, or delegate its execution. Instructions to perform those actions belong inside the
+rewritten prompt. Refinement itself creates no files unless the user asks to save the prompt.
 

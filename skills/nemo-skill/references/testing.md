@@ -45,10 +45,15 @@ Pass the normal global and local instruction entry points when the worker does n
 Record this as supplied environment context. Do not substitute the target skill's path in a
 discovery test.
 
-A new name is not a fresh context. Do not reuse the author's or a previous tester's session. If the
-host cannot prevent history inheritance, use a genuinely fresh supported session or mark the test
-non-blind. Record unavoidable shared context such as global instructions and skill catalogs. Do not
-claim isolation that was not verified. Prompt restrictions are not a filesystem sandbox.
+A new name is not a fresh context. Do not reuse the author's or a previous tester's session. Fresh
+context also excludes retrieving host-stored transcripts or earlier runs during execution. Before
+running, verify relevant access boundaries through permitted metadata or synthetic probes without
+opening protected content. If history inheritance or later retrieval cannot be excluded, use another
+supported setup or mark the test non-blind. A non-blind label does not authorize prohibited access.
+After an observed access-boundary violation, verify mechanical isolation of that boundary before
+rerunning the affected setup, or stop and report the limitation. Record unavoidable shared context
+such as global instructions and skill catalogs. Do not claim isolation that was not verified.
+Prompt restrictions are not a filesystem sandbox.
 
 Distinguish two tests:
 - **Execution:** explicitly supply the candidate skill or its path. This tests following its
@@ -81,6 +86,10 @@ Separate findings by cause: discovery, instructions, unavailable environment/too
 setup. If claiming improvement, compare the same inputs and host/model conditions against the prior
 skill or no-skill baseline. Report the metric actually measured. Fewer loaded words do not prove
 lower latency or better answers.
+
+Distinguish complete assistant-event traces from text rendered by the consuming surface. Verify
+that surface when grading silence or exact output, and keep event-level and visible-output verdicts
+separate. A final-only renderer does not prove that the model generated no commentary.
 
 ## Match completion claims to evidence
 Identify the tested source and dependencies by content hash or equivalent snapshot. Compare the

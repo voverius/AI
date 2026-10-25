@@ -12,6 +12,8 @@ class SyncTests(unittest.TestCase):
         self.addCleanup(self.directory.cleanup)
         self.root = Path(self.directory.name)
         self.repository = Path(__file__).resolve().parent.parent
+        self.skills = [skill for skill in (self.repository / 'skills').glob('nemo-*')
+                       if skill.name != 'nemo-general-delete' and (skill / 'SKILL.md').is_file()]
 
     def sync(self, platform, answer=''):
         environment = dict(os.environ, TASK_TEST_ROOT=str(self.root), TASK_PLATFORM=platform,
@@ -20,6 +22,7 @@ class SyncTests(unittest.TestCase):
             source "$TASK_SYNC_SCRIPT" help >/dev/null
             tool_instructions_path() { printf '%s\\n' "$TASK_TEST_ROOT/rules/$1.mdc"; }
             tool_skills_path() { printf '%s\\n' "$TASK_TEST_ROOT/skills/$1"; }
+            tool_output_style_path() { printf '%s\\n' "$TASK_TEST_ROOT/output-styles/nemo-general.md"; }
             sync_tool "$TASK_PLATFORM"
             '''], env=environment, input=answer, text=True, capture_output=True)
 
@@ -43,7 +46,7 @@ class SyncTests(unittest.TestCase):
                 self.assertEqual(result.returncode, 0, result.stderr)
                 self.assertEqual((self.root / 'rules/codex.mdc').resolve(),
                                  self.repository / 'AGENTS.md')
-                for skill in (self.repository / 'skills').glob('nemo-*'):
+                for skill in self.skills:
                     self.assertEqual((self.root / 'skills/codex' / skill.name).resolve(), skill)
                 directory.rmdir()
 
@@ -53,6 +56,36 @@ class SyncTests(unittest.TestCase):
         content = (self.root / 'rules/cursor.mdc').read_text()
         self.assertTrue(content.startswith('---\nalwaysApply: true\n---\n'))
         self.assertIn(str(self.repository / 'AGENTS.md'), content)
+
+    def test_historical_general_skill_is_not_installed(self):
+        for platform in ('claude', 'codex', 'cursor'):
+            with self.subTest(platform=platform):
+                result = self.sync(platform)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                target = self.root / 'skills' / platform / 'nemo-general-delete'
+                self.assertFalse(target.exists())
+                self.assertFalse(target.is_symlink())
+
+    def test_historical_general_managed_link_is_pruned(self):
+        target = self.root / 'skills/codex/nemo-general-delete'
+        target.parent.mkdir(parents=True)
+        target.symlink_to(self.repository / 'skills/nemo-general-delete')
+        result = self.sync('codex')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn('stale managed skill', result.stdout)
+        self.assertFalse(target.is_symlink())
+        repeated = self.sync('codex')
+        self.assertEqual((repeated.returncode, repeated.stdout, repeated.stderr), (0, '', ''))
+
+    def test_historical_general_foreign_link_is_preserved(self):
+        target = self.root / 'skills/codex/nemo-general-delete'
+        target.parent.mkdir(parents=True)
+        foreign = self.root / 'foreign-skill'
+        foreign.mkdir()
+        target.symlink_to(foreign)
+        result = self.sync('codex')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(target.readlink(), foreign)
 
     def test_cursor_replaces_only_its_legacy_link_without_editing_source(self):
         target = self.root / 'rules/cursor.mdc'
@@ -135,7 +168,7 @@ class SyncTests(unittest.TestCase):
 
     def test_confirmed_foreign_skill_link_is_replaced(self):
         self.assertEqual(self.sync('codex').returncode, 0)
-        skill = next((self.repository / 'skills').glob('nemo-*'))
+        skill = self.skills[0]
         target = self.root / 'skills/codex' / skill.name
         foreign = self.root / 'foreign-skill'
         foreign.mkdir()
@@ -166,7 +199,7 @@ class SyncTests(unittest.TestCase):
         self.assertEqual((self.root / 'rules/codex.mdc').read_text(), 'Existing instructions')
         self.assertIn('alwaysApply: true', (self.root / 'rules/cursor.mdc').read_text())
         for platform in ('claude', 'codex', 'cursor'):
-            for skill in (self.repository / 'skills').glob('nemo-*'):
+            for skill in self.skills:
                 self.assertEqual((self.root / 'skills' / platform / skill.name).resolve(), skill)
 
     def test_other_platforms_keep_links_and_all_skills_install(self):
@@ -177,15 +210,24 @@ class SyncTests(unittest.TestCase):
                 if platform != 'cursor':
                     self.assertEqual((self.root / f'rules/{platform}.mdc').resolve(),
                                      self.repository / 'AGENTS.md')
-                for skill in (self.repository / 'skills').glob('nemo-*'):
+                for skill in self.skills:
                     self.assertEqual((self.root / f'skills/{platform}' / skill.name).resolve(),
                                      skill)
 
+    def test_output_style_links_only_for_claude(self):
+        style = self.root / 'output-styles/nemo-general.md'
+        self.assertEqual(self.sync('codex').returncode, 0)
+        self.assertFalse(style.exists())
+        result = self.sync('claude')
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(style.resolve(), self.repository / 'skills/nemo-general/SKILL.md')
+        self.assertEqual(self.sync('claude').stdout, '')
+
     def test_managed_skill_symlink_is_repointed(self):
         self.assertEqual(self.sync('codex').returncode, 0)
-        skill = next((self.repository / 'skills').glob('nemo-*'))
+        skill = self.skills[0]
         target = self.root / 'skills/codex' / skill.name
-        stale = next(p for p in (self.repository / 'skills').glob('nemo-*') if p != skill)
+        stale = next(p for p in self.skills if p != skill)
         target.unlink()
         target.symlink_to(stale)
         result = self.sync('codex')
@@ -194,7 +236,7 @@ class SyncTests(unittest.TestCase):
 
     def test_foreign_skill_symlink_is_preserved(self):
         self.assertEqual(self.sync('codex').returncode, 0)
-        skill = next((self.repository / 'skills').glob('nemo-*'))
+        skill = self.skills[0]
         target = self.root / 'skills/codex' / skill.name
         foreign = self.root / 'foreign-skill'
         foreign.mkdir()
@@ -207,7 +249,7 @@ class SyncTests(unittest.TestCase):
 
     def test_dangling_managed_skill_is_pruned_then_reinstalled(self):
         self.assertEqual(self.sync('codex').returncode, 0)
-        skill = next((self.repository / 'skills').glob('nemo-*'))
+        skill = self.skills[0]
         target = self.root / 'skills/codex' / skill.name
         missing = self.repository / 'skills' / '.missing-skill-for-test'
         target.unlink()
@@ -219,7 +261,7 @@ class SyncTests(unittest.TestCase):
 
     def test_remove_uninstalls_managed_skill(self):
         self.assertEqual(self.sync('codex').returncode, 0)
-        skill = next((self.repository / 'skills').glob('nemo-*'))
+        skill = self.skills[0]
         target = self.root / 'skills/codex' / skill.name
         self.assertTrue(target.is_symlink())
         environment = dict(os.environ, TASK_TEST_ROOT=str(self.root),
@@ -330,7 +372,7 @@ class SyncTests(unittest.TestCase):
 
     def test_directory_link_with_dot_or_trailing_slash_is_unchanged(self):
         self.assertEqual(self.sync('codex').returncode, 0)
-        skill = next((self.repository / 'skills').glob('nemo-*'))
+        skill = self.skills[0]
         target = self.root / 'skills/codex' / skill.name
         for suffix in ('/.', '/'):
             with self.subTest(suffix=suffix):
@@ -343,7 +385,7 @@ class SyncTests(unittest.TestCase):
 
     def test_relative_managed_repoint_and_remove(self):
         self.assertEqual(self.sync('codex').returncode, 0)
-        skills = list((self.repository / 'skills').glob('nemo-*'))
+        skills = self.skills
         target = self.root / 'skills/codex' / skills[0].name
         target.unlink()
         target.symlink_to(os.path.relpath(skills[1], target.parent))
@@ -367,7 +409,7 @@ class SyncTests(unittest.TestCase):
 
     def test_prefix_with_parent_escape_is_foreign_and_loops_are_preserved(self):
         self.assertEqual(self.sync('codex').returncode, 0)
-        skill = next((self.repository / 'skills').glob('nemo-*'))
+        skill = self.skills[0]
         target = self.root / 'skills/codex' / skill.name
         target.unlink()
         foreign_path = str(self.repository / 'skills') + '/../../foreign-skill'

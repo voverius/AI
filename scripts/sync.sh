@@ -36,6 +36,11 @@ tool_instructions_path() {
   esac
 }
 
+# Claude Code also reads nemo-general as its output style, from the same live source.
+tool_output_style_path() {
+  printf '%s\n' "$HOME/.claude/output-styles/nemo-general.md"
+}
+
 tool_available() {
   case "$1" in
     claude) command -v claude >/dev/null 2>&1 ;;
@@ -54,11 +59,15 @@ tool_available() {
   esac
 }
 
+is_installable_skill() {
+  [[ "${1##*/}" != nemo-general-delete && -f "$1/SKILL.md" ]]
+}
+
 skill_sources() {
   local skill
 
   for skill in "$SKILLS_DIR"/nemo-*; do
-    [[ -f "$skill/SKILL.md" ]] && printf '%s\n' "$skill"
+    is_installable_skill "$skill" && printf '%s\n' "$skill"
   done
 }
 
@@ -94,7 +103,7 @@ prune_stale_skills() {
     current="$(link_destination "$entry")" || continue
     name="${entry##*/}"
     [[ "$current" == "$SKILLS_DIR"/* ]] || continue
-    if [[ -f "$SKILLS_DIR/$name/SKILL.md" && -e "$entry" ]]; then
+    if is_installable_skill "$SKILLS_DIR/$name" && [[ -e "$entry" ]]; then
       continue
     fi
     printf 'Remove: %s (stale managed skill)\n' "$entry"
@@ -285,6 +294,11 @@ sync_tool() {
       has_conflict=1
     fi
   done 3< <(skill_sources)
+
+  if [[ "$tool" == claude ]] &&
+     ! sync_target "$SKILLS_DIR/nemo-general/SKILL.md" "$(tool_output_style_path)"; then
+    has_conflict=1
+  fi
 
   return "$has_conflict"
 }

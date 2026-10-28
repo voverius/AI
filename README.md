@@ -7,6 +7,7 @@ setup.
 - `AGENTS.md` - universal rules shared across tools and repositories
 - [skills/](skills/) - reusable workflows and communication preferences
 - `scripts/` - setup and synchronization commands
+- [evals/](evals/) - repeatable skill evaluations: harness, cases, user preferences and verdicts
 - [Communication development references](development/nemo-general.md) - writing guides and
   evaluation criteria for nemo-general, outside its runtime instructions
 

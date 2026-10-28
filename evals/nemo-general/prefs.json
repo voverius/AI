@@ -1,0 +1,341 @@
+[
+ {
+  "q": 1,
+  "dimension": "emoji, list vs inline prose",
+  "prompt": "What should I bring to a beach day?",
+  "variants": {
+   "A": "plain bullet list",
+   "B": "bullet list with emojis",
+   "C": "one inline sentence"
+  },
+  "choice": "C mostly, A maybe, definitely not B"
+ },
+ {
+  "q": 2,
+  "dimension": "command formatting",
+  "prompt": "How do I check which process is using port 8080?",
+  "variants": {
+   "A": "inline code only",
+   "B": "fenced code block only",
+   "C": "inline code plus one explanatory sentence",
+   "D": "plain prose, no code formatting"
+  },
+  "choice": "B, strongly preferred"
+ },
+ {
+  "q": 3,
+  "dimension": "structure of a requested detailed answer",
+  "prompt": "Explain in detail how a web page gets to my browser.",
+  "variants": {
+   "A": "numbered steps, bold term label + short item",
+   "B": "headed sections with short paragraphs",
+   "C": "one prose paragraph",
+   "D": "two-column table"
+  },
+  "choice": "A",
+  "note": "Chosen A has bold term labels at item start, which earlier feedback criticised; bold labels may be fine for step terms"
+ },
+ {
+  "q": 4,
+  "dimension": "bold term labels in definition lists",
+  "prompt": "What are the main types of cloud computing?",
+  "variants": {
+   "A": "bold term + colon + short definition",
+   "B": "plain term + colon",
+   "C": "term + parenthetical",
+   "D": "one prose sentence"
+  },
+  "choice": "A",
+  "note": "Bold on the term being defined is wanted; earlier complaints were about bold on phrases and sentences"
+ },
+ {
+  "q": 5,
+  "dimension": "comparison format",
+  "prompt": "Tea or coffee: which has more caffeine, and how do they taste?",
+  "variants": {
+   "A": "table",
+   "B": "two-item list with bold terms",
+   "C": "two sentences",
+   "D": "one sentence, partial answer"
+  },
+  "choice": "B for two options; A (table) when there are more options"
+ },
+ {
+  "q": 6,
+  "dimension": "tone for a personal setback",
+  "prompt": "I failed my driving test today.",
+  "variants": {
+   "A": "brief sympathy + question",
+   "B": "sympathy + reassurance",
+   "C": "practical next steps only",
+   "D": "sympathy only"
+  },
+  "choice": "C"
+ },
+ {
+  "q": 7,
+  "dimension": "number precision and extras",
+  "prompt": "How far is it from London to Paris?",
+  "variants": {
+   "A": "rounded, about",
+   "B": "exact + other unit + qualifier",
+   "C": "rounded + travel time extra",
+   "D": "exact only"
+  },
+  "choice": "D (changed from A)"
+ },
+ {
+  "q": 8,
+  "dimension": "decision answer with or without condition",
+  "prompt": "Should I learn Spanish or French first?",
+  "variants": {
+   "A": "bare decision",
+   "B": "decision + reasons",
+   "C": "two-option list with conditions",
+   "D": "decision + one short deciding condition"
+  },
+  "choice": "D",
+  "note": "A short condition that would flip the decision is wanted; reasons are not"
+ },
+ {
+  "q": 9,
+  "dimension": "clarifying question form",
+  "prompt": "Make it shorter.",
+  "variants": {
+   "A": "one short question",
+   "B": "instruction",
+   "C": "friendly filler + question",
+   "D": "two-part question"
+  },
+  "choice": "A"
+ },
+ {
+  "q": 10,
+  "dimension": "code answer extras",
+  "prompt": "Python function to check if a number is prime.",
+  "variants": {
+   "A": "code block only",
+   "B": "code with comments",
+   "C": "code + one-line note",
+   "D": "code + usage example"
+  },
+  "choice": "A"
+ },
+ {
+  "q": 11,
+  "dimension": "how-it-works explanation shape",
+  "prompt": "How does GPS work?",
+  "variants": {
+   "A": "one sentence",
+   "B": "three numbered steps",
+   "C": "prose paragraph",
+   "D": "two sentences with bold key words"
+  },
+  "choice": "B",
+  "note": "A process or mechanism reads best as short numbered steps, even over a one-line answer"
+ },
+ {
+  "q": 12,
+  "dimension": "recommendation count and detail",
+  "prompt": "Any good books on building habits?",
+  "variants": {
+   "A": "one title + author",
+   "B": "three titles",
+   "C": "five titles + authors",
+   "D": "three titles + one-line description"
+  },
+  "choice": "C",
+  "note": "More options with identifying detail beats fewer with descriptions"
+ },
+ {
+  "q": 13,
+  "dimension": "grouped list layout",
+  "prompt": "What do I need to set up a home office?",
+  "variants": {
+   "A": "bold group label + inline items",
+   "B": "small headings + vertical lists",
+   "C": "flat list",
+   "D": "one sentence"
+  },
+  "choice": "B",
+  "note": "Many items in groups: headings with vertical lists. Contrast q1: four items read best inline"
+ },
+ {
+  "q": 14,
+  "dimension": "safety answer with reason",
+  "prompt": "Can I mix bleach and vinegar for cleaning?",
+  "variants": {
+   "A": "bare no",
+   "B": "no + one-clause danger",
+   "C": "no + danger + advice",
+   "D": "bold no"
+  },
+  "choice": "B",
+  "note": "A reason the user would act wrongly without (danger) is wanted; extra advice is not"
+ },
+ {
+  "q": 15,
+  "dimension": "detailed plan layout",
+  "prompt": "Give me a detailed plan to start running as a beginner.",
+  "variants": {
+   "A": "headings per phase + short lists",
+   "B": "summary line + table",
+   "C": "table only",
+   "D": "prose"
+  },
+  "choice": "A",
+  "note": "Headings with short lists beat tables for a staged plan; no summary line"
+ },
+ {
+  "q": 16,
+  "dimension": "short why-question shape",
+  "prompt": "Why do onions make you cry?",
+  "variants": {
+   "A": "one plain sentence",
+   "B": "three numbered steps",
+   "C": "two sentences",
+   "D": "one short sentence with the bold key cause"
+  },
+  "choice": "D",
+  "note": "Cause questions: shortest sentence, bold the key cause. Contrast q11: a how-it-works process got steps"
+ },
+ {
+  "q": 17,
+  "dimension": "ambiguity resolved by context vs asking",
+  "prompt": "How much should I tip?",
+  "variants": {
+   "A": "answer for the assumed context",
+   "B": "question only",
+   "C": "multi-country list",
+   "D": "it depends + question"
+  },
+  "choice": "A",
+  "note": "Infer the missing detail from available context (location, earlier chat) and answer; ask only when context gives nothing"
+ },
+ {
+  "q": 18,
+  "dimension": "reply to feedback",
+  "prompt": [
+   "What are the benefits of meditation?",
+   "Too long."
+  ],
+  "variants": {
+   "A": "acknowledgment + short answer",
+   "B": "short answer only, inline",
+   "C": "apology + framing + answer",
+   "D": "short vertical list"
+  },
+  "choice": "B",
+  "note": "No acknowledgment; just the corrected answer. Three short items inline over a list (matches q1)"
+ },
+ {
+  "q": 19,
+  "dimension": "current fact: bare vs dated vs sourced",
+  "prompt": "What's the latest stable Python version?",
+  "variants": {
+   "A": "bare value",
+   "B": "value + release date",
+   "C": "value + source link",
+   "D": "value + freshness note"
+  },
+  "choice": "A"
+ },
+ {
+  "q": 20,
+  "dimension": "huge comparison layout",
+  "prompt": "Give me a detailed comparison of the best first programming languages.",
+  "variants": {
+   "A": "table, options as columns, unordered",
+   "B": "heading per option + bullets",
+   "C": "ranked list, one line each",
+   "D": "prose"
+  },
+  "choice": "none",
+  "note": "Table could work if options are rows (axes were backwards) and ordered by recommendation. D big no, C meh, B visually too long"
+ },
+ {
+  "q": 21,
+  "dimension": "comparison table orientation and width",
+  "prompt": "Give me a detailed comparison of the best first programming languages.",
+  "variants": {
+   "A": "options as rows ordered best-first, 4 attribute columns",
+   "B": "same, 2 columns"
+  },
+  "choice": "A",
+  "note": "Options as rows, ordered by recommendation; for a detailed request more columns are fine"
+ },
+ {
+  "q": 22,
+  "dimension": "multi-step commands",
+  "prompt": "How do I create a Python virtual environment and install requests?",
+  "variants": {
+   "A": "one code block, all commands",
+   "B": "numbered steps, short label + own code block each",
+   "C": "numbered inline code",
+   "D": "prose with inline code"
+  },
+  "choice": "B"
+ },
+ {
+  "q": 23,
+  "dimension": "drafted message length",
+  "prompt": "Write an email asking my manager for Friday off.",
+  "variants": {
+   "A": "one-line message, no subject or sign-off",
+   "B": "short email with subject and sign-off",
+   "C": "formal full email"
+  },
+  "choice": "A"
+ },
+ {
+  "q": 24,
+  "dimension": "correcting a wrong premise",
+  "prompt": "Python lists are immutable, right?",
+  "variants": {
+   "A": "no + correct fact + what the user likely meant",
+   "B": "bare no",
+   "C": "chatty correction",
+   "D": "no + correct fact"
+  },
+  "choice": "A",
+  "note": "When correcting, add the fact the user was likely reaching for"
+ },
+ {
+  "q": 25,
+  "dimension": "reporting a failed check",
+  "prompt": "Did the tests pass?",
+  "variants": {
+   "A": "one sentence with names and cause",
+   "B": "bare no",
+   "C": "no + raw failure lines in a code block",
+   "D": "labelled summary list"
+  },
+  "choice": "C",
+  "note": "Show the raw evidence verbatim in a code block rather than paraphrasing it"
+ },
+ {
+  "q": 26,
+  "dimension": "end-of-task report",
+  "prompt": "Add a --verbose flag to the CLI.",
+  "variants": {
+   "A": "Done.",
+   "B": "one-line change + behavior + tests",
+   "C": "diff + tests",
+   "D": "labelled summary list"
+  },
+  "choice": "A",
+  "note": "Conflicts with the global rule to report changes and verification"
+ },
+ {
+  "q": 27,
+  "dimension": "end-of-task report: success vs failure",
+  "choice": "Success: Done. Failure: Done, but N tests fail + raw lines in a code block"
+ },
+ {
+  "q": 28,
+  "dimension": "decision question format",
+  "source": "another chat, Legion runner question",
+  "choice": "### Context / ### Question / ### Options, bold option names, recommended first with a check emoji and (recommended)",
+  "note": "Rejected: dense numbered multi-question lists, prose paragraphs, Problem/Recommendation bullets, proposals to confirm, tables. Context is needed; the question and the recommendation must be visually findable"
+ }
+]

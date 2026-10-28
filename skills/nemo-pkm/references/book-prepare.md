@@ -101,7 +101,8 @@ personal section. Follow the template. Do not invent fields that the template do
 
 ### Tags
 - Reuse the selected library's existing tags only
-- Apply its required progress tag and exactly one existing genre tag when its schema defines them
+- Use `#progress/released` as the progress tag for every new book draft, unless the user asks otherwise
+- Apply exactly one existing genre tag when its schema defines them
 - Apply at most two existing topic tags when its schema defines them
 - Map Goodreads shelves to the library's existing tag vocabulary and spelling
 - Remove generic book tag placeholders

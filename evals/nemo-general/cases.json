@@ -1,0 +1,856 @@
+[
+ {
+  "id": "fact-kb",
+  "turns": [
+   "How many bytes are in a kilobyte?"
+  ],
+  "ambiguous": false,
+  "expect": "Exactly '1024 bytes.' No alternative definitions, no question"
+ },
+ {
+  "id": "why-sky",
+  "turns": [
+   "Why is the sky blue?"
+  ],
+  "ambiguous": false,
+  "expect": "One sentence: air scatters short (blue) wavelengths of sunlight more than long ones"
+ },
+ {
+  "id": "pick-db",
+  "turns": [
+   "Postgres or SQLite for a personal notes app?"
+  ],
+  "ambiguous": false,
+  "expect": "'SQLite.' A few words of the deciding reason at most"
+ },
+ {
+  "id": "howto-git",
+  "turns": [
+   "How do I undo my last git commit but keep the changes?"
+  ],
+  "ambiguous": false,
+  "expect": "Only a fenced code block with git reset --soft HEAD~1"
+ },
+ {
+  "id": "depth-tls",
+  "turns": [
+   "Explain in detail how the TLS 1.3 handshake works."
+  ],
+  "ambiguous": false,
+  "expect": "Depth was requested, so length is allowed, but every item is the point in few words, structured for scanning, no unrequested sections such as version comparisons"
+ },
+ {
+  "id": "advice-credit",
+  "turns": [
+   "My coworker keeps taking credit for my work. What should I do?"
+  ],
+  "ambiguous": false,
+  "expect": "One or two short action lines (e.g. keep a written record and raise it with your manager). No list of escalation options, no closing question"
+ },
+ {
+  "id": "list-hike",
+  "turns": [
+   "What should I pack for a 3-day hiking trip?"
+  ],
+  "ambiguous": false,
+  "expect": "Small headings per group with short vertical lists of item names. No assumption line, tips or question"
+ },
+ {
+  "id": "vague-faster",
+  "turns": [
+   "Make it faster."
+  ],
+  "ambiguous": true,
+  "expect": "Only one short question asking what 'it' is. Nothing else"
+ },
+ {
+  "id": "vague-paris",
+  "turns": [
+   "How long does it take to get to Paris?"
+  ],
+  "ambiguous": true,
+  "expect": "Only one short question asking where from (and how). No preamble, no example durations"
+ },
+ {
+  "id": "clear-convert",
+  "turns": [
+   "Convert 5 feet to meters."
+  ],
+  "ambiguous": false,
+  "expect": "Just '1.524 m'. No echo of the question, no question"
+ },
+ {
+  "id": "gen-examples",
+  "turns": [
+   "'utilize' vs 'use', 'in order to' vs 'to'. What's the general rule here?"
+  ],
+  "ambiguous": false,
+  "generalization": true,
+  "expect": "One line: use the shorter plain word when the meaning is the same"
+ },
+ {
+  "id": "gen-one-thing",
+  "generalization": true,
+  "ambiguous": false,
+  "turns": [
+   "What are some ways to speed up a slow laptop?",
+   "Too much. I only want the single thing that matters most.",
+   "How can I make my phone battery last longer?"
+  ],
+  "expect": "Exactly 'Lower the screen brightness.' No reason, no alternative"
+ },
+ {
+  "id": "gen-no-background",
+  "generalization": true,
+  "ambiguous": false,
+  "turns": [
+   "What does HTTP status 404 mean?",
+   "I don't need background, just tell me what to do about it.",
+   "What does HTTP 503 mean?"
+  ],
+  "expect": "Final reply answers what 503 means in one or two plain sentences (server-side, temporarily unable: overload, downtime, no healthy backend). The earlier correction generalizes to brevity, not to an action list. No bullets"
+ },
+ {
+  "id": "gen-table",
+  "generalization": true,
+  "ambiguous": false,
+  "turns": [
+   "Compare Python, Go and Rust for writing a CLI tool.",
+   "Put comparisons like this in a table.",
+   "Compare AWS, GCP and Azure for a small startup."
+  ],
+  "expect": "Final reply is a table with providers as rows ordered best-first, short cells, nothing outside except at most one line"
+ },
+ {
+  "id": "fact-boil",
+  "turns": [
+   "What's the boiling point of water at sea level in Fahrenheit?"
+  ],
+  "ambiguous": false,
+  "expect": "'212 °F'",
+  "split": "train"
+ },
+ {
+  "id": "fact-author",
+  "turns": [
+   "Who wrote Pride and Prejudice?"
+  ],
+  "ambiguous": false,
+  "expect": "'Jane Austen'",
+  "split": "train"
+ },
+ {
+  "id": "fact-wall",
+  "turns": [
+   "What year did the Berlin Wall fall?"
+  ],
+  "ambiguous": false,
+  "expect": "'1989'",
+  "split": "heldout"
+ },
+ {
+  "id": "explain-vaccine",
+  "turns": [
+   "How does a vaccine work?"
+  ],
+  "ambiguous": false,
+  "expect": "One or two plain sentences: it trains the immune system to recognise a germ without causing the disease",
+  "split": "train"
+ },
+ {
+  "id": "explain-inflation",
+  "turns": [
+   "What is inflation?"
+  ],
+  "ambiguous": false,
+  "expect": "One sentence: prices rising over time so money buys less",
+  "split": "train"
+ },
+ {
+  "id": "explain-recursion",
+  "turns": [
+   "Explain recursion like I'm 10."
+  ],
+  "ambiguous": false,
+  "expect": "One or two simple sentences with one everyday image",
+  "split": "heldout"
+ },
+ {
+  "id": "list-planets",
+  "turns": [
+   "What are the planets in order from the sun?"
+  ],
+  "ambiguous": false,
+  "expect": "The eight names in order, nothing else",
+  "split": "train"
+ },
+ {
+  "id": "list-gift",
+  "turns": [
+   "Give me 5 ideas for a birthday gift for my dad who likes fishing."
+  ],
+  "ambiguous": false,
+  "expect": "Exactly 5 short item names, no descriptions",
+  "split": "train"
+ },
+ {
+  "id": "list-pancakes",
+  "turns": [
+   "What ingredients do I need for pancakes?"
+  ],
+  "ambiguous": false,
+  "expect": "Short list of ingredient names (amounts optional), no method or tips",
+  "split": "heldout"
+ },
+ {
+  "id": "howto-ip",
+  "turns": [
+   "How do I find my IP address on a Mac?"
+  ],
+  "ambiguous": false,
+  "expect": "One line: the command or the settings path",
+  "split": "train"
+ },
+ {
+  "id": "howto-egg",
+  "turns": [
+   "How do I boil an egg so the yolk stays runny?"
+  ],
+  "ambiguous": false,
+  "expect": "One line: boiling water, about 6 minutes, then cold water",
+  "split": "train"
+ },
+ {
+  "id": "howto-ssh",
+  "turns": [
+   "How do I set up SSH keys for GitHub?"
+  ],
+  "ambiguous": false,
+  "expect": "Numbered steps, each a short label with its own fenced code block, no explanations",
+  "split": "train"
+ },
+ {
+  "id": "advice-debt",
+  "turns": [
+   "Should I pay off my credit card or invest first?"
+  ],
+  "ambiguous": false,
+  "expect": "Pay off the credit card first, with a few words of reason at most",
+  "split": "train"
+ },
+ {
+  "id": "advice-sleep",
+  "turns": [
+   "I can't sleep at night. Any tips?"
+  ],
+  "ambiguous": false,
+  "expect": "A short list of good tips (several is fine), each a few words, bold on at most a key word, no doctor or medical caveat",
+  "split": "heldout"
+ },
+ {
+  "id": "advice-landlord",
+  "turns": [
+   "How do I tell my landlord the heating is broken?"
+  ],
+  "ambiguous": false,
+  "expect": "One line of action, or a short message they can send",
+  "split": "train"
+ },
+ {
+  "id": "pick-phone",
+  "turns": [
+   "iPhone or Android for my mom who isn't tech savvy?"
+  ],
+  "ambiguous": false,
+  "expect": "'iPhone.' plus a few words at most",
+  "split": "train"
+ },
+ {
+  "id": "pick-rent",
+  "turns": [
+   "Is it better to rent or buy a house?"
+  ],
+  "ambiguous": true,
+  "expect": "Readings depend on the user's situation: one focused question, or a one-line rule of thumb",
+  "split": "heldout"
+ },
+ {
+  "id": "opinion-python",
+  "turns": [
+   "Is Python a good first programming language?"
+  ],
+  "ambiguous": false,
+  "expect": "'Yes.' plus a few words at most",
+  "split": "train"
+ },
+ {
+  "id": "yesno-rice",
+  "turns": [
+   "Can I freeze cooked rice?"
+  ],
+  "ambiguous": false,
+  "expect": "'Yes.' plus at most a few words",
+  "split": "train"
+ },
+ {
+  "id": "yesno-charge",
+  "turns": [
+   "Is it safe to charge my phone overnight?"
+  ],
+  "ambiguous": false,
+  "expect": "'Yes.' plus at most a few words",
+  "split": "heldout"
+ },
+ {
+  "id": "math-percent",
+  "turns": [
+   "What's 15% of 80?"
+  ],
+  "ambiguous": false,
+  "expect": "'12'",
+  "split": "train"
+ },
+ {
+  "id": "math-saving",
+  "turns": [
+   "If I save $200 a month, how long until I have $5000?"
+  ],
+  "ambiguous": false,
+  "expect": "'25 months'",
+  "split": "train"
+ },
+ {
+  "id": "rewrite-short",
+  "turns": [
+   "Make this shorter: 'I wanted to reach out to let you know that the meeting has been moved to Thursday.'"
+  ],
+  "ambiguous": false,
+  "expect": "Only the rewritten line, e.g. 'The meeting moved to Thursday.'",
+  "split": "train"
+ },
+ {
+  "id": "draft-cancel",
+  "turns": [
+   "Write a one-line text to cancel dinner with a friend tonight."
+  ],
+  "ambiguous": false,
+  "expect": "Only the text message itself",
+  "split": "heldout"
+ },
+ {
+  "id": "code-reverse",
+  "turns": [
+   "Python one-liner to reverse a string?"
+  ],
+  "ambiguous": false,
+  "expect": "Only s[::-1], in a code block or inline",
+  "split": "train"
+ },
+ {
+  "id": "code-chmod",
+  "turns": [
+   "What does chmod 755 do?"
+  ],
+  "ambiguous": false,
+  "expect": "One line: owner can read, write, execute; everyone else read and execute",
+  "split": "train"
+ },
+ {
+  "id": "summary-romeo",
+  "turns": [
+   "Summarize the plot of Romeo and Juliet."
+  ],
+  "ambiguous": false,
+  "expect": "One or two sentences",
+  "split": "heldout"
+ },
+ {
+  "id": "translate-thanks",
+  "turns": [
+   "How do you say 'thank you' in Japanese?"
+  ],
+  "ambiguous": false,
+  "expect": "Only the word, e.g. 'Arigatou (ありがとう)'",
+  "split": "train"
+ },
+ {
+  "id": "vague-rain",
+  "turns": [
+   "Is it going to rain?"
+  ],
+  "ambiguous": true,
+  "expect": "Needs a place and live data: one short question asking where, nothing else",
+  "split": "train"
+ },
+ {
+  "id": "vague-fix",
+  "turns": [
+   "Fix it."
+  ],
+  "ambiguous": true,
+  "expect": "Only one short question asking what to fix",
+  "split": "train"
+ },
+ {
+  "id": "vague-laptop",
+  "turns": [
+   "Best laptop?"
+  ],
+  "ambiguous": true,
+  "expect": "Use and budget change the answer: one focused question, nothing else",
+  "split": "heldout"
+ },
+ {
+  "id": "depth-engine",
+  "turns": [
+   "Explain in detail how a car engine works."
+  ],
+  "ambiguous": false,
+  "expect": "Depth allowed, structured for scanning, each item the point in few words, no unrequested sections",
+  "split": "train"
+ },
+ {
+  "id": "emotional-dog",
+  "turns": [
+   "My dog died today."
+  ],
+  "ambiguous": false,
+  "expect": "A short, sincere acknowledgment. No advice list, no platitude paragraph, no questions",
+  "split": "train"
+ },
+ {
+  "id": "gen-one-name",
+  "turns": [
+   "What's a good name for a cat?",
+   "Just give me one name, not a list.",
+   "What's a good name for a dog?"
+  ],
+  "ambiguous": false,
+  "generalization": true,
+  "expect": "Final reply is a single name only",
+  "split": "train"
+ },
+ {
+  "id": "gen-steps-only",
+  "turns": [
+   "How do I make cold brew coffee?",
+   "Skip the explanations, just the steps.",
+   "How do I make French press coffee?"
+  ],
+  "ambiguous": false,
+  "generalization": true,
+  "expect": "Final reply is short steps only, no explanations",
+  "split": "train"
+ },
+ {
+  "id": "gen-metric",
+  "turns": [
+   "How tall is Mount Everest?",
+   "Always use metric.",
+   "How far away is the moon?"
+  ],
+  "ambiguous": false,
+  "generalization": true,
+  "expect": "Final reply gives the distance in km only, no miles",
+  "split": "heldout"
+ },
+ {
+  "id": "p-beach",
+  "turns": [
+   "What should I bring to a beach day?"
+  ],
+  "ambiguous": false,
+  "expect": "Few items in one inline sentence, no list, no emojis",
+  "split": "train"
+ },
+ {
+  "id": "p-port",
+  "turns": [
+   "How do I check which process is using port 8080?"
+  ],
+  "ambiguous": false,
+  "expect": "Only a fenced code block with the command",
+  "split": "train"
+ },
+ {
+  "id": "p-webpage",
+  "turns": [
+   "Explain in detail how a web page gets to my browser."
+  ],
+  "ambiguous": false,
+  "expect": "Short numbered steps, bold term label then a few words each. No sections beyond the process",
+  "split": "train"
+ },
+ {
+  "id": "p-cloud",
+  "turns": [
+   "What are the main types of cloud computing?"
+  ],
+  "ambiguous": false,
+  "expect": "List of bold term + colon + few-word definition",
+  "split": "train"
+ },
+ {
+  "id": "p-teacoffee",
+  "turns": [
+   "Tea or coffee: which has more caffeine, and how do they taste?"
+  ],
+  "ambiguous": false,
+  "expect": "Two-item list with bold option names, caffeine and taste in a few words each",
+  "split": "train"
+ },
+ {
+  "id": "p-driving",
+  "turns": [
+   "I failed my driving test today."
+  ],
+  "ambiguous": false,
+  "expect": "Practical next steps only in one line. No sympathy, no reassurance, no question",
+  "split": "train"
+ },
+ {
+  "id": "p-london",
+  "turns": [
+   "How far is it from London to Paris?"
+  ],
+  "ambiguous": false,
+  "expect": "Exact value only, e.g. '344 km.' No other unit, no travel times",
+  "split": "train"
+ },
+ {
+  "id": "p-spanish",
+  "turns": [
+   "Should I learn Spanish or French first?"
+  ],
+  "ambiguous": false,
+  "expect": "Decision plus one short condition that would flip it. No reasons",
+  "split": "train"
+ },
+ {
+  "id": "p-shorter",
+  "turns": [
+   "Make it shorter."
+  ],
+  "ambiguous": true,
+  "expect": "Only one short question asking what to shorten",
+  "split": "train"
+ },
+ {
+  "id": "p-prime",
+  "turns": [
+   "Python function to check if a number is prime."
+  ],
+  "ambiguous": false,
+  "expect": "Only a fenced code block, no comments, no usage example, no prose",
+  "split": "train"
+ },
+ {
+  "id": "p-gps",
+  "turns": [
+   "How does GPS work?"
+  ],
+  "ambiguous": false,
+  "expect": "Two to four short numbered steps",
+  "split": "train"
+ },
+ {
+  "id": "p-books",
+  "turns": [
+   "Any good books on building habits?"
+  ],
+  "ambiguous": false,
+  "expect": "About five titles with authors, no descriptions",
+  "split": "train"
+ },
+ {
+  "id": "p-office",
+  "turns": [
+   "What do I need to set up a home office?"
+  ],
+  "ambiguous": false,
+  "expect": "Small headings per group with short vertical lists",
+  "split": "train"
+ },
+ {
+  "id": "p-bleach",
+  "turns": [
+   "Can I mix bleach and vinegar for cleaning?"
+  ],
+  "ambiguous": false,
+  "expect": "'No' plus one clause naming the danger (toxic chlorine gas). No advice",
+  "split": "train"
+ },
+ {
+  "id": "p-running",
+  "turns": [
+   "Give me a detailed plan to start running as a beginner."
+  ],
+  "ambiguous": false,
+  "expect": "Small headings per phase with short lists. No table, no summary line",
+  "split": "train"
+ },
+ {
+  "id": "p-onions",
+  "turns": [
+   "Why do onions make you cry?"
+  ],
+  "ambiguous": false,
+  "expect": "One short sentence with the key cause in bold",
+  "split": "train"
+ },
+ {
+  "id": "p-tip",
+  "turns": [
+   "How much should I tip?"
+  ],
+  "ambiguous": false,
+  "expect": "Answers for the most likely context (e.g. 15-20% in the US) in one line, no question, no multi-country list",
+  "split": "train"
+ },
+ {
+  "id": "p-meditation",
+  "turns": [
+   "What are the benefits of meditation?",
+   "Too long."
+  ],
+  "ambiguous": false,
+  "expect": "Final reply is a short inline answer only, no acknowledgment or apology",
+  "split": "train"
+ },
+ {
+  "id": "p-languages",
+  "turns": [
+   "Give me a detailed comparison of the best first programming languages."
+  ],
+  "ambiguous": false,
+  "expect": "Table with languages as rows ordered best-first and several attribute columns. Nothing else",
+  "split": "train"
+ },
+ {
+  "id": "p-venv",
+  "turns": [
+   "How do I create a Python virtual environment and install requests?"
+  ],
+  "ambiguous": false,
+  "expect": "Numbered steps, each a short label with its own fenced code block",
+  "split": "train"
+ },
+ {
+  "id": "p-email",
+  "turns": [
+   "Write an email asking my manager for Friday off."
+  ],
+  "ambiguous": false,
+  "expect": "Only a one-line message, no subject or sign-off",
+  "split": "train"
+ },
+ {
+  "id": "p-immutable",
+  "turns": [
+   "Python lists are immutable, right?"
+  ],
+  "ambiguous": false,
+  "expect": "No, lists are mutable, plus that tuples are the immutable ones. One line",
+  "split": "train"
+ },
+ {
+  "id": "h-guac",
+  "turns": [
+   "What do I need to make guacamole?"
+  ],
+  "ambiguous": false,
+  "expect": "Few items in one inline sentence",
+  "split": "heldout2"
+ },
+ {
+  "id": "h-email",
+  "turns": [
+   "How does email get delivered?"
+  ],
+  "ambiguous": false,
+  "expect": "Two to five short numbered steps",
+  "split": "heldout2"
+ },
+ {
+  "id": "h-yawn",
+  "turns": [
+   "Why do we yawn?"
+  ],
+  "ambiguous": false,
+  "expect": "One short sentence with the key cause in bold",
+  "split": "heldout2"
+ },
+ {
+  "id": "h-curl",
+  "turns": [
+   "How do I download a file from the terminal?"
+  ],
+  "ambiguous": false,
+  "expect": "Only a fenced code block with the command",
+  "split": "heldout2"
+ },
+ {
+  "id": "h-branch",
+  "turns": [
+   "How do I create a new git branch and push it?"
+  ],
+  "ambiguous": false,
+  "expect": "Numbered steps, each a short label with its own fenced code block",
+  "split": "heldout2"
+ },
+ {
+  "id": "h-cars",
+  "turns": [
+   "Compare the Toyota Corolla, Honda Civic and Mazda 3."
+  ],
+  "ambiguous": false,
+  "expect": "Table with cars as rows ordered best-first and a few attribute columns. Nothing else",
+  "split": "heldout2"
+ },
+ {
+  "id": "h-pets",
+  "turns": [
+   "Cats or dogs for a small apartment?"
+  ],
+  "ambiguous": false,
+  "expect": "Decision plus at most one short flip condition",
+  "split": "heldout2"
+ },
+ {
+  "id": "h-podcasts",
+  "turns": [
+   "Any good podcasts about history?"
+  ],
+  "ambiguous": false,
+  "expect": "About five titles with hosts, no descriptions",
+  "split": "heldout2"
+ },
+ {
+  "id": "h-garden",
+  "turns": [
+   "What do I need to start a vegetable garden?"
+  ],
+  "ambiguous": false,
+  "expect": "Small headings per group with short vertical lists",
+  "split": "heldout2"
+ },
+ {
+  "id": "h-foil",
+  "turns": [
+   "Can I put aluminium foil in the microwave?"
+  ],
+  "ambiguous": false,
+  "expect": "'No' plus one clause naming the danger (sparks or fire). No advice",
+  "split": "heldout2"
+ },
+ {
+  "id": "h-jssort",
+  "turns": [
+   "JavaScript code to sort an array of numbers."
+  ],
+  "ambiguous": false,
+  "expect": "Only a fenced code block, no comments, no prose",
+  "split": "heldout2"
+ },
+ {
+  "id": "h-wall",
+  "turns": [
+   "The Great Wall of China is visible from space, right?"
+  ],
+  "ambiguous": false,
+  "expect": "No plus the fact the user was reaching for, one line",
+  "split": "heldout2"
+ },
+ {
+  "id": "dq-db",
+  "turns": [
+   "I need to pick a database for an order system that needs strict consistency. Lay out the decision for me."
+  ],
+  "ambiguous": false,
+  "expect": "Uses ### Context (one or two sentences), ### Question (one line), ### Options (bold names, few words each, recommended first marked with a check emoji and (recommended)). Nothing else",
+  "split": "train"
+ },
+ {
+  "id": "dq-job",
+  "turns": [
+   "Help me decide: a job offer with 10% more pay but a one-hour commute each way."
+  ],
+  "ambiguous": false,
+  "expect": "Uses ### Context (one or two sentences), ### Question (one line), ### Options (bold names, few words each, recommended first marked with a check emoji and (recommended)). Nothing else",
+  "split": "train"
+ },
+ {
+  "id": "dq-host",
+  "turns": [
+   "Should I host my personal blog on GitHub Pages, Netlify or a VPS? Give me the decision."
+  ],
+  "ambiguous": false,
+  "expect": "Uses ### Context (one or two sentences), ### Question (one line), ### Options (bold names, few words each, recommended first marked with a check emoji and (recommended)). Nothing else",
+  "split": "heldout2"
+ },
+ {
+  "id": "ex-decline",
+  "turns": [
+   "Show me 3 different ways to decline a meeting invite."
+  ],
+  "ambiguous": false,
+  "expect": "Each variant rendered as the user would see it (no code block or quote around it), under a short label, separated by ---. No intro, no closing",
+  "split": "train"
+ },
+ {
+  "id": "ex-commits",
+  "turns": [
+   "Show me a few versions of a commit message for fixing a login bug, from short to detailed."
+  ],
+  "ambiguous": false,
+  "expect": "Each variant rendered as the user would see it (no code block or quote around it), under a short label, separated by ---. No intro, no closing",
+  "split": "train"
+ },
+ {
+  "id": "ex-greeting",
+  "turns": [
+   "Give me 4 options for a greeting on my portfolio homepage."
+  ],
+  "ambiguous": false,
+  "expect": "Each variant rendered as the user would see it (no code block or quote around it), under a short label, separated by ---. No intro, no closing",
+  "split": "heldout2"
+ },
+ {
+  "id": "chat-why-fail",
+  "turns": [
+   "You just sent me 14 long test cases in one message and I couldn't read any of it. Explain why that was a failure."
+  ],
+  "ambiguous": false,
+  "expect": "One or two short sentences naming the root cause (too much at once, not checked against readability). No list of three, no apology",
+  "split": "train"
+ },
+ {
+  "id": "chat-need",
+  "turns": [
+   "You asked me to rate replies in a file. What exactly do you need from me now?"
+  ],
+  "ambiguous": false,
+  "expect": "One line naming exactly what the user must do. No explanation of why",
+  "split": "train"
+ },
+ {
+  "id": "chat-continue",
+  "generalization": true,
+  "ambiguous": false,
+  "turns": [
+   "List some test prompts for a chatbot.",
+   "Too long, and stop numbering things."
+  ],
+  "expect": "Final reply is the corrected shorter list without numbers and with no acknowledgment of the feedback",
+  "split": "train"
+ },
+ {
+  "id": "chat-typo",
+  "turns": [
+   "Fix the typo in this sentence: 'teh cat sat on teh mat'"
+  ],
+  "ambiguous": false,
+  "expect": "Only the corrected sentence: 'the cat sat on the mat'. No report of what changed",
+  "split": "heldout2"
+ }
+]

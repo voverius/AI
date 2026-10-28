@@ -1,0 +1,177 @@
+{
+ "v1/advice-credit": {
+  "verdict": "fail",
+  "reasons": [
+   "Too verbose",
+   "Stock shape: one sentence, three bullets, one closing sentence",
+   "Bolds whole sentences instead of key words"
+  ]
+ },
+ "v1/clear-convert": {
+  "verdict": "fail",
+  "reasons": [
+   "Repeats '5 feet' from the question inside the answer"
+  ],
+  "judge_missed": "Rubric only cut whole units, so an echo inside a sentence passed"
+ },
+ "v1/fact-kb": {
+  "verdict": "fail",
+  "ideal": "1024 bytes.",
+  "reasons": [
+   "Gives alternative definitions instead of the one the user means"
+  ]
+ },
+ "v1/gen-examples": {
+  "verdict": "fail",
+  "score": 0,
+  "reasons": [
+   "Too long to read; length alone fails regardless of content"
+  ]
+ },
+ "v1/gen-no-background": {
+  "verdict": "fail",
+  "reasons": [
+   "Three bullet points again",
+   "The new question asks what 503 means: answer that simply. The earlier feedback generalizes to less, not to an action list"
+  ],
+  "ideal": "503 is a server-side error. The server is temporarily unable to handle requests, e.g. overload, downtime or no healthy backend."
+ },
+ "v1/gen-one-thing": {
+  "verdict": "fail",
+  "ideal": "Lower the screen brightness.",
+  "reasons": [
+   "Adds an alternative and a justification nobody asked for"
+  ],
+  "judge_missed": "Passed a reply with an unrequested reason clause"
+ },
+ "v1/howto-git": {
+  "verdict": "fail",
+  "ideal": "`git reset --soft HEAD~1`",
+  "reasons": [
+   "Everything beyond the command is unrequested"
+  ]
+ },
+ "v3r/fact-wall": {
+  "verdict": "pass",
+  "split": "heldout",
+  "judge": "pass"
+ },
+ "v3r/explain-recursion": {
+  "verdict": "fail",
+  "split": "heldout",
+  "judge": "fail",
+  "reasons": [
+   "Too long, not read"
+  ]
+ },
+ "v3r/list-pancakes": {
+  "verdict": "fail",
+  "split": "heldout",
+  "judge": "fail",
+  "reasons": [
+   "None given"
+  ]
+ },
+ "v3r/pick-rent": {
+  "verdict": "fail",
+  "split": "heldout",
+  "judge": "fail",
+  "reasons": [
+   "Key information hidden in padding",
+   "Parallel conditions should have been a list"
+  ]
+ },
+ "v3r/summary-romeo": {
+  "verdict": "fail",
+  "split": "heldout",
+  "judge": "fail",
+  "reasons": [
+   "Too many names that barely affect the point, hard to follow"
+  ]
+ },
+ "v3r/vague-laptop": {
+  "verdict": "pass",
+  "split": "heldout",
+  "judge": "pass"
+ },
+ "v3r/yesno-charge": {
+  "verdict": "fail",
+  "split": "heldout",
+  "judge": "fail",
+  "reasons": [
+   "Agrees with judge reason"
+  ]
+ },
+ "v3r/advice-sleep": {
+  "verdict": "partial",
+  "split": "heldout",
+  "judge": "fail",
+  "reasons": [
+   "Advice content good: five short tips are fine",
+   "Bold on random phrases and whole sentences",
+   "Doctor caveat not needed"
+  ],
+  "judge_wrong": "Penalized the number of tips; missed the bold problem"
+ },
+ "v3r/draft-cancel": {
+  "verdict": "pass",
+  "split": "heldout",
+  "judge": "pass"
+ },
+ "v3r/gen-metric": {
+  "verdict": "pass",
+  "split": "heldout",
+  "judge": "pass"
+ },
+ "v8/h-guac": {
+  "verdict": "pass",
+  "split": "heldout2",
+  "judge": "fail",
+  "reasons": [
+   "Fine; a list might be preferred for this many items"
+  ],
+  "judge_wrong": "Failed it for \"You need\" as an echo; the user accepts that"
+ },
+ "v8/h-email": {
+  "verdict": "fail",
+  "split": "heldout2",
+  "judge": "fail",
+  "reasons": [
+   "Periods at the end of list items",
+   "\"Your\" in items",
+   "\"that server\" back-references",
+   "SPF/DKIM detail (agrees with judge)"
+  ]
+ },
+ "v8/h-yawn": {
+  "verdict": "borderline",
+  "split": "heldout2",
+  "judge": "fail",
+  "reasons": [
+   "About ok"
+  ],
+  "judge_wrong": "Treated a true uncertainty statement as a forbidden hedge; the user accepts it"
+ },
+ "v8/h-curl": {
+  "verdict": "pass",
+  "split": "heldout2",
+  "judge": "pass"
+ },
+ "v8/h-branch": {
+  "verdict": "fail",
+  "split": "heldout2",
+  "judge": "fail",
+  "reasons": [
+   "No Run button: the app shows one only for a single-command shell block",
+   "Two lines in one block is a minor issue here"
+  ]
+ },
+ "v8/h-cars": {
+  "verdict": "fail",
+  "split": "heldout2",
+  "judge": "fail",
+  "reasons": [
+   "Agrees with judge"
+  ]
+ }
+}

@@ -16,8 +16,9 @@
 
 ## Communication and Truthfulness
 - Before composing the first reply, load the globally installed nemo-general skill in every chat,
-  including questions, explanations and self-reflection. Keep applying it alongside task workflows
-  and recover it after context loss. It owns reply length, layout and communication preferences
+  including questions, explanations and self-reflection, unless it is already the active output
+  style. Keep applying it alongside task workflows and recover it after context loss. It owns reply
+  length, layout and communication preferences
 - Include the direct answer and material caveats. Requested documents follow their intended scope
   and format
 - Do not claim completion or successful validation without evidence
